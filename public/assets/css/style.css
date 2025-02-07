@@ -1,33 +1,3 @@
-/*===============================================
-Template Name: DreamHub Dentist & Dental Clinic HTML5 Template
-Author:  https://templatemonstar.net/authors/drtheme
-Description: Description
-Version: 1.0.0
-Text Domain: dentist
-Tags: agency, consulting, digital agency, digital marketing, digital marketing agency, marketing, marketing agency, media agency, portfolio, seo, seo agency, seo agency theme, seo marketing, smm, social media marketing agency.
-================================================*/
-
-/*TABLE OF CONTENTS*/
-/*=====================
-01. dentist Header Top Menu Area Css
-02. dentist Nav Menu Area Css 
-03. dentist Slider Area Css
-04. dentist Section Title Css
-05. dentist Service Area css
-06. dentist About Area Css
-07. dentist Counter Area Css
-08. dentist Case Study Area Css
-
-30. dentist Contact  US Css
-31. dentist Blog Sidber Widget CSS
-32. dentist Case Study Details Css
-33. dentist Search Box Css
-34. dentist Loader Css
-=======================*/
-
-/*================================
-<--  Digitcent All CSS LINK -->
-==================================*/
 @import url(owl.carousel.min.css); /*carousel CSS*/
 @import url(bootstrap-icons.css); /*bootstrap icons*/
 @import url(owl.transitions.css); /*transitions CSS*/
@@ -284,7 +254,7 @@ nav.dentist_menu span {
     color: #3BB3D8;
 }
 
-/*** Sub Menu Style 
+/*** Sub Menu Style
 ==========================***/
 
 .dentist_menu ul .sub-menu {
@@ -338,7 +308,7 @@ nav.dentist_menu span {
     color: #fff !important;
 }
 
-/* sub menu 2 
+/* sub menu 2
 =================*/
 
 .dentist_menu ul .sub-menu .sub-menu {
@@ -354,7 +324,7 @@ nav.dentist_menu span {
     top: 0%;
 }
 
-/* sub menu 3 
+/* sub menu 3
 ==================*/
 
 .dentist_menu ul .sub-menu .sub-menu li {
@@ -390,7 +360,7 @@ ul.sub-menu li:hover a span{
     background: rgba(255,255,255, 0.20);
 }
 
-/* sub menu 4 
+/* sub menu 4
 ====================*/
 
 .dentist_menu ul .sub-menu .sub-menu .sub-menu li {
@@ -1460,7 +1430,7 @@ ul.footer-info li i {
 ul.footer-info li a {
     font-size: 16px;
     color: #ffffff;
-    margin-left: 30px;
+    margin-left: 0;
 }
 
 .footer-bottom-content {
@@ -1617,7 +1587,7 @@ ul.footer-info li a {
 
 .sidebar-info-contents .widget {
     display: block;
-} 
+}
 
 .sidebar-info-contents h3.widget-title {
     font-size: 25px;
@@ -1727,11 +1697,11 @@ li.item1 {
 }
 
 .sidebar-tag-item a:hover:before {
-   transform: scale(1); 
+   transform: scale(1);
 }
 
 .sidebar-tag-item a:hover {
-   color: #fff; 
+   color: #fff;
 }
 
 /* Social Icon */
@@ -1747,7 +1717,7 @@ ul.list-style-one li a:hover span {
     background: #3BB3D8;
     border-radius: 30px;
     color: #fff;
-} 
+}
 
 ul.list-style-one li a:hover {
     color: #3BB3D8;
@@ -2268,9 +2238,9 @@ td.column-1 {
     text-align: center;
 }
 
-  
-  
-  
+
+
+
 
 
 
@@ -3075,7 +3045,7 @@ span#slider-range-value1, span#slider-range-value2 {
   cursor: not-allowed;
 }
 
-/*Product 
+/*Product
 ======================*/
 
 .product-categories-box {
@@ -3120,7 +3090,7 @@ span#slider-range-value1, span#slider-range-value2 {
 }
 
 
-/*Shop Right 
+/*Shop Right
 ======================*/
 
 .row.products {
@@ -3478,13 +3448,13 @@ li.category-text {
     top: -3px;
 }
 
-/* --- Quantity button 
+/* --- Quantity button
 ================================*/
 
 .category-count-button {
     display: inline-flex;
     padding: 8px 0 30px;
-} 
+}
 
 .quantity-with_btn {
     display: flex;
@@ -3719,7 +3689,7 @@ table.tab-items-table td.table-text i {
 
 
 /*post comment box
-===================*/ 
+===================*/
 
 .post-comment-thumb {
     float: left;
@@ -4979,7 +4949,7 @@ p.description {
     width: 100%;
 }
 
-  
+
 .formbold-pt-3 {
     padding-top: 12px;
 }
@@ -5068,7 +5038,7 @@ textarea::placeholder {
 }
 
 .w-full {
-  
+
     width: 100%;
 }
 @media (min-width: 540px) {
