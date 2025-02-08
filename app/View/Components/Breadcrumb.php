@@ -2,19 +2,20 @@
 
 namespace App\View\Components;
 
-use App\Models\Option;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Header extends Component
+class Breadcrumb extends Component
 {
+    public string $title;
+
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct($title = "")
     {
-        view()->share('options', Option::pluck('value', 'key'));
+        $this->title = $title;
     }
 
     /**
@@ -22,6 +23,6 @@ class Header extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.header');
+        return view('components.breadcrumb');
     }
 }

@@ -2,19 +2,18 @@
 
 namespace App\View\Components;
 
-use App\Models\Option;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Header extends Component
+class ArticleSidebar extends Component
 {
     /**
      * Create a new component instance.
      */
     public function __construct()
     {
-        view()->share('options', Option::pluck('value', 'key'));
+        //
     }
 
     /**
@@ -22,6 +21,6 @@ class Header extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.header');
+        return view('components.article-sidebar');
     }
 }

@@ -35,7 +35,7 @@
                         <div class="single-widget-item">
                             <div class="recent-post-item">
                                 <div class="recent-post-image">
-                                    <a href="home.html"><img src="assets/images/resource/recent1.png" alt=""></a>
+                                    <a href="{{route('articles')}}"><img src="assets/images/resource/recent1.png" alt=""></a>
                                 </div>
                                 <div class="recent-post-text">
                                     <h4><a href="home.html">Get The Exercise Limited Mobility</a></h4>

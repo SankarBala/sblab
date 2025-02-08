@@ -76,7 +76,7 @@
                                     <p>We bring the right people together to challenge established thinking.</p>
                                 </div>
                             </div>
-                            <div class="section-button"><a href="about.html">About Clinic</a></div>
+                            <div class="section-button"><a href="about.blade.php">About Clinic</a></div>
                         </div>
                     </div>
                 </div>
