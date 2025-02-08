@@ -9,9 +9,9 @@
                         <ul>
                             <li><a href="home.blade.php">Home</a></li>
                             <li><i class="fa fa-angle-right"></i></li>
-                            <li><a href="articles.blade.php">Blog</a></li>
+                            <li><a href="articles.blade.php">Articles</a></li>
                             <li><i class="fa fa-angle-right"></i></li>
-                            <li>Blog Details</li>
+                            <li>Article Title</li>
                         </ul>
                     </div>
                 </div>

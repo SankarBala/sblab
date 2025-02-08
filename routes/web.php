@@ -11,9 +11,10 @@ Route::get('/profiles', [BaseController::class, 'profiles'])->name('profiles');
 Route::get('/profile/{slug}', [BaseController::class, 'profile'])->name('profile');
 Route::get('/articles', [BaseController::class, 'articles'])->name('articles');
 Route::get('/article', [BaseController::class, 'article'])->name('article');
+Route::get('/faq', [BaseController::class, 'faq'])->name('faq');
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'admin']], function () {
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']], function () {
+    Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/contact-us', [AdminController::class, 'contact'])->name('contact');
     Route::get('/about-us', [AdminController::class, 'about'])->name('about');
 });

@@ -18,7 +18,7 @@
   <!-- JQVMap -->
   <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css?v=3.2.0">
+  <link rel="stylesheet" href="/dist/css/adminlte.min.css">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Daterange picker -->
@@ -713,7 +713,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="starter.html" class="nav-link">
+                <a href="layouts/admin.blade.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Starter Page</p>
                 </a>
@@ -1497,7 +1497,7 @@
 <!-- overlayScrollbars -->
 <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
-<script src="dist/js/adminlte.js?v=3.2.0"></script>
+<script src="dist/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->

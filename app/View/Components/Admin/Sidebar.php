@@ -1,21 +1,19 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Admin;
 
-use App\Models\Section;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Nav extends Component
+class Sidebar extends Component
 {
     /**
      * Create a new component instance.
      */
     public function __construct()
     {
-        $sections = Section::where('status', 1)->get();
-        view()->share('sections', $sections);
+        //
     }
 
     /**
@@ -23,6 +21,6 @@ class Nav extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.nav');
+        return view('components.admin.sidebar');
     }
 }

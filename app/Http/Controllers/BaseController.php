@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Faq;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -31,7 +32,13 @@ class BaseController extends Controller
 
     public function article(): View
     {
-//        view()->share('article', $article);
+        // view()->share('article', $article);
         return view('article');
+    }
+
+    public function faq(): View
+    {
+        $faqs = Faq::where('active', 1)->get();
+        return view('faq')->with('faqs', $faqs);
     }
 }
