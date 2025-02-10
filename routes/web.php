@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\BaseController;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [BaseController::class, 'home'])->name('home');
@@ -13,8 +15,13 @@ Route::get('/articles', [BaseController::class, 'articles'])->name('articles');
 Route::get('/article', [BaseController::class, 'article'])->name('article');
 Route::get('/faq', [BaseController::class, 'faq'])->name('faq');
 
+// General post routes.
+Route::post('/message', [BaseController::class, 'store_message'])->name('store_message');
+
+// Admin routes.
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']], function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/contact-us', [AdminController::class, 'contact'])->name('contact');
     Route::get('/about-us', [AdminController::class, 'about'])->name('about');
+    Route::resource('faq', FaqController::class)->names('faq');
 });

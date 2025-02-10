@@ -1,0 +1,12 @@
+### GET request to example server
+POST {{host}}/message
+Accept: application/json
+Content-Type: application/json
+
+{
+"name": "Sankar Bala",
+"email": "sankarbala232@gmail.com",
+"message": "Welcome to SBLab."
+}
+
+###

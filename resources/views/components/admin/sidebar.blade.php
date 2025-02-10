@@ -83,7 +83,6 @@
                 </li>
 
 
-
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-envelope"></i> Messages
@@ -95,7 +94,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('admin.faq.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-question-circle"></i> FAQ
                     </a>
                 </li>

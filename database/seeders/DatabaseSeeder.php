@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             OptionSeeder::class,
             FaqSeeder::class,
+            MessageSeeder::class,
         ]);
     }
 }

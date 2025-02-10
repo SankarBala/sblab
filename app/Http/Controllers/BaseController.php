@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Article;
+use App\Http\Requests\MessageRequest;
 use App\Models\Faq;
+use App\Models\Message;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -40,5 +42,16 @@ class BaseController extends Controller
     {
         $faqs = Faq::where('active', 1)->get();
         return view('faq')->with('faqs', $faqs);
+    }
+
+    public function store_message(MessageRequest $request): JsonResponse
+    {
+        $message = new Message();
+        $message->name = $request->name;
+        $message->email = $request->email;
+        $message->message = $request->message;
+        $message->save();
+
+        return response()->json(['status' => 'success', 'message' => 'Message sent successfully.']);
     }
 }

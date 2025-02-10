@@ -2,17 +2,19 @@
 
 namespace Database\Seeders;
 
-use App\Models\Faq;
+use App\Models\Message;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class FaqSeeder extends Seeder
+class MessageSeeder extends Seeder
 {
+    use WithoutModelEvents;
+
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Faq::factory()->count(200)->create();
+        Message::factory()->count(50)->create();
     }
 }

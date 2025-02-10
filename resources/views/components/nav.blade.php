@@ -1,5 +1,5 @@
 <ul class="nav_scroll">
-    <li><a href="home.html">Home</a></li>
+    <li><a href="{{route('home')}}">Home</a></li>
     <li><a href="#">Products <span><i class="fas fa-chevron-down"></i></span></a>
         @if(count($sections) > 0)
             <ul class="sub-menu">
