@@ -40,7 +40,7 @@
                                 <a href="{{route('admin.faq.edit', $faq)}}" onclick="event.stopPropagation()" >
                                     <span class="btn btn-warning mr-1 d-none d-md-flex">Edit</span>
                                     <span class="btn btn-warning mr-1 d-md-none d-flex">
-                                    <i class="fa fa-trash"></i>
+                                    <i class="fa fa-pen"></i>
                                 </span>
                                 </a>
 

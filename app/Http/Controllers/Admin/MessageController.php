@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Message;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -10,9 +13,10 @@ class MessageController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
-        //
+        view()->share('messages', Message::paginate(10));
+        return view('admin.messages');
     }
 
     /**
@@ -50,16 +54,25 @@ class MessageController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Message $message): RedirectResponse
     {
-        //
+
+        $request->validate([
+            'seen' => 'required|boolean',
+        ]);
+
+        $message->seen = $request->seen;
+        $message->save();
+
+        return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Message $message): RedirectResponse
     {
-        //
+        $message->delete();
+        return redirect()->back();
     }
 }

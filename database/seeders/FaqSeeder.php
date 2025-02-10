@@ -8,11 +8,12 @@ use Illuminate\Database\Seeder;
 
 class FaqSeeder extends Seeder
 {
+    use WithoutModelEvents;
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Faq::factory()->count(200)->create();
+        Faq::factory()->count(20)->create();
     }
 }

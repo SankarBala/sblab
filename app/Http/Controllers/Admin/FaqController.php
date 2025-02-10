@@ -15,7 +15,7 @@ class FaqController extends Controller
      */
     public function index(): View
     {
-        view()->share('faqs', Faq::paginate());
+        view()->share('faqs', Faq::paginate(10));
         return view('admin.faq.index');
     }
 

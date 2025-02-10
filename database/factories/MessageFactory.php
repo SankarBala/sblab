@@ -21,7 +21,7 @@ class MessageFactory extends Factory
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'message' => $this->faker->paragraph(),
-            'read' => $this->faker->boolean(20),
+            'seen' => $this->faker->boolean(20),
         ];
     }
 }

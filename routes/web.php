@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\BaseController;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [BaseController::class, 'home'])->name('home');
@@ -23,5 +23,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/contact-us', [AdminController::class, 'contact'])->name('contact');
     Route::get('/about-us', [AdminController::class, 'about'])->name('about');
+    Route::resource('message', MessageController::class)->names('message');
     Route::resource('faq', FaqController::class)->names('faq');
 });
