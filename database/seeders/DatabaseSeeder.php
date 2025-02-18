@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             OptionSeeder::class,
             FaqSeeder::class,
             MessageSeeder::class,
+            DivisionSeeder::class,
         ]);
     }
 }

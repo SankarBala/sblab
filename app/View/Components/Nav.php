@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Division;
 use App\Models\Section;
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -14,8 +15,9 @@ class Nav extends Component
      */
     public function __construct()
     {
-        $sections = Section::where('status', 1)->get();
-        view()->share('sections', $sections);
+        // $sections = Section::where('status', 1)->get();
+        // view()->share('sections', $sections);
+        
     }
 
     /**

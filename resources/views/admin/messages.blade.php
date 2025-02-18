@@ -41,14 +41,14 @@
                                         @csrf
                                         @if ($message->seen)
                                             <input name="seen" type="hidden" value="0">
-                                            <button onclick="event.stopPropagation()" class="btn btn-secondary mr-2"
+                                            <button onclick="event.stopPropagation()" class="btn btn-secondary mr-1 p-2"
                                                 type="submit">
                                                 <span class="d-none d-md-flex">Unseen</span>
                                                 <span class="d-md-none d-flex"><i class="fa fa-eye-slash"></i></span>
                                             </button>
                                         @else
                                             <input name="seen" type="hidden" value="1">
-                                            <button onclick="event.stopPropagation()" class="btn btn-info mr-2"
+                                            <button onclick="event.stopPropagation()" class="btn btn-info mr-1 p-2"
                                                 type="submit">
                                                 <span class="d-none d-md-flex">Seen</span>
                                                 <span class="d-md-none d-flex"><i class="fa fa-eye"></i></span>

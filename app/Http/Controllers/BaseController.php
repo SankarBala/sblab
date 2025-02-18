@@ -3,14 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MessageRequest;
+use App\Models\Division;
 use App\Models\Faq;
 use App\Models\Message;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class BaseController extends Controller
 {
+    public function __construct()
+    {
+        view()->share('divisions', Division::where('active', 1)->get());
+    }
 
     public function home(): View
     {

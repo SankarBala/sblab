@@ -83,7 +83,7 @@
                     <div class="">
                         <p>&copy; {{date('Y')}} All Rights Reserved By |
                             <a class="text-info" href="{{route('home')}}">
-                                S.B. Laboratories Ltd.
+                                S.B.&nbsp;Laboratories Ltd.
                             </a>
                         </p>
                     </div>

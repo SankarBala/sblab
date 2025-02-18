@@ -1,31 +1,33 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="hero-section d-flex align-items-center">
-        <div class="container">
+    <div class="hero-section d-flex align-items-start pt-5">
+        <div class="container mt-5">
             <div class="row hero-bg">
                 <div class="col-lg-6">
                     <div class="hero-content">
-                        <h5>Welcome to Dream Hub</h5>
-                        <h2> We Are Best </h2>
-                        <h2> Dental Service </h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-                            efficitur, enim bibendum volutpat dictum, tellus risus porttitor leo,
-                            eget eleifend enim metus eu sem. Ut ipsum eros.</p>
+                        <h3 class="text-warning">Welcome to {{ env('APP_NAME') }}</h3>
+                        {{-- <h2>We produce medicine from nature.</h2> --}}
+                        <h3 class="mt-4">Holistic Health, Inspired by Nature.</h3>
+                        <p class="text-dark  text-justify">At {{ env('APP_NAME') }}, we blend ancient Ayurvedic wisdom with
+                            modern
+                            innovation to
+                            create safe, effective, and natural healthcare solutions. With a commitment to quality and
+                            well-being, our herbal and nutraceutical products are crafted to enhance your life. Experience
+                            the power of nature for a healthier tomorrow.</p>
                         <div class="slider-button">
-                            <div class="section-button"><a href="home.html">View More</a></div>
-                            <div class="section-button"><a href="home.html">Purchase</a></div>
+                            <a class="btn btn-info btn-lg px-5" href="">Products</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="hero-thumb">
-                        <img src="assets/images/slider/hero-img.png" alt="">
-                        <div class="slider-shape">
+                        <img class="img-thumbnail" src="assets/images/sbl/herbal.png" alt="" />
+                        {{-- <div class="slider-shape">
                             <div class="shape1"><img src="assets/images/slider/slider-shape1.png" alt=""></div>
                             <div class="shape2"><img src="assets/images/slider/slider-shape2.png" alt=""></div>
                             <div class="shape3"><img src="assets/images/slider/slider-shape3.png" alt=""></div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -37,46 +39,40 @@
             <div class="row about-bg">
                 <div class="col-lg-6">
                     <div class="about-thumb">
-                        <img src="assets/images/resource/about-img.png" alt="">
-                        <div class="about-shape">
+                        <img src="{{ asset('assets/images/sbl/right-logo-t.png') }}" alt="">
+                        {{-- <div class="about-shape">
                             <div class="ab-shape1"><img src="assets/images/resource/about-shape1.png" alt=""></div>
                             <div class="ab-shape2"><img src="assets/images/resource/about-shape2.png" alt=""></div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="about-right">
                         <div class="dentist-section-title">
-                            <h5>Find A Doctors</h5>
-                            <h1>A Leading Visionary In</h1>
-                            <h1>Dental Care</h1>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has
-                                been the industry's standard.</p>
+                            <h1>Our Division</h1>
+                            <p class="text-justify">Innovative Healthcare Divisions Dedicated to Ayurvedic, Herbal,
+                                Pharmaceutical, and
+                                Veterinary Solutions for Holistic Well-Being and a Healthier Future.</p>
                         </div>
                         <div class="single-about-right">
-                            <div class="single_about_right_inner">
-                                <div class="about-icon"><img src="assets/images/resource/about-icon1.png" alt=""></div>
-                                <div class="single-about-content">
-                                    <h5>General Dentistry</h5>
-                                    <p>We bring the right people together to challenge established thinking.</p>
+
+
+                            @foreach ($divisions as $division)
+                                <div class="single_about_right_inner">
+                                    <div class="about-icon">
+                                        <img class="img-fluid rounded" style="width: 80px;"
+                                            src="{{ asset($division->image) }}" alt="" />
+                                    </div>
+                                    <div class="single-about-content">
+                                        <h5>{{ $division->title }}</h5>
+                                        <p>We bring the right people together to challenge established thinking.</p>
+                                    </div>
                                 </div>
+                            @endforeach
+
+
+                            <div class="btn btn-lg btn-info px-3 py-2 my-4"><a href="about.blade.php">See all products</a>
                             </div>
-                            <div class="single_about_right_inner">
-                                <div class="about-icon"><img src="assets/images/resource/about-icon2.png" alt=""></div>
-                                <div class="single-about-content">
-                                    <h5>Dental Surgery</h5>
-                                    <p>We bring the right people together to challenge established thinking.</p>
-                                </div>
-                            </div>
-                            <div class="single_about_right_inner">
-                                <div class="about-icon"><img src="assets/images/resource/about-icon3.png" alt=""></div>
-                                <div class="single-about-content">
-                                    <h5>Teeth Braces</h5>
-                                    <p>We bring the right people together to challenge established thinking.</p>
-                                </div>
-                            </div>
-                            <div class="section-button"><a href="about.blade.php">About Clinic</a></div>
                         </div>
                     </div>
                 </div>
@@ -88,66 +84,54 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
+
                     <div class="dentist-section-title">
-                        <h5>Dental Services</h5>
-                        <h1>Committed to excellence</h1>
-                        <h1>dental health services</h1>
+                        <h1>Products</h1>
+                        <p class="lead">Some popular products we already have introduced.</p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-single-box">
-                        <div class="service-icon"><img src="assets/images/resource/service-icon1.png" alt=""></div>
-                        <div class="service-content">
-                            <a href="service.html">Alignment Specialist</a>
-                            <p>Implants replace missing teeth and just like your natural teeth</p>
+
+
+
+
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-products-box">
+                        <!-- products thumb -->
+                        <div class="products-thumbs">
+                            <img class="img-thumbnail rounded"
+                                src="{{ asset('assets/images/sbl/divisions/pharmaceuticals.jpg') }}" alt="" />
+                            <!-- product thumb -->
+                            <div class="product-thumb-icon">
+                                <a href="cart.html"> <i class="bi bi-cart3"></i> </a>
+                                <a href="shop-details.html"> <i class="bi bi-suit-heart"></i> </a>
+                            </div>
+                        </div>
+                        <!-- products content -->
+                        <div class="product-content">
+                            <!-- product list -->
+                            <ul class="product-rating">
+                                <li><i class="bi bi-star-fill"></i></li>
+                                <li><i class="bi bi-star-fill"></i></li>
+                                <li><i class="bi bi-star-fill"></i></li>
+                                <li><i class="bi bi-star-fill"></i></li>
+                                <li><i class="bi bi-star-half"></i></li>
+                            </ul>
+                            <div class="product-title">
+                                <h2> Dental Shower </h2>
+                            </div>
+                            <!-- product text -->
+                            <div class="product-price">
+                                <p> £30.00 <span>£30.00</span> </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-single-box">
-                        <div class="service-icon"><img src="assets/images/resource/service-icon2.png" alt=""></div>
-                        <div class="service-content">
-                            <a href="service.html">Oral Hygiene Experts</a>
-                            <p>Implants replace missing teeth and just like your natural teeth</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-single-box">
-                        <div class="service-icon"><img src="assets/images/resource/service-icon3.png" alt=""></div>
-                        <div class="service-content">
-                            <a href="service.html">Cavity Inspection</a>
-                            <p>Implants replace missing teeth and just like your natural teeth</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-single-box">
-                        <div class="service-icon"><img src="assets/images/resource/service-icon4.png" alt=""></div>
-                        <div class="service-content">
-                            <a href="service.html">Cavity Inspection</a>
-                            <p>Implants replace missing teeth and just like your natural teeth</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-single-box">
-                        <div class="service-icon"><img src="assets/images/resource/service-icon5.png" alt=""></div>
-                        <div class="service-content">
-                            <a href="service.html">Cosmetic dentistry</a>
-                            <p>Implants replace missing teeth and just like your natural teeth</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-single-box">
-                        <div class="service-icon"><img src="assets/images/resource/service-icon6.png" alt=""></div>
-                        <div class="service-content">
-                            <a href="service.html">Root Canal Specialist</a>
-                            <p>Implants replace missing teeth and just like your natural teeth</p>
-                        </div>
-                    </div>
-                </div>
+
+
+
+
+
             </div>
         </div>
     </div>
@@ -157,8 +141,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="dentist-section-title">
-                        <h5>Our Team</h5>
-                        <h1>Our Optimistic Team</h1>
+                        <h1>Our Team</h1>
                         <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut
                             labore
                             et dolore magna aliqua.</p>
@@ -231,8 +214,12 @@
                                 <div class="icon"><i class="fas fa-check"></i></div>
                             </div>
                             <div class="icon-box-content">
-                                <div class="title"><h2>Advanced technology for dental care</h2></div>
-                                <div class="description"><p>Curabitur sagittis libero tincidunt finibus.</p></div>
+                                <div class="title">
+                                    <h2>Advanced technology for dental care</h2>
+                                </div>
+                                <div class="description">
+                                    <p>Curabitur sagittis libero tincidunt finibus.</p>
+                                </div>
                             </div>
                         </div>
                         <div class="choose-us-icon-box d-flex">
@@ -240,8 +227,12 @@
                                 <div class="icon"><i class="fas fa-check"></i></div>
                             </div>
                             <div class="icon-box-content">
-                                <div class="title"><h2>Available emergency dental services</h2></div>
-                                <div class="description"><p>Curabitur sagittis libero tincidunt finibus.</p></div>
+                                <div class="title">
+                                    <h2>Available emergency dental services</h2>
+                                </div>
+                                <div class="description">
+                                    <p>Curabitur sagittis libero tincidunt finibus.</p>
+                                </div>
                             </div>
                         </div>
                         <div class="choose-us-icon-box d-flex">
@@ -249,8 +240,12 @@
                                 <div class="icon"><i class="fas fa-check"></i></div>
                             </div>
                             <div class="icon-box-content">
-                                <div class="title"><h2>Our best qualified dentist doctor team</h2></div>
-                                <div class="description"><p>Curabitur sagittis libero tincidunt finibus.</p></div>
+                                <div class="title">
+                                    <h2>Our best qualified dentist doctor team</h2>
+                                </div>
+                                <div class="description">
+                                    <p>Curabitur sagittis libero tincidunt finibus.</p>
+                                </div>
                             </div>
                         </div>
                         <div class="choose-us-icon-box d-flex">
@@ -258,8 +253,12 @@
                                 <div class="icon"><i class="fas fa-check"></i></div>
                             </div>
                             <div class="icon-box-content">
-                                <div class="title"><h2>Our best qualified dentist doctor team</h2></div>
-                                <div class="description"><p>Curabitur sagittis libero tincidunt finibus.</p></div>
+                                <div class="title">
+                                    <h2>Our best qualified dentist doctor team</h2>
+                                </div>
+                                <div class="description">
+                                    <p>Curabitur sagittis libero tincidunt finibus.</p>
+                                </div>
                             </div>
                         </div>
                         <div class="section-button"><a href="home.html">Dental Services</a></div>
@@ -268,35 +267,37 @@
                 <div class="col-lg-6">
                     <div class="choose_us_right">
                         <div class="choose-us-title right">
-                            <h5>Have some questions or want to say hi?</h5>
-                            <p>Our experts and developers would love to contribute their expertise and insights to your
-                                potencial projects</p>
+                            <h5>Do you have any question?</h5>
+                            <p>Ask your question here. Our agent will reply you soon.</p>
                         </div>
                         <div class="form-area contact-form">
                             <div class="form-inner">
-                                <form action="https://formspree.io/f/myyleorq" method="POST" class="form-controls row">
+                                <form action="" method="POST" class="form-controls row">
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <input class="form-control" size="40" placeholder="Your Name*" type="text"
-                                                   name="sub" required>
+                                            <input class="form-control" size="40" placeholder="Name" type="text"
+                                                name="sub" required>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input class="form-control" size="40" value="" type="text" name="sub"
-                                                   placeholder="Your Email Address*" required>
+                                            <input class="form-control" size="40" value="" type="text"
+                                                name="phone" placeholder="Phone Number" required />
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                        <textarea class="form-control" cols="20" rows="7" placeholder="Write Message"
-                                                  name="textarea-234"></textarea>
+                                            <input class="form-control" size="40" value="" type="text"
+                                                name="email" placeholder="Email Address" />
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <button class="form-btn" type="submit">Send Message</button>
+                                            <textarea class="form-control" cols="20" rows="7" placeholder="Write Message" name="textarea-234"></textarea>
                                         </div>
+                                    </div>
+                                    <div class="col-md-12 text-right">
+                                        <button class="btn btn-primary form-group" type="submit">Send Message</button>
                                     </div>
                                 </form>
                             </div>
@@ -528,16 +529,15 @@
             <div class="row subscribe-bg">
                 <div class="col-lg-6">
                     <div class="dentist-section-title">
-                        <h1>Latest Updates Subscribe</h1>
-                        <h1>To Our Newsletter</h1>
+                        <h3>Subscribe to our newsletter</h3>
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <form action="https://formspree.io/f/myyleorq" method="POST" class="form-controls">
+                    <form action="" method="POST" class="form-controls">
                         <div class="subscribe-form">
                             <input type="email" name="email" placeholder="Enter Your Email...." autocomplete="off"
-                                   required="">
-                            <button type="submit"> Sign Up</button>
+                                required="">
+                            <button class="btn btn-sm btn-info" type="submit">Subscribe</button>
                         </div>
                     </form>
                 </div>
@@ -547,9 +547,7 @@
 @endsection
 
 @push('styles')
-
 @endpush
 
 @push('scripts')
-
 @endpush

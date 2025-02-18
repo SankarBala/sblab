@@ -20,7 +20,8 @@
 /*animate CSS*/
 @import url(all.min.css);
 /*font-awesome CSS*/
-@import url(../../venobox/venobox.css); /*venobox CSS*/
+@import url(../../venobox/venobox.css);
+/*venobox CSS*/
 
 
 /*----------  Body CSS  ----------*/
@@ -124,11 +125,11 @@
     animation-name: slideInDown;
 }
 
-.sticky .dentist_menu > ul > li > a {
+.sticky .dentist_menu>ul>li>a {
     color: #fff;
 }
 
-.sticky .dentist_menu > ul > li > a:hover {
+.sticky .dentist_menu>ul>li>a:hover {
     color: #fff;
 }
 
@@ -154,13 +155,13 @@ nav.dentist_menu {
     display: inline-block;
 }
 
-.dentist_menu > ul > li {
+.dentist_menu>ul>li {
     display: inline-block;
     position: relative;
     z-index: 1;
 }
 
-.dentist_menu > ul > li > a {
+.dentist_menu>ul>li>a {
     display: inline-block;
     margin: 32px 12px;
     font-size: 16px;
@@ -176,7 +177,7 @@ nav.dentist_menu span {
     opacity: .5;
 }
 
-.dentist_menu > ul > li > a:hover {
+.dentist_menu>ul>li>a:hover {
     color: #3BB3D8;
 }
 
@@ -248,7 +249,7 @@ nav.dentist_menu span {
     border-bottom: 1px solid rgba(255, 255, 255, 0.10196078431372549);
 }
 
-.style-two .dentist_menu > ul > li > a {
+.style-two .dentist_menu>ul>li>a {
     color: #fff;
 
 }
@@ -284,7 +285,7 @@ nav.dentist_menu span {
     opacity: 0;
 }
 
-.dentist_menu ul li:hover > .sub-menu {
+.dentist_menu ul li:hover>.sub-menu {
     visibility: visible;
     top: 100%;
     opacity: 1;
@@ -310,10 +311,10 @@ nav.dentist_menu span {
     color: #101210 !important;
 }
 
-.dentist_menu ul .sub-menu li:hover > a,
-.dentist_menu ul .sub-menu .sub-menu li:hover > a,
-.dentist_menu ul .sub-menu .sub-menu .sub-menu li:hover > a,
-.dentist_menu ul .sub-menu .sub-menu .sub-menu .sub-menu li:hover > a {
+.dentist_menu ul .sub-menu li:hover>a,
+.dentist_menu ul .sub-menu .sub-menu li:hover>a,
+.dentist_menu ul .sub-menu .sub-menu .sub-menu li:hover>a,
+.dentist_menu ul .sub-menu .sub-menu .sub-menu .sub-menu li:hover>a {
     background: #3BB3D8;
     color: #fff !important;
 }
@@ -328,7 +329,7 @@ nav.dentist_menu span {
     visibility: hidden;
 }
 
-.dentist_menu ul .sub-menu li:hover > .sub-menu {
+.dentist_menu ul .sub-menu li:hover>.sub-menu {
     opacity: 1;
     visibility: visible;
     top: 0%;
@@ -349,7 +350,7 @@ nav.dentist_menu span {
     visibility: hidden;
 }
 
-.dentist_menu ul .sub-menu .sub-menu li:hover > .sub-menu {
+.dentist_menu ul .sub-menu .sub-menu li:hover>.sub-menu {
     opacity: 1;
     visibility: visible;
     top: 0%;
@@ -378,7 +379,7 @@ ul.sub-menu li:hover a span {
 }
 
 
-.dentist_menu ul .sub-menu .sub-menu .sub-menu li:hover > .sub-menu {
+.dentist_menu ul .sub-menu .sub-menu .sub-menu li:hover>.sub-menu {
     opacity: 1;
     visibility: visible;
     top: 0%;
@@ -411,11 +412,16 @@ ul.sub-menu li:hover a span {
 <!-- =================================================== -->*/
 
 .hero-section {
-    background: url(../images/slider/hero-bg.jpg);
+    /* background: url(../images/slider/hero-bg.jpg); */
+    background: url(../images/sbl/hero.jpgv);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     height: 780px;
+}
+
+.text-justify {
+    text-align: justify;
 }
 
 .hero-bg {
@@ -487,9 +493,11 @@ ul.sub-menu li:hover a span {
     0% {
         transform: translateX(0);
     }
+
     50% {
         transform: translateX(20px);
     }
+
     100% {
         transform: translateX(0);
     }
@@ -1070,13 +1078,13 @@ h3.team-name {
     display: inline-block;
 }
 
-.blog-thumb > a {
+.blog-thumb>a {
     display: inline-block;
     width: 100%;
     position: relative;
 }
 
-.blog-thumb > a::before {
+.blog-thumb>a::before {
     position: absolute;
     content: "";
     left: 50%;
@@ -1089,7 +1097,7 @@ h3.team-name {
 }
 
 /* blog box hover */
-.blog-single-box:hover .blog-thumb > a::before {
+.blog-single-box:hover .blog-thumb>a::before {
     left: 0;
     width: 100%;
 }
@@ -2077,7 +2085,7 @@ ul.list-style-one li a:hover {
     margin-bottom: 30px;
 }
 
-.dentist-section-title > h1 > span {
+.dentist-section-title>h1>span {
     color: #3BB3D8;
 }
 
@@ -2200,7 +2208,7 @@ ul.list-style-one li a:hover {
     color: #303030;
 }
 
-.tablepress > :not(caption) > * > * {
+.tablepress> :not(caption)>*>* {
     background: none;
     border: none;
     box-sizing: initial;
@@ -2211,11 +2219,11 @@ ul.list-style-one li a:hover {
     color: #303030;
 }
 
-.tablepress > tbody > tr {
+.tablepress>tbody>tr {
     border-bottom: 1px solid #ddd;
 }
 
-.tablepress > tbody > tr:last-child {
+.tablepress>tbody>tr:last-child {
     border: 0;
 }
 
@@ -2411,7 +2419,7 @@ td.column-1 {
 }
 
 /*======== Blog List Inner Page ==========*/
-.blog-right-side > div {
+.blog-right-side>div {
     width: 100%;
     margin-bottom: 40px;
     padding: 15px;
@@ -2645,6 +2653,7 @@ td.column-1 {
         -webkit-transform: translateX(0);
         transform: translateX(0);
     }
+
     to {
         -webkit-transform: translateX(88px);
         transform: translateX(88px);
@@ -2831,12 +2840,12 @@ label.widget-check span {
     float: right;
 }
 
-.widget-check:hover input ~ .checkmark {
+.widget-check:hover input~.checkmark {
     background-color: #ccc;
 }
 
 
-.widget-check input:checked ~ .checkmark {
+.widget-check input:checked~.checkmark {
     background-color: #3BB3D8;
 }
 
@@ -2848,7 +2857,7 @@ label.widget-check span {
 }
 
 
-.widget-check input:checked ~ .checkmark:after {
+.widget-check input:checked~.checkmark:after {
     display: block;
 }
 
@@ -2902,7 +2911,8 @@ label.widget-check span {
     margin-right: 10px;
 }
 
-span#slider-range-value1, span#slider-range-value2 {
+span#slider-range-value1,
+span#slider-range-value2 {
     font-size: 16px;
     font-weight: 400;
     color: #062462;
@@ -3471,7 +3481,7 @@ li.category-text {
     border-radius: 5px;
 }
 
-.quantity .cart-plus-minus > .ctnbutton {
+.quantity .cart-plus-minus>.ctnbutton {
     cursor: pointer;
     position: absolute;
     text-align: center;
@@ -3487,7 +3497,7 @@ li.category-text {
     background: #3BB3D8;
 }
 
-.quantity .cart-plus-minus > .cart-plus-minus-box {
+.quantity .cart-plus-minus>.cart-plus-minus-box {
     border: 0;
     height: 54px;
     text-align: center;
@@ -3503,7 +3513,7 @@ li.category-text {
     animation: linearGradientMove 0.3s infinite linear;
 }
 
-.quantity .cart-plus-minus > .ctnbutton.dec {
+.quantity .cart-plus-minus>.ctnbutton.dec {
     top: 50%;
     left: 0%;
     -webkit-transform: translateY(-50%);
@@ -3516,7 +3526,7 @@ li.category-text {
     border-radius: 0 30px 30px 0;
 }
 
-.quantity .cart-plus-minus > .ctnbutton.inc {
+.quantity .cart-plus-minus>.ctnbutton.inc {
     top: 50%;
     right: 0%;
     -webkit-transform: translateY(-50%);
@@ -4308,6 +4318,7 @@ p.description {
         -webkit-box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.3), 0 0 0 10px rgba(255, 255, 255, 0.3), 0 0 0 20px rgba(255, 255, 255, 0.3);
         box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.3), 0 0 0 10px rgba(255, 255, 255, 0.3), 0 0 0 20px rgba(255, 255, 255, 0.3)
     }
+
     100% {
         -webkit-box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.3), 0 0 0 20px rgba(255, 255, 255, 0.3), 0 0 0 30px rgba(255, 255, 255, 0);
         box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.3), 0 0 0 20px rgba(255, 255, 255, 0.3), 0 0 0 30px rgba(255, 255, 255, 0)

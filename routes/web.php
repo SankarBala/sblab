@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\DivisionController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\BaseController;
@@ -24,5 +25,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
     Route::get('/contact-us', [AdminController::class, 'contact'])->name('contact');
     Route::get('/about-us', [AdminController::class, 'about'])->name('about');
     Route::resource('message', MessageController::class)->names('message');
+    Route::resource('division', DivisionController::class)->names('division');
     Route::resource('faq', FaqController::class)->names('faq');
 });

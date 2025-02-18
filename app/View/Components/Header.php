@@ -4,6 +4,7 @@ namespace App\View\Components;
 
 use App\Models\Option;
 use Closure;
+use App\Models\Division;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
