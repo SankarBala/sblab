@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Division;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
+                                                                                                                        
 class DivisionController extends Controller
 {
     /**
@@ -52,16 +54,14 @@ class DivisionController extends Controller
         $division = new Division();
         $division->name = $request->input('name');
         $division->slug = $slug;
-        $division->description = $request->input('description');
-        $division->active = $request->input('active');
+                  $division->description = $request->input('description');
+        $division->active = $request->input('active' );
         $division->save();
 
-        // Handle image upload if present
-        if ($request->hasFile('images')) {
-            $image = $request->file('images')[0]; // Get the uploaded image (first item in the array)
-            $path = $image->store('divisions', 'public'); // Store in 'public/divisions' folder
+        if ($request->hasFile('image')) {
+            $image = $request->file('image'); 
+            $path = $image->store('divisions', 'public');
 
-            // Save the image path to the database (if needed)
             $division->image = $path;
             $division->save();
         }
@@ -88,9 +88,54 @@ class DivisionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Division $division): RedirectResponse
     {
-        //
+
+        $request->validate([
+            'name' => 'required|string|max:255|unique:divisions,name,' . $division->id,
+            'description' => 'nullable|string|max:20000',
+            'images' => 'nullable|array|size:1',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ], [
+            'images.*.image' => 'File must be an image.',
+            'images.*.mimes' => 'Only JPEG, PNG, JPG, GIF, and WEBP are allowed.',
+            'images.*.max' => 'Image must not exceed 2MB in size.',
+        ]);
+
+        $slug = Str::slug($request->name);
+
+        $count = Division::where('slug', $slug)->count();
+        if ($count > 0) {
+            $slug .= '-' . ($count + 1);
+        }
+
+        $division->name = $request->input('name');
+        $division->slug = $slug;
+        $division->description = $request->input('description');
+        $division->active = $request->input('active');
+
+        $division->save();
+
+        if($request->has('image')){
+            if ($request->input('image') === 'remove') {
+                if ($division->image) {
+                    Storage::disk('public')->delete($division->image);
+                    $division->image = null;
+                    $division->save();
+                }
+            } elseif ($request->hasFile('image')) {
+                if ($division->image) {
+                    Storage::disk('public')->delete($division->image);
+                }
+                $image = $request->file('image');
+                $path = $image->store('divisions', 'public');
+                $division->image = $path;
+                $division->save();
+            }
+
+        }
+
+        return redirect()->route('admin.division.edit', $division)->with('success', 'Division updated successfully!');
     }
 
     /**
@@ -98,6 +143,10 @@ class DivisionController extends Controller
      */
     public function destroy(Division $division)
     {
+        if ($division->image) {
+            Storage::disk('public')->delete($division->image);
+        }
+        
         $division->delete();
         return redirect()->route('admin.division.index')->with('success', 'Division deleted successfully!');
     }

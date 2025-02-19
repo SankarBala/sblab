@@ -40,24 +40,19 @@
     <div id="sticky-header" class="dentist_nav_manu">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-3">
+                <div class="col-lg-4">
                     <div class="logo">
                         <a class="logo_img" href="{{route('home')}}" title="dentist">
-                            <img src='{{asset("assets/images/sbl/logo.png")}}' alt="logo">
+                            <img class="img-fluid" src='{{asset("assets/images/sbl/logo.png")}}' alt="logo">
                         </a>
                         <a class="main_sticky" href="{{route('home')}}" title="dentist">
-                            <img src='{{asset("assets/images/sbl/logo.png")}}' alt="logo">
+                            <img class="img-fluid" src='{{asset("assets/images/sbl/logo.png")}}' alt="logo">
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-9 d-flex justify-content-end">
+                <div class="col-lg-8 d-flex justify-content-end">
                     <nav class="dentist_menu">
                         <x-nav/>
-                        {{--                        <div class="header-right">--}}
-                        {{--                            <div class="header-button">--}}
-                        {{--                                <a href="{{route('home')}}">Send a Request</a>--}}
-                        {{--                            </div>--}}
-                        {{--                        </div>--}}
                     </nav>
                 </div>
             </div>

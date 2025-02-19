@@ -9,8 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" type="image/png" sizes="56x56" href='{{asset("assets/images/sbl/favicon.png")}}'>
-    <link rel="stylesheet" href='{{asset("assets/css/bootstrap.min.css")}}' type="text/css" media="all">
-    <link rel="stylesheet" href='{{asset("assets/css/style.css")}}' type="text/css" media="all">
+    <link rel="stylesheet" href='{{asset("/assets/css/bootstrap.min.css")}}' type="text/css" media="all">
+    <link rel="stylesheet" href='{{asset("/assets/css/style.css")}}' type="text/css" media="all">
     <link rel="stylesheet" href='{{asset("assets/css/responsive.css")}}' type="text/css" media="all">
     <script src='{{asset("assets/js/vendor/modernizr-3.5.0.min.js")}}'></script>
 

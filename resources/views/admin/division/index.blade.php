@@ -37,8 +37,9 @@
                                 <td>{{ $division->id }}</td>
                                 <td>{{ $division->title }}</td>
                                 <td>
-                                    <img src="{{ asset('storage/' . $division->image) }}" alt="{{ $division->title }}"
-                                        class="img-thumbnail" style="width: 80px" />
+                                    @if($division->image)
+                                    <img src="{{ asset('storage/' . $division->image) }}" alt="{{ $division->title }}" class="img-thumbnail" style="width: 80px" />
+                                    @endif
                                 </td>
                                 <td>{{ $division->active ? '✔' : '❌' }}</td>
                                 <td class="d-flex">
@@ -60,7 +61,7 @@
                             </tr>
                             <tr class="expandable-body">
                                 <td colspan="5">
-                                    <p><span class="text-info font-weight-bold"></span> {{ $division->description }}</p>
+                                    <p class="text-break">{{ $division->description }}</p>
                                 </td>
                             </tr>
                         @endforeach

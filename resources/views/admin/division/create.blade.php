@@ -49,7 +49,10 @@
                                         <div class="col-md-4 col-lg-3">
                                             <div class="form-group">
                                                 <label for="answer">Image (Optional)</label>
-                                                <div id="divisionImage"></div>
+                                                <x-image-picker name="image" accept="image/*"/>
+                                                @error('image')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -67,29 +70,5 @@
                 </div>
             </div>
         </section>
-{{$errors}}
     </div>
 @endsection
-
-
-@push('styles')
-    <style>
-        #divisionImage .file_upload {
-            min-height: 160px;
-        }
-    </style>
-@endpush
-
-@push('scripts')
-    <script>
-        $("#divisionImage").spartanMultiImagePicker({
-            rowHeight: 'auto',
-            allowedExt: 'png|jpg|jpeg|gif|webp',
-            maxFileSize: '2048',
-            dropFileLabel: 'Drop file here',
-            fieldName: 'images[]',
-            maxCount: 1,
-            groupClassName: '',
-        });
-    </script>
-@endpush

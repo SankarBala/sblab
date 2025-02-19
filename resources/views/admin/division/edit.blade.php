@@ -42,7 +42,11 @@
                                         <div class="col-md-8 col-lg-9">
                                             <div class="form-group">
                                                 <label for="answer">Description (Optional)</label>
-                                                <textarea name="description" class="form-control" id="description" placeholder="Write description here." rows="6">{{ old('description', $division->description) }}</textarea>
+                                                <textarea 
+                                                    name="description" 
+                                                    class="form-control" 
+                                                    placeholder="Write description here." 
+                                                    rows="6">{{ old('description', $division->description) }}</textarea>
                                                 @error('description')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -50,13 +54,16 @@
                                         </div>
                                         <div class="col-md-4 col-lg-3">
                                             <div class="form-group">
-                                                <label for="answer">Image (Optional)</label>
-                                                <div id="divisionImage"></div>
+                                            <label for="image">Image (Optional)</label>
+                                            <x-image-picker name="image" src="{{ $division->image }}" accept="image/*"/>
+                                            @error('image')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="d-flex justify-content-end">
+                                    <div class="d-flex justify-content-end mt-2">
                                         <button type="submit" class="btn btn-secondary mx-2" name="active"
                                             value="0">Draft</button>
                                         <button type="submit" class="btn btn-success" name="active"
@@ -64,58 +71,11 @@
                                     </div>
                                 </div>
                             </form>
+
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        {{ $errors }}
     </div>
 @endsection
-
-
-@push('styles')
-    <style>
-        #divisionImage .file_upload {
-            min-height: 160px;
-        }
-    </style>
-@endpush
-
-@push('scripts')
-    <script>
-        $("#divisionImage").spartanMultiImagePicker({
-            rowHeight: 'auto',
-            allowedExt: 'png|jpg|jpeg|gif|webp',
-            maxFileSize: '2048',
-            dropFileLabel: 'Drop file here',
-            fieldName: 'images[]',
-            maxCount: 1,
-            groupClassName: '',
-        });
-
-        // // Load existing images from the database
-        // let existingImages = @json($division->image ?? []);
-
-        // if (existingImages.length > 0) {
-        //     existingImages.forEach(function(image) {
-        //         $("#image-picker").spartanMultiImagePicker("load", {
-        //             name: image,
-        //             type: "image",
-        //             url: "{{ asset('storage/' . $division->image) }}",
-        //         });
-        //     });
-        // }
-
-
-        let existingImage = "{{ asset('storage/' . $division->image) }}";
-
-        if (existingImage) {
-            $("#divisionImage").spartanMultiImagePicker("load", {
-                name: "image",
-                type: "image",
-                url: existingImage,
-            });
-        }
-    </script>
-@endpush
