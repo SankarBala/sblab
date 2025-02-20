@@ -47,25 +47,28 @@
                                         @error('answer')
                                         <span class="text-danger"> {{$message}}</span>
                                         @enderror
+                                        <h5 class="{{ $faq->active ? 'text-success' : 'text-secondary' }}"> {{$faq->active? "Active": "Inactive"}}</h5>
                                     </div>
-                                    <div class="d-flex justify-content-between">
-                                    <span class="{{ $faq->active ? 'text-success' : 'text-secondary' }}"> {{$faq->active? "Active": "Inactive"}}</span>
-                                       <div> <button type="submit" class="btn btn-secondary mx-2" name="active" value="0">
+                                    <div class="d-flex justify-content-end mt-2">
+                                        <button type="submit" class="btn btn-secondary mx-2" name="active"
+                                                value="0">
                                             Draft
                                         </button>
-                                        <button type="submit" class="btn btn-success" name="active" value="1">Publish
-                                        </button></div>
+                                        <button type="submit" class="btn btn-success" name="active" value="1">
+                                            Publish
+                                        </button>
                                     </div>
                                 </div>
-
-                            </form>
                         </div>
 
+                        </form>
                     </div>
 
                 </div>
+
             </div>
-        </section>
+    </div>
+    </section>
 
     </div>
 @endsection

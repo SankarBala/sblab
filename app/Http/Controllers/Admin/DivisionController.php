@@ -8,13 +8,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
-                                                                                                                        
+use Illuminate\View\View;
+
 class DivisionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
         view()->share('divisions', Division::paginate(10));
         return view('admin.division.index');
@@ -23,7 +24,7 @@ class DivisionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
         return view('admin.division.create');
     }
@@ -31,7 +32,7 @@ class DivisionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'name' => 'required|string|max:255|unique:divisions,name',
@@ -54,12 +55,12 @@ class DivisionController extends Controller
         $division = new Division();
         $division->name = $request->input('name');
         $division->slug = $slug;
-        $division ->description = $request->input('description');
+        $division->description = $request->input('description');
         $division->active = $request->input('active');
         $division->save();
 
         if ($request->hasFile('image')) {
-            $image = $request->file('image'); 
+            $image = $request->file('image');
             $path = $image->store('divisions', 'public');
 
             $division->image = $path;
@@ -80,7 +81,7 @@ class DivisionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Division $division)
+    public function edit(Division $division): View
     {
         return view('admin.division.edit', compact('division'));
     }
@@ -116,7 +117,7 @@ class DivisionController extends Controller
 
         $division->save();
 
-        if($request->has('image')){
+        if ($request->has('image')) {
             if ($request->input('image') === 'remove') {
                 if ($division->image) {
                     Storage::disk('public')->delete($division->image);
@@ -141,12 +142,12 @@ class DivisionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Division $division)
+    public function destroy(Division $division): RedirectResponse
     {
         if ($division->image) {
             Storage::disk('public')->delete($division->image);
         }
-        
+
         $division->delete();
         return redirect()->route('admin.division.index')->with('success', 'Division deleted successfully!');
     }

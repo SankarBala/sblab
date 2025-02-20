@@ -28,3 +28,5 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
     Route::resource('division', DivisionController::class)->names('division');
     Route::resource('faq', FaqController::class)->names('faq');
 });
+
+
