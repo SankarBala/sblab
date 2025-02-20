@@ -54,8 +54,8 @@ class DivisionController extends Controller
         $division = new Division();
         $division->name = $request->input('name');
         $division->slug = $slug;
-                  $division->description = $request->input('description');
-        $division->active = $request->input('active' );
+        $division ->description = $request->input('description');
+        $division->active = $request->input('active');
         $division->save();
 
         if ($request->hasFile('image')) {
