@@ -53,12 +53,12 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link pl-5">
+                            <a href="{{ route('admin.product.create') }}" class="nav-link pl-5">
                                 <p>New Product</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link pl-5">
+                            <a href="{{ route('admin.product.index') }}" class="nav-link pl-5">
                                 <p>Product List</p>
                             </a>
                         </li>

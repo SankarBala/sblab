@@ -12,10 +12,10 @@
          id="{{ $uniqueId }}_preview"
          style="{{ $src ? '' : 'display: none;' }}"/>
 
-    <div id="{{ $uniqueId }}_control" class="ImagePickerControl"  style="{{ $src ? '' : 'display: none;' }}">
+    <div id="{{ $uniqueId }}_control" class="imagePickerControl"  style="{{ $src ? '' : 'display: none;' }}">
         <div class="d-flex justify-content-end">
-            <button type="button" class="btn btn-sm btn-info m-1" id="{{ $uniqueId }}_change_btn">Change</button>
-            <button type="button" class="btn btn-sm btn-danger m-1" id="{{ $uniqueId }}_remove_btn">Remove</button>
+            <button type="button" class="btn btn-sm btn-info mr-2" id="{{ $uniqueId }}_change_btn">Change</button>
+            <button type="button" class="btn btn-sm btn-danger" id="{{ $uniqueId }}_remove_btn">Remove</button>
         </div>
     </div>
 </div>
@@ -26,10 +26,10 @@
           .imagePickerContainer {
             position:relative;
           }
-          .imagePickerContainer .divisionImageControl {
+          .imagePickerContainer .imagePickerControl {
               position: absolute;
-              bottom: 0;
-              right: 0;
+              bottom: 8px;
+              right: 8px;
           }
           .imagePickerContainer .imagePickerPlaceHolder {
               width: 100%;
