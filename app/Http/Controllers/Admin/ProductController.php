@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -31,26 +33,48 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        // Validate the request
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'price' => 'required|numeric',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+
+
+        $slug = Str::slug($request->name);
+
+        $count = Product::where('slug', $slug)->count();
+        if ($count > 0) {
+            $slug .= '-' . ($count + 1);
+        }
 
         // Store the product
         $product = new Product();
         $product->name = $request->name;
+        $product->slug = $slug;
+        $product->short_description = $request->short_description;
         $product->description = $request->description;
         $product->price = $request->price;
-        $product->image = $request->file('image')->store('products', 'public');
+
+        $product->attch($request->categories);
+        
+        
         $product->save();
 
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+
+            $timestamp = time();
+            $extension = $image->getClientOriginalExtension();
+            $filename = $product->id . '_' . $timestamp . '.' . $extension;
+
+            $path = $image->storeAs('products', $filename, 'public');
+
+            $product->image = $path;
+            $product->save();
+        }
+
+        dd($product);
+
         // Redirect to the index page
-        return redirect()->route('admin.product.index');
+        return redirect()->route('admin.product.index')->with('success', 'Product created successfully!');
     }
 
     /**
