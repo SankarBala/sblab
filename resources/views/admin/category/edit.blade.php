@@ -29,14 +29,35 @@
                                 @method('PUT')
                                 @csrf
                                 <div class="card-body">
-                                    <div class="form-group">
-                                        <label for="question">Name (Required)</label>
-                                        <input type="text" name="name" class="form-control" id="name"
-                                            placeholder="Write Section name here"
-                                            value="{{ old('name', $category->name) }}" />
-                                        @error('name')
-                                            <span class="text-danger"> {{ $message }}</span>
-                                        @enderror
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="question">Name (Required)</label>
+                                                <input type="text" name="name" class="form-control" id="name"
+                                                    placeholder="Write Section name here"
+                                                    value="{{ old('name', $category->name) }}" />
+                                                @error('name')
+                                                    <span class="text-danger"> {{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="parent_category">Parent Category</label>
+                                                <select name="parent_category" class="form-control" id="parent_category"
+                                                    value="2">
+                                                    <option value="0">Primary Category</option>
+                                                    @foreach ($categories as $category)
+                                                        <option value="{{ $category->id }}"
+                                                            selected={{ $category->id == $category->parent_id }}>
+                                                            {{ $category->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('parent_category')
+                                                    <span class="text-danger"> {{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-8 col-lg-9">

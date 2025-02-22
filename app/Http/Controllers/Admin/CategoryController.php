@@ -26,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create(): View
     {
-       
+        view()->share('categories', Category::all());
         return view('admin.category.create');
     }
 
@@ -84,6 +84,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category): View
     {
+        view()->share('categories', Category::all());
         return view('admin.category.edit', compact('category'));
     }
 

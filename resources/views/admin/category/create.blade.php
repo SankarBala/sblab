@@ -24,7 +24,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card card-primary">
-                            <form id="quickForms" action="{{ route('admin.division.store') }}" method="POST"
+                            <form id="quickForms" action="{{ route('admin.category.store') }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
@@ -42,8 +42,15 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="parent_category">Parent Category</label>
-                                                <input type="text" name="parent_category" class="form-control" id="parent_category"
-                                                    placeholder="Write Section parent_category here" value="{{ old('parent_category') }}" />
+                                                <select name="parent_category" class="form-control" id="parent_category"
+                                                    value="{{ old('parent_category') }}">
+                                                    <option value="0">Primary Category</option>
+                                                    @foreach ($categories as $category)
+                                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                    @endforeach
+                                                </select>
+
+
                                                 @error('parent_category')
                                                     <span class="text-danger"> {{ $message }}</span>
                                                 @enderror

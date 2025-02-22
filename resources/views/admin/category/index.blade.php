@@ -35,7 +35,7 @@
                         @foreach ($categories as $category)
                             <tr data-widget="expandable-table" aria-expanded="false">
                                 <td>{{ $category->id }}</td>
-                                <td>{{ $category->title }}</td>
+                                <td>{{ $category->name }}</td>
                                 <td>
                                     @if ($category->image)
                                         <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->title }}"
