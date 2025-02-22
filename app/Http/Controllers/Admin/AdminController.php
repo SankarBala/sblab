@@ -12,14 +12,4 @@ class AdminController extends Controller
         return view('admin.home');
     }
 
-    public function contact(): View
-    {
-        return view('admin.contact');
-    }
-
-    public function about(): View
-    {
-        return view('admin.about');
-    }
-
 }
