@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->text('description')->nullable();
             $table->integer('order')->default(0);
-            $table->boolean('status')->default(1);
+            $table->boolean('active')->default(1);
             $table->timestamps();
         });
     }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DivisionController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\MessageController;
@@ -25,8 +26,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::resource('message', MessageController::class)->names('message');
     Route::resource('division', DivisionController::class)->names('division');
+    Route::resource('category', CategoryController::class)->names('category');
     Route::resource('faq', FaqController::class)->names('faq');
     Route::resource('product', ProductController::class)->names('product');
 });
-
-

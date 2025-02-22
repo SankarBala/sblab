@@ -20,11 +20,11 @@
             }
 
             .tag {
-                background-color: #e7e7e7;
+                background-color: #5497ca;
                 color: rgb(0, 0, 0);
-                padding: 5px 10px;
+                padding: 2px 6px;
                 margin: 2px;
-                border-radius: 15px;
+                border-radius: 8px;
                 display: flex;
                 align-items: center;
             }

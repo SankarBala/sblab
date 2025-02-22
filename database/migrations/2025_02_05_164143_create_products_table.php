@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('short_description')->nullable();
             $table->mediumText('description')->nullable();
-            $table->decimal('price', 8, 2)->default(0);
+            $table->decimal('price', 8, 2)->nullable();
             $table->integer('stock')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();

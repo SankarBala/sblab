@@ -43,6 +43,11 @@
                         <i class="nav-icon fa fa-th-large"></i> Divisions
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.category.index') }}" class="nav-link">
+                        <i class="nav-icon fa fa-th-large"></i> Categories
+                    </a>
+                </li>
                 <li class="nav-item menu-open-n">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-box"></i>
