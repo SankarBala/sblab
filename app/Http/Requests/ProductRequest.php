@@ -50,7 +50,7 @@ class ProductRequest extends FormRequest
 
         // =================================================================
         // Sanitize the description input
-        $this->merge(['description' => (new HTMLPurifier())->purify($this->description)]);
+        // $this->merge(['description' => (new HTMLPurifier())->purify($this->description)]);
         //==================================================================
     }
 
@@ -67,7 +67,7 @@ class ProductRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'short_description' => 'nullable|string|max:1000',
-            'description' => 'nullable|string|max:10000',
+            'description' => 'nullable|string',
             'price' => 'nullable|numeric',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'categories' => ['nullable', 'array'],

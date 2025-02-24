@@ -27,7 +27,7 @@
                             <th>ID</th>
                             <th>Title</th>
                             <th>Image</th>
-                            <th>Status</th>
+                            <th>Price</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -42,7 +42,8 @@
                                             class="img-thumbnail" style="width: 80px" />
                                     @endif
                                 </td>
-                                <td>{{ $product->published ? '✔' : '❌' }}</td>
+                                {{-- <td>{{ $product->published ? '✔' : '❌' }}</td> --}}
+                                <td>{{ $product->price }}</td>
                                 <td class="d-flex">
                                     <a href="{{ route('admin.product.edit', $product) }}" onclick="event.stopPropagation()"
                                         class="btn btn-warning mr-1">
@@ -61,8 +62,8 @@
                                 </td>
                             </tr>
                             <tr class="expandable-body">
-                                <td colspan="5">
-                                    <p class="text-break">{{ $product->description }}</p>
+                                <td colspan="5" class="">
+                                    <div class="row"></div>
                                 </td>
                             </tr>
                         @endforeach

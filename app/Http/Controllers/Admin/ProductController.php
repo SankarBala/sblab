@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Tag;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -38,7 +39,6 @@ class ProductController extends Controller
     public function store(ProductRequest $request): RedirectResponse
     {
 
-
         $slug = Str::slug($request->name);
 
         $count = Product::where('slug', $slug)->count();
@@ -59,12 +59,24 @@ class ProductController extends Controller
 
         $product->categories()->attach($request->categories);
 
+        // Handle tags
+        $tags = $request->tags;
+        if (!empty($tags)) {
+            $tagIds = [];
+            foreach ($tags as $tagName) {
+                $tag = Tag::firstOrCreate(['name' => $tagName]);
+                $tagIds[] = $tag->id;
+            }
+            $product->tags()->attach($tagIds);
+        }
+
+
         if ($request->hasFile('image')) {
             $image = $request->file('image');
 
             $timestamp = time();
             $extension = $image->getClientOriginalExtension();
-            $filename = $product->id . '_' . $timestamp . '.' . $extension;
+            $filename = "{$product->id}_{$timestamp}.{$extension}";
 
             $path = $image->storeAs('products', $filename, 'public');
 
