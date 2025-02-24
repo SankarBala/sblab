@@ -53,12 +53,11 @@ class ProductController extends Controller
         $product->short_description = $request->short_description;
         $product->description = $request->description;
         $product->price = $request->price;
-
-        $product->attch($request->categories);
-
+        $product->published = $request->published;
 
         $product->save();
 
+        $product->categories()->attach($request->categories);
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');

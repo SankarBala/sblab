@@ -6,13 +6,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="d-inline">Divisions</h1>
-                        <a class="btn btn-info ml-5" href="{{ route('admin.division.create') }}">Create New</a>
+                        <h1 class="d-inline">Products</h1>
+                        <a class="btn btn-info ml-5" href="{{ route('admin.product.create') }}">Create New</a>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                            <li class="breadcrumb-item active">Divisions</li>
+                            <li class="breadcrumb-item active">Products</li>
                         </ol>
                     </div>
                 </div>
@@ -32,24 +32,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($divisions as $division)
+                        @foreach ($products as $product)
                             <tr data-widget="expandable-table" aria-expanded="false">
-                                <td>{{ $division->id }}</td>
-                                <td>{{ $division->title }}</td>
+                                <td>{{ $product->id }}</td>
+                                <td>{{ $product->name }}</td>
                                 <td>
-                                    @if($division->image)
-                                    <img src="{{ asset('storage/' . $division->image) }}" alt="{{ $division->title }}" class="img-thumbnail" style="width: 80px" />
+                                    @if ($product->image)
+                                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->title }}"
+                                            class="img-thumbnail" style="width: 80px" />
                                     @endif
                                 </td>
-                                <td>{{ $division->active ? '✔' : '❌' }}</td>
+                                <td>{{ $product->published ? '✔' : '❌' }}</td>
                                 <td class="d-flex">
-                                    <a href="{{ route('admin.division.edit', $division) }}"
-                                        onclick="event.stopPropagation()" class="btn btn-warning mr-1">
+                                    <a href="{{ route('admin.product.edit', $product) }}" onclick="event.stopPropagation()"
+                                        class="btn btn-warning mr-1">
                                         <span class="d-none d-md-flex">Edit</span>
                                         <span class="d-md-none d-flex"><i class="fa fa-pen"></i></span>
                                     </a>
 
-                                    <form action="{{ route('admin.division.destroy', $division) }}" method="POST">
+                                    <form action="{{ route('admin.product.destroy', $product) }}" method="POST">
                                         @method('DELETE')
                                         @csrf
                                         <button onclick="event.stopPropagation()" class="btn btn-danger" type="submit">
@@ -61,7 +62,7 @@
                             </tr>
                             <tr class="expandable-body">
                                 <td colspan="5">
-                                    <p class="text-break">{{ $division->description }}</p>
+                                    <p class="text-break">{{ $product->description }}</p>
                                 </td>
                             </tr>
                         @endforeach
@@ -69,7 +70,7 @@
                 </table>
                 <div class="row">
                     <div class="col-12">
-                        {{ $divisions->links() }}
+                        {{ $products->links() }}
                     </div>
                 </div>
             </div>

@@ -102,9 +102,9 @@
                                     </div>
 
                                     <div class="d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-secondary mx-2" name="active"
+                                        <button type="submit" class="btn btn-secondary mx-2" name="published"
                                             value="0">Draft</button>
-                                        <button type="submit" class="btn btn-success" name="active"
+                                        <button type="submit" class="btn btn-success" name="published"
                                             value="1">Publish</button>
                                     </div>
                                 </div>
