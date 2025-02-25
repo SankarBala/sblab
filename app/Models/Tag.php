@@ -14,6 +14,8 @@ class Tag extends Model
 
     protected $fillable = ['name', 'slug'];
 
+    public $timestamps = false;
+
     // Automatically generate slug before saving
     public static function boot()
     {

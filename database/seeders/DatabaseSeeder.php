@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             // MessageSeeder::class,
             // DivisionSeeder::class,
             CategorySeeder::class,
+            ArticleSeeder::class,
         ]);
     }
 }

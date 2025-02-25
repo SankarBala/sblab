@@ -47,10 +47,10 @@
                                                 <select name="parent_category" class="form-control" id="parent_category"
                                                     value="2">
                                                     <option value="0">Primary Category</option>
-                                                    @foreach ($categories as $category)
-                                                        <option value="{{ $category->id }}"
-                                                            selected={{ $category->id == $category->parent_id }}>
-                                                            {{ $category->name }}</option>
+                                                    @foreach ($categories as $cat)
+                                                        <option value="{{ $cat->id }}"
+                                                            selected={{ $cat->id == $category->parent_id }}>
+                                                            {{ $cat->name }}</option>
                                                     @endforeach
                                                 </select>
                                                 @error('parent_category')
@@ -83,7 +83,6 @@
                                         </div>
                                     </div>
 
-
                                     <div class="d-flex justify-content-end mt-2">
                                         <button type="submit" class="btn btn-secondary mx-2" name="active"
                                             value="0">Draft
@@ -93,7 +92,6 @@
                                     </div>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>

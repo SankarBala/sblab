@@ -119,6 +119,7 @@ class ProductController extends Controller
         $product->short_description = $request->short_description;
         $product->description = $request->description;
         $product->price = $request->price;
+        $product->published = $request->published;
 
         $product->categories()->sync($request->categories);
 
@@ -162,7 +163,7 @@ class ProductController extends Controller
         $product->categories()->detach();
         $product->tags()->detach();
         $product->delete();
-        
+
         return redirect()->route('admin.product.index')->with('success', 'Product deleted successfully!');
     }
 }

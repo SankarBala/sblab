@@ -85,7 +85,8 @@ class CategoryController extends Controller
     public function edit(Category $category): View
     {
         view()->share('categories', Category::all());
-        return view('admin.category.edit', compact('category'));
+        view()->share('category', $category);
+        return view('admin.category.edit');
     }
 
     /**
@@ -149,7 +150,12 @@ class CategoryController extends Controller
             Storage::disk('public')->delete($category->image);
         }
 
+        $category->products()->detach();
+        $category->articles()->detach();
+        $category->children()->update(['parent_id' => $category->parent_id]);
+
         $category->delete();
+
         return redirect()->route('admin.category.index')->with('success', 'Category deleted successfully!');
     }
 }

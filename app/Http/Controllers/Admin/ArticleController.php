@@ -53,7 +53,6 @@ class ArticleController extends Controller
         $article->slug = $slug;
         $article->short_description = $request->short_description;
         $article->description = $request->description;
-        $article->price = $request->price;
         $article->published = $request->published;
 
         $article->save();
@@ -116,8 +115,8 @@ class ArticleController extends Controller
         $article->name = $request->name;
         $article->short_description = $request->short_description;
         $article->description = $request->description;
-        $article->price = $request->price;
-
+        $article->published = $request->published;
+        
         $article->categories()->sync($request->categories);
 
         // Handle tags
