@@ -15,15 +15,15 @@ class DivisionSeeder extends Seeder
     public function run(): void
     {
         $divisions = [
-            ['title' =>  "S.B. Laboratories (Ayurvedic) Ltd.", 'slug' => 'ayurvedic', 'image' => "assets/images/sbl/divisions/ayurveda.jpg"],
-            ['title' =>  "S.B. Herbal & Nutraceuticals.", 'slug' => 'herbal', 'image' => "assets/images/sbl/divisions/herbal.png"],
-            ['title' =>  "S.B. Pharmaceuticals.", 'slug' => 'pharmaceuticals', 'image' => "assets/images/sbl/divisions/pharmaceuticals.jpg"],
-            ['title' =>  "S.B. Pharmaceuticals (Veterinary).", 'slug' => 'veterinary', 'image' => "assets/images/sbl/divisions/veterinary.jpg"],
+            ['name' =>  "S.B. Laboratories (Ayurvedic) Ltd.", 'slug' => 'ayurvedic', 'image' => "assets/images/sbl/divisions/ayurveda.jpg"],
+            ['name' =>  "S.B. Herbal & Nutraceuticals.", 'slug' => 'herbal', 'image' => "assets/images/sbl/divisions/herbal.png"],
+            ['name' =>  "S.B. Pharmaceuticals.", 'slug' => 'pharmaceuticals', 'image' => "assets/images/sbl/divisions/pharmaceuticals.jpg"],
+            ['name' =>  "S.B. Pharmaceuticals (Veterinary).", 'slug' => 'veterinary', 'image' => "assets/images/sbl/divisions/veterinary.jpg"],
         ];
 
         foreach ($divisions as $division) {
             $newDivision = new Division();
-            $newDivision->title = $division['title'];
+            $newDivision->name = $division['name'];
             $newDivision->slug = Str::slug($division['slug']);
             $newDivision->image = $division['image'];
             $newDivision->save();
