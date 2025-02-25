@@ -65,6 +65,7 @@ class ProductController extends Controller
         // Handle tags
         $tags = $request->tags;
         if (!empty($tags)) {
+            $tags = array_unique($tags);
             $tagIds = [];
             foreach ($tags as $tagName) {
                 $tag = Tag::firstOrCreate(['name' => $tagName]);
@@ -126,6 +127,7 @@ class ProductController extends Controller
         // Handle tags
         $tags = $request->tags;
         if (!empty($tags)) {
+            $tags = array_unique($tags);
             $tagIds = [];
             foreach ($tags as $tagName) {
                 $tag = Tag::firstOrCreate(['name' => $tagName]);

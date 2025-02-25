@@ -62,6 +62,7 @@ class ArticleController extends Controller
         // Handle tags
         $tags = $request->tags;
         if (!empty($tags)) {
+            $tags = array_unique($tags);
             $tagIds = [];
             foreach ($tags as $tagName) {
                 $tag = Tag::firstOrCreate(['name' => $tagName]);
@@ -116,12 +117,13 @@ class ArticleController extends Controller
         $article->short_description = $request->short_description;
         $article->description = $request->description;
         $article->published = $request->published;
-        
+
         $article->categories()->sync($request->categories);
 
         // Handle tags
         $tags = $request->tags;
         if (!empty($tags)) {
+            $tags = array_unique($tags);
             $tagIds = [];
             foreach ($tags as $tagName) {
                 $tag = Tag::firstOrCreate(['name' => $tagName]);
