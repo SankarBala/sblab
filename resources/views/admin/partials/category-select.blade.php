@@ -1,8 +1,9 @@
 @foreach ($categories as $category)
     <div class="custom-control custom-checkbox py-1">
-        <input class="custom-control-input category-checkbox" type="checkbox" id="{{ 'category_' . $category->id }}"
-            name="categories[]" value="{{ $category->id }}">
-        <label for="{{ 'category_' . $category->id }}" class="custom-control-label text-uppercase">
+        <input class="custom-control-input category-checkbox" type="checkbox" id="category_{{ $category->id }}"
+            name="categories[]" value="{{ $category->id }}"
+            {{ in_array($category->id, $selectedCategories ?? []) ? 'checked' : '' }} />
+        <label for="category_{{ $category->id }}" class="custom-control-label text-uppercase">
             {{ $category->name }}
         </label>
     </div>

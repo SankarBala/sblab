@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DivisionController;
 use App\Http\Controllers\Admin\FaqController;
@@ -29,4 +30,5 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
     Route::resource('category', CategoryController::class)->names('category');
     Route::resource('faq', FaqController::class)->names('faq');
     Route::resource('product', ProductController::class)->names('product');
+    Route::resource('article', ArticleController::class)->names('article');
 });

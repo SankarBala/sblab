@@ -6,7 +6,7 @@
         CLICK HERE TO UPLOAD IMAGE
     </div>
 
-    <img src="{{ $src ?  asset('storage/'. $src) : '' }}" 
+    <img src="{{ $src ?  asset("storage/{$src}") : '' }}" 
          alt="Image Preview" 
          class="img-fluid" 
          id="{{ $uniqueId }}_preview"

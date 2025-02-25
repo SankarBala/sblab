@@ -6,13 +6,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="d-inline">Create New Product</h1>
+                        <h1 class="d-inline">Edit Article</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('admin.faq.index') }}">Product</a></li>
-                            <li class="breadcrumb-item active">Create</li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.faq.index') }}">Article</a></li>
+                            <li class="breadcrumb-item active">Edit</li>
                         </ol>
                     </div>
                 </div>
@@ -24,8 +24,9 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card card-primary">
-                            <form id="quickForms" action="{{ route('admin.product.store') }}" method="POST"
+                            <form id="quickForms" action="{{ route('admin.article.update', $article) }}" method="POST"
                                 enctype="multipart/form-data">
+                                @method('PUT')
                                 @csrf
                                 <div class="card-body">
                                     <div class="row">
@@ -33,30 +34,15 @@
                                             <div class="form-group">
                                                 <label for="name">Name (Required)</label>
                                                 <input type="text" name="name" class="form-control" id="name"
-                                                    placeholder="Write name here" value="{{ old('name') }}" />
+                                                    placeholder="Write name here"
+                                                    value="{{ old('name', $article->name) }}" />
                                                 @error('name')
                                                     <span class="text-danger"> {{ $message }}</span>
                                                 @enderror
                                             </div>
-                                        </div>
-
-                                        <div class="col-md-4 col-lg-3">
                                             <div class="form-group">
-                                                <label for="price">Price</label>
-                                                <input type="number" name="price" class="form-control" id="price"
-                                                    placeholder="Write price here" value="{{ old('price') }}" />
-                                                @error('price')
-                                                    <span class="text-danger"> {{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-8 col-lg-9">
-                                            <div class="form-group">
-                                                <label for="description">Product Description</label>
-                                                <textarea id="summernote" name="description" placeholder="Write description here.">{{ old('description') }}</textarea>
+                                                <label for="description">Article Description</label>
+                                                <textarea id="summernote" name="description" placeholder="Write description here.">{{ old('description', $article->description) }}</textarea>
                                                 @error('description')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -64,7 +50,7 @@
                                             <div class="form-group">
                                                 <label for="short_description">Short Description (Optional)</label>
                                                 <textarea name="short_description" class="form-control" id="short_description"
-                                                    placeholder="Write Short description here." rows="4">{{ old('short_description') }}</textarea>
+                                                    placeholder="Write Short description here." rows="4">{{ old('short_description', $article->short_description) }}</textarea>
                                                 @error('short_description')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -73,7 +59,7 @@
                                                 <label for="tags">Tags (Comma Separated)</label>
                                                 @include('admin.partials.tag-input', [
                                                     'name' => 'tags',
-                                                    'tags' => json_encode([]),
+                                                    'tags' => json_encode($article->tags->pluck('name')),
                                                 ])
                                                 @error('tags')
                                                     <span class="text-danger">{{ $message }}</span>
@@ -86,6 +72,7 @@
                                                 <div class="category_input_wrapper">
                                                     @include('admin.partials.category-select', [
                                                         'categories' => $categories,
+                                                        'selectedCategories' => $article->categories->pluck('id')->toArray(),
                                                         'depth' => 5,
                                                     ])
                                                 </div>
@@ -96,7 +83,8 @@
 
                                             <div class="form-group">
                                                 <label for="answer">Image (Optional)</label>
-                                                <x-image-picker name="image" accept="image/*" />
+                                                <x-image-picker name="image" accept="image/*"
+                                                    src="{{ $article->image }}" />
                                                 @error('image')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror

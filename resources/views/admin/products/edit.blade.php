@@ -74,7 +74,10 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="tags">Tags (Comma Separated)</label>
-                                                @include('admin.partials.tag-input', ['name' => 'tags'])
+                                                @include('admin.partials.tag-input', [
+                                                    'name' => 'tags',
+                                                    'tags' => json_encode($product->tags->pluck('name')),
+                                                ])
                                                 @error('tags')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -86,6 +89,7 @@
                                                 <div class="category_input_wrapper">
                                                     @include('admin.partials.category-select', [
                                                         'categories' => $categories,
+                                                        'selectedCategories' => $product->categories->pluck('id')->toArray(),
                                                         'depth' => 5,
                                                     ])
                                                 </div>
@@ -96,7 +100,8 @@
 
                                             <div class="form-group">
                                                 <label for="answer">Image (Optional)</label>
-                                                <x-image-picker name="image" accept="image/*" />
+                                                <x-image-picker name="image" accept="image/*"
+                                                    src="{{ $product->image }}" />
                                                 @error('image')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror

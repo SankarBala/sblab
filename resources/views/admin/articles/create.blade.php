@@ -6,12 +6,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="d-inline">Create New Product</h1>
+                        <h1 class="d-inline">Create New Article</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('admin.faq.index') }}">Product</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.faq.index') }}">Article</a></li>
                             <li class="breadcrumb-item active">Create</li>
                         </ol>
                     </div>
@@ -24,10 +24,11 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card card-primary">
-                            <form id="quickForms" action="{{ route('admin.product.store') }}" method="POST"
+                            <form id="quickForms" action="{{ route('admin.article.store') }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
+
                                     <div class="row">
                                         <div class="col-md-8 col-lg-9">
                                             <div class="form-group">
@@ -38,24 +39,8 @@
                                                     <span class="text-danger"> {{ $message }}</span>
                                                 @enderror
                                             </div>
-                                        </div>
-
-                                        <div class="col-md-4 col-lg-3">
                                             <div class="form-group">
-                                                <label for="price">Price</label>
-                                                <input type="number" name="price" class="form-control" id="price"
-                                                    placeholder="Write price here" value="{{ old('price') }}" />
-                                                @error('price')
-                                                    <span class="text-danger"> {{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-8 col-lg-9">
-                                            <div class="form-group">
-                                                <label for="description">Product Description</label>
+                                                <label for="description">Article Description</label>
                                                 <textarea id="summernote" name="description" placeholder="Write description here.">{{ old('description') }}</textarea>
                                                 @error('description')
                                                     <span class="text-danger">{{ $message }}</span>

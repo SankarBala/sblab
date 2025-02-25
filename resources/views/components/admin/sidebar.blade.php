@@ -80,12 +80,12 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link pl-5">
+                            <a href="{{ route('admin.article.create') }}" class="nav-link pl-5">
                                 <p>Post New</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link pl-5">
+                            <a href="{{ route('admin.article.index') }}" class="nav-link pl-5">
                                 <p>Article List</p>
                             </a>
                         </li>

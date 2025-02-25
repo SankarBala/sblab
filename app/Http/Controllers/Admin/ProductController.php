@@ -8,7 +8,6 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Tag;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -39,7 +38,11 @@ class ProductController extends Controller
     public function store(ProductRequest $request): RedirectResponse
     {
 
-        $slug = Str::slug($request->name);
+        // $slug = Str::slug($request->name);
+
+        $words = explode(' ', $request->name);
+        $limitedWords = array_slice($words, 0, 10); // Keep only the first 8 words
+        $slug = Str::slug(implode(' ', $limitedWords));
 
         $count = Product::where('slug', $slug)->count();
         if ($count > 0) {
@@ -109,14 +112,29 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product): RedirectResponse
+    public function update(ProductRequest $request, Product $product): RedirectResponse
     {
+
         $product->name = $request->name;
         $product->short_description = $request->short_description;
         $product->description = $request->description;
         $product->price = $request->price;
 
         $product->categories()->sync($request->categories);
+
+        // Handle tags
+        $tags = $request->tags;
+        if (!empty($tags)) {
+            $tagIds = [];
+            foreach ($tags as $tagName) {
+                $tag = Tag::firstOrCreate(['name' => $tagName]);
+                $tagIds[] = $tag->id;
+            }
+            $product->tags()->sync($tagIds);
+        } else {
+            $product->tags()->detach();
+        }
+
 
         $product->save();
 
@@ -125,7 +143,7 @@ class ProductController extends Controller
 
             $timestamp = time();
             $extension = $image->getClientOriginalExtension();
-            $filename = $product->id . '_' . $timestamp . '.' . $extension;
+            $filename = "{$product->id}_{$timestamp}.{$extension}";
 
             $path = $image->storeAs('products', $filename, 'public');
 
@@ -141,9 +159,10 @@ class ProductController extends Controller
      */
     public function destroy(Product $product): RedirectResponse
     {
+        $product->categories()->detach();
+        $product->tags()->detach();
         $product->delete();
-
-
+        
         return redirect()->route('admin.product.index')->with('success', 'Product deleted successfully!');
     }
 }

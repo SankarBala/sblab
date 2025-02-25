@@ -20,12 +20,32 @@ class Tag extends Model
         parent::boot();
 
         static::creating(function ($tag) {
-            $tag->slug = Str::slug($tag->name);
+            $tag->slug = static::generateUniqueSlug($tag->name);
         });
 
         static::updating(function ($tag) {
-            $tag->slug = Str::slug($tag->name);
+            if ($tag->isDirty('name')) { // Only regenerate slug if name has changed
+                $tag->slug = static::generateUniqueSlug($tag->name, $tag->id);
+            }
         });
+    }
+
+    private static function generateUniqueSlug($name, $tagId = null)
+    {
+        $slug = Str::slug($name);
+        $originalSlug = $slug;
+        $counter = 1;
+
+        while (
+            static::where('slug', $slug)
+            ->where('id', '!=', $tagId) // Ignore the current tag when updating
+            ->exists()
+        ) {
+            $slug = "{$originalSlug}-{$counter}";
+            $counter++;
+        }
+
+        return $slug;
     }
 
     public function products(): BelongsToMany
