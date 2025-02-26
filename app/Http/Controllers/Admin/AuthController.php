@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 // use App\Mail\VerifyEmail;
 use Illuminate\Auth\Notifications\VerifyEmail as NotificationsVerifyEmail;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 
 class AuthController extends Controller
@@ -87,8 +88,54 @@ class AuthController extends Controller
         // return view('auth.reset-password');
     }
 
-    public function verifyEmail(Request $request){
-        return view('auth.verify-email');
+    public function verify_email(Request $request, User $user, $hash)
+    {
+
+        if (!URL::hasValidSignature($request)) {
+            abort(403, 'Invalid or expired verification link.');
+        }
+
+        if (!hash_equals(sha1($user->email), $hash)) {
+            abort(403, 'Email verification failed.');
+        }
+
+        if ($user->hasVerifiedEmail()) {
+            return redirect()->route('login')->with('status', 'Email already verified. Please login.');
+        }
+
+        $user->markEmailAsVerified();
+        $user->save();
+        $request->session()->regenerate();
+        
+        return redirect()->route('login')->with('status', 'Email successfully verified. Please login.');
+    }
+
+
+
+    // public function resend_verification_email(Request $request)
+    // {
+    //     return view('auth.verify-email');
+    // }
+
+    public function confirm_email(Request $request)
+    {
+        $token = $request->route('token');
+        $user = User::where('email_verification_token', $token)->firstOrFail();
+
+        if ($user->hasVerifiedEmail()) {
+            return redirect()->route('login')->with('status', 'Email already verified. Please login.');
+        }
+
+        $user->markEmailAsVerified();
+        $user->email_verification_token = null;
+        $user->save();
+
+        if (Hash::check($request->password, $user->password)) {
+            Auth::login($user);
+            return redirect()->route('dashboard')->with('status', 'Email verified and logged in successfully.');
+        }
+
+        return redirect()->route('login')->with('status', 'Email verified. Please login.');
     }
 
     public function logout(Request $request)
