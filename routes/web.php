@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ArticleController;
+use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DivisionController;
 use App\Http\Controllers\Admin\FaqController;
@@ -32,3 +33,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
     Route::resource('product', ProductController::class)->names('product');
     Route::resource('article', ArticleController::class)->names('article');
 });
+
+// Auth routes.
+
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'authenticate'])->name('authenticate');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/register', [AuthController::class, 'create_user'])->name('create_user');
+Route::get('/forgot-password', [AuthController::class, 'forgot_password'])->name('forgot_password');
+Route::post('/forgot-password', [AuthController::class, 'send_reset_link'])->name('send_reset_link');
+Route::get('/reset-password/{token}', [AuthController::class, 'reset_password'])->name('reset_password');
+Route::post('/reset-password/{token}', [AuthController::class, 'update_password'])->name('update_password');
