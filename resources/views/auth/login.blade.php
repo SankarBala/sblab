@@ -11,7 +11,7 @@
                 <form action="{{ route('authenticate') }}" method="post">
                     @csrf
                     <div class="mb-3">
-                        <input type="email" class="form-control" placeholder="Email" name="email" />
+                        <input type="email" class="form-control" placeholder="Email" name="email" value="{{old('email')}}"/>
                         @error('email')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror

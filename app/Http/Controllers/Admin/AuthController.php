@@ -25,7 +25,7 @@ class AuthController extends Controller
 
         $request->validate([
             'email' => 'required|email|exists:users,email',
-            'password' => 'required|string|min:6',
+            'password' => 'required|string|min:2',
         ]);
 
         $credentials = $request->only('email', 'password');
@@ -51,7 +51,7 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:2|confirmed',
         ]);
 
         $user = User::create([
@@ -65,7 +65,7 @@ class AuthController extends Controller
             $user->sendEmailVerificationNotification();
         }
 
-        return redirect()->route('login')->with('status', 'Registration successful! Please check your email to verify your account.');
+        return redirect()->route('login')->with('success', 'Registration successful! Please check your email to verify.');
     }
 
     public function forgot_password(Request $request)
@@ -88,58 +88,60 @@ class AuthController extends Controller
         // return view('auth.reset-password');
     }
 
-    public function verify_email(Request $request, User $user, $hash)
+    public function verify_email(Request $request,  $id, $hash)
     {
 
+        dump('hesdfre');
+
+        $user = User::findOrFail($id);
+        dump('hesfre');
         if (!URL::hasValidSignature($request)) {
             abort(403, 'Invalid or expired verification link.');
         }
-
+        dump('hersdfe');
         if (!hash_equals(sha1($user->email), $hash)) {
             abort(403, 'Email verification failed.');
         }
-
+        dump('hesere');
         if ($user->hasVerifiedEmail()) {
-            return redirect()->route('login')->with('status', 'Email already verified. Please login.');
+            return redirect()->route('login')->with('success', 'Email already verified. Please login.');
         }
-
+        dump('heree');
         $user->markEmailAsVerified();
         $user->save();
-        $request->session()->regenerate();
-        
-        return redirect()->route('login')->with('status', 'Email successfully verified. Please login.');
+        // $request->session()->regenerate();
+        dump('heres');
+        // return redirect()->route('login')->with('success', 'Email successfully verified. Please login.');
     }
 
-
-
-    // public function resend_verification_email(Request $request)
-    // {
-    //     return view('auth.verify-email');
-    // }
-
-    public function confirm_email(Request $request)
+    public function resend_verification_email(Request $request)
     {
-        $token = $request->route('token');
-        $user = User::where('email_verification_token', $token)->firstOrFail();
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user->hasVerifiedEmail()) {
+                return redirect()->route('dashboard')->with('status', 'Your email is already verified.');
+            }
 
-        if ($user->hasVerifiedEmail()) {
-            return redirect()->route('login')->with('status', 'Email already verified. Please login.');
+            $user->sendEmailVerificationNotification();
+
+            return back()->with('status', 'Verification link sent!');
+        } else {
+            return redirect()->route('login')->with('error', 'You need to be logged in to resend the verification email.');
         }
-
-        $user->markEmailAsVerified();
-        $user->email_verification_token = null;
-        $user->save();
-
-        if (Hash::check($request->password, $user->password)) {
-            Auth::login($user);
-            return redirect()->route('dashboard')->with('status', 'Email verified and logged in successfully.');
-        }
-
-        return redirect()->route('login')->with('status', 'Email verified. Please login.');
     }
+
+    public function verification_notice(Request $request)
+    {
+        return view('auth.verify-email');
+    }
+
 
     public function logout(Request $request)
     {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
         return redirect()->route('home');
     }
 }

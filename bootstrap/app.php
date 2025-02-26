@@ -17,6 +17,8 @@ return Application::configure(basePath: dirname(__DIR__))
         ])->validateCsrfTokens(except: [
             'message',
         ]);
+    })->withMiddleware(function (Middleware $middleware) {
+        $middleware->redirectUsersTo('admin/dashboard');
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
