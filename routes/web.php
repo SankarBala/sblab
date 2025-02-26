@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\BaseController;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [BaseController::class, 'home'])->name('home');
@@ -45,3 +47,18 @@ Route::get('/forgot-password', [AuthController::class, 'forgot_password'])->name
 Route::post('/forgot-password', [AuthController::class, 'send_reset_link'])->name('send_reset_link');
 Route::get('/reset-password/{token}', [AuthController::class, 'reset_password'])->name('reset_password');
 Route::post('/reset-password/{token}', [AuthController::class, 'update_password'])->name('update_password');
+
+Route::get('/email/verify', [AuthController::class, 'showVerificationNotice'])->name('verification.notice');
+Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->name('verification.verify')->middleware(['signed', 'throttle:6,1']);
+Route::post('/email/resend', [AuthController::class, 'resendVerificationEmail'])->name('verification.resend')->middleware('throttle:6,1');
+
+
+
+Route::get('mail', function () {
+
+    Mail::raw('This is a test email.', function ($message) {
+        $message->to('test@example.com')->subject('Test Email');
+    });
+
+    return 'Mail sent successfully.';
+});
