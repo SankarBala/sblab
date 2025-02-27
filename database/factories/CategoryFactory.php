@@ -23,7 +23,7 @@ class CategoryFactory extends Factory
             'image' => $this->faker->imageUrl,
             'description' => $this->faker->paragraph,
             'order' => $this->faker->numberBetween(1, 5),
-            'status' => $this->faker->boolean,
+            'active' => $this->faker->boolean,
         ];
     }
 }

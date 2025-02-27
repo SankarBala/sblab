@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MessageRequest;
+use App\Models\Article;
 use App\Models\Division;
 use App\Models\Faq;
 use App\Models\Message;
+use App\Models\Option;
 use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
 
@@ -13,12 +15,15 @@ class BaseController extends Controller
 {
     public function __construct()
     {
+        view()->share('options', Option::pluck('value', 'key'));
         view()->share('divisions', Division::where('active', 1)->get());
     }
 
     public function home(): View
     {
-        return view('home');
+        $articles = Article::where('published', 1)->take(10)->get();
+
+        return view('home', compact('articles'));
     }
 
     public function about(): View

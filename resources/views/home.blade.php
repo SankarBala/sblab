@@ -22,7 +22,8 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="hero-thumb">
-                        <img class="img-thumbnail" src="assets/images/sbl/herbal.png" alt="" />
+                        {{-- <img class="" src="assets/images/sbl/herbal.png" alt=""
+                            style="width: 300px; margin-top: 20px;" /> --}}
                         {{-- <div class="slider-shape">
                             <div class="shape1"><img src="assets/images/slider/slider-shape1.png" alt=""></div>
                             <div class="shape2"><img src="assets/images/slider/slider-shape2.png" alt=""></div>
@@ -39,7 +40,7 @@
             <div class="row about-bg">
                 <div class="col-lg-6">
                     <div class="about-thumb">
-                        <img src="{{ asset('assets/images/sbl/right-logo-t.png') }}" alt="">
+                        <img src="{{ asset('assets/images/sbl/right-logo-t.png') }}" alt="" style="width: 450px;">
                         {{-- <div class="about-shape">
                             <div class="ab-shape1"><img src="assets/images/resource/about-shape1.png" alt=""></div>
                             <div class="ab-shape2"><img src="assets/images/resource/about-shape2.png" alt=""></div>
@@ -56,20 +57,18 @@
                         </div>
                         <div class="single-about-right">
 
-
                             @foreach ($divisions as $division)
                                 <div class="single_about_right_inner">
                                     <div class="about-icon">
                                         <img class="img-fluid rounded" style="width: 80px;"
                                             src="{{ asset($division->image) }}" alt="" />
                                     </div>
-                                    <div class="single-about-content">
-                                        <h5>{{ $division->title }}</h5>
-                                        <p>We bring the right people together to challenge established thinking.</p>
+                                    <div class="single-about-contents">
+                                        <h5>{{ $division->name }}</h5>
+                                        <p class="text-justify">{!! $division->description ?? '&nbsp;' !!}</p>
                                     </div>
                                 </div>
                             @endforeach
-
 
                             <div class="btn btn-lg btn-info px-3 py-2 my-4"><a href="about.blade.php">See all products</a>
                             </div>
@@ -93,40 +92,42 @@
 
 
 
-
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-products-box">
-                        <!-- products thumb -->
-                        <div class="products-thumbs">
-                            <img class="img-thumbnail rounded"
-                                src="{{ asset('assets/images/sbl/divisions/pharmaceuticals.jpg') }}" alt="" />
-                            <!-- product thumb -->
-                            <div class="product-thumb-icon">
-                                <a href="cart.html"> <i class="bi bi-cart3"></i> </a>
-                                <a href="shop-details.html"> <i class="bi bi-suit-heart"></i> </a>
+                @foreach ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] as $product)
+                    <div class="col-lg-3 col-md-6">
+                        <div class="single-products-box">
+                            <!-- products thumb -->
+                            <div class="products-thumbs">
+                                <img class="img-thumbnail rounded"
+                                    src="{{ asset('assets/images/sbl/divisions/pharmaceuticals.jpg') }}" alt="" />
+                                <!-- product thumb -->
+                                <div class="product-thumb-icon">
+                                    <a href="cart.html"> <i class="bi bi-cart3"></i> </a>
+                                    <a href="shop-details.html"> <i class="bi bi-suit-heart"></i> </a>
+                                </div>
                             </div>
-                        </div>
-                        <!-- products content -->
-                        <div class="product-content">
-                            <!-- product list -->
-                            <ul class="product-rating">
-                                <li><i class="bi bi-star-fill"></i></li>
-                                <li><i class="bi bi-star-fill"></i></li>
-                                <li><i class="bi bi-star-fill"></i></li>
-                                <li><i class="bi bi-star-fill"></i></li>
-                                <li><i class="bi bi-star-half"></i></li>
-                            </ul>
-                            <div class="product-title">
-                                <h2> Dental Shower </h2>
-                            </div>
-                            <!-- product text -->
-                            <div class="product-price">
-                                <p> £30.00 <span>£30.00</span> </p>
+                            <!-- products content -->
+                            <div class="product-content">
+                                <!-- product list -->
+                                <ul class="product-rating">
+                                    <li><i class="bi bi-star-fill"></i></li>
+                                    <li><i class="bi bi-star-fill"></i></li>
+                                    <li><i class="bi bi-star-fill"></i></li>
+                                    <li><i class="bi bi-star-fill"></i></li>
+                                    <li><i class="bi bi-star-half"></i></li>
+                                </ul>
+                                <div class="product-title">
+                                    <h2> Dental Shower </h2>
+                                </div>
+                                <!-- product text -->
+                                <div class="product-price">
+                                    <p> £30.00 <span>£30.00</span> </p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
+
+
 
 
 
@@ -272,11 +273,11 @@
                         </div>
                         <div class="form-area contact-form">
                             <div class="form-inner">
-                                <form action="" method="POST" class="form-controls row">
+                                <form id="message-form" class="form-controls rows" action="{{ route('store_message') }}">
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <input class="form-control" size="40" placeholder="Name" type="text"
-                                                name="sub" required>
+                                                name="name" required>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -287,17 +288,18 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input class="form-control" size="40" value="" type="text"
-                                                name="email" placeholder="Email Address" />
+                                            <input class="form-control" size="40" value="" type="email"
+                                                name="email" placeholder="Email Address" required />
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea class="form-control" cols="20" rows="7" placeholder="Write Message" name="textarea-234"></textarea>
+                                            <textarea class="form-control" cols="20" rows="7" placeholder="Write Message" name="message" required></textarea>
                                         </div>
+                                        <span id="message-response" class="text-dark"></span>
                                     </div>
                                     <div class="col-md-12 text-right">
-                                        <button class="btn btn-primary form-group" type="submit">Send Message</button>
+                                        <button class="msg-button" type="submit">Send Message</button>
                                     </div>
                                 </form>
                             </div>
@@ -313,83 +315,44 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="dentist-section-title">
-                        <h5>Latest Blog</h5>
-                        <h1>Checkout Recent News & Blog</h1>
-                        <p>Our office combines breakthrough technology with traditional dentistry so that we can improve
-                            patient smiles with and non-invasive procedures</p>
+                        <h5>&nbsp;</h5>
+                        <h1>Read our recent Blogs</h1>
+                        <p>Stay updated with the latest insights, tips, and trends in our recent blogs. Explore expert
+                            opinions, helpful guides, and inspiring stories curated just for you! </p>
                     </div>
                 </div>
                 <div class="blog_list owl-carousel">
-                    <div class="col-lg-12">
-                        <div class="blog-single-box">
-                            <div class="blog-thumb">
-                                <a href="blog-list.html"><img src="assets/images/resource/blog1.png" alt=""></a>
-                                <div class="post-categories"><a href="home.html">health</a></div>
-                            </div>
-                            <div class="dentist-blog-meta-left">
-                                <span><i aria-hidden="true" class="far fa-calendar-alt"></i>February 26, 2023</span>
-                                <div class="blog-content">
-                                    <div class="blog-title">
-                                        <h2><a href="blog-list.html">Facts About Dental ImplantRecovery Process</a></h2>
-                                    </div>
-                                    <div class="blog-text">
-                                        <p>Curabitur sagittis libero tincidunt tem finibus. Mauris at dignissim
-                                            ligula, </p>
+                    @foreach ($articles as $article)
+                        <div class="col-lg-12">
+                            <div class="blog-single-box">
+                                <div class="blog-thumb">
+                                    <a href="blog-list.html"><img src="assets/images/resource/blog1.png"
+                                            alt=""></a>
+                                    {{-- <div class="post-categories"><a href="home.html">health</a></div> --}}
+                                </div>
+                                <div class="dentist-blog-meta-left">
+                                    <span class="text-dark">
+                                        <i aria-hidden="true" class="far fa-calendar-alt"></i>
+                                        {{ $article->created_at->format('d M Y h:m A') }}
+                                    </span>
+                                    <div class="blog-content">
+                                        <div class="blog-title three_line_title">
+                                            <a href="{{ route('article', $article) }}">{{ $article->name }}</a>
+                                        </div>
+                                        <div class="blog-text four_line_short_description">
+                                            <p>{{ $article->short_description }}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="blog-single-box">
-                            <div class="blog-thumb">
-                                <a href="blog-list.html"><img src="assets/images/resource/blog2.png" alt=""></a>
-                                <ul class="post-categories">
-                                    <li><a href="home.html" rel="category tag">health</a></li>
-                                </ul>
-                            </div>
-                            <div class="dentist-blog-meta-left">
-                                <span><i aria-hidden="true" class="far fa-calendar-alt"></i>February 26, 2023</span>
-                                <div class="blog-content">
-                                    <div class="blog-title">
-                                        <h2><a href="blog-list.html">How Long Does It Take To Whiten Teeth</a></h2>
-                                    </div>
-                                    <div class="blog-text">
-                                        <p>Curabitur sagittis libero tincidunt tem finibus. Mauris at dignissim
-                                            ligula, </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="blog-single-box">
-                            <div class="blog-thumb">
-                                <a href="blog-list.html"><img src="assets/images/resource/blog3.png" alt=""></a>
-                                <ul class="post-categories">
-                                    <li><a href="home.html" rel="category tag">health</a></li>
-                                </ul>
-                            </div>
-                            <div class="dentist-blog-meta-left">
-                                <span><i aria-hidden="true" class="far fa-calendar-alt"></i>February 26, 2023</span>
-                                <div class="blog-content">
-                                    <div class="blog-title">
-                                        <h2><a href="blog-list.html">Taking Care of Your Teeth Home with Candid</a></h2>
-                                    </div>
-                                    <div class="blog-text">
-                                        <p>Curabitur sagittis libero tincidunt tem finibus. Mauris at dignissim
-                                            ligula, </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="testimonial-section">
+    {{-- <div class="testimonial-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -403,18 +366,14 @@
                         <div class="testimonial-single-box">
                             <div class="testi-intro">
                                 <div class="testi-thumb">
-                                    <img src="assets/images/resource/testi1.png" alt="">
+                                    <img src="" alt="/">
                                 </div>
                                 <div class="testi-title">
                                     <h2> Dr. Linda Davis<span>Health Director</span></h2>
                                 </div>
                             </div>
                             <div class="testi-content">
-                                <div class="testi-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                                    tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim veniam, quis nostrud
-                                    exercitation
-                                    ullamco laboris nisi ut dolor commodo consequat.
+                                <div class="testi-text">Lorem ipsum dolor
                                 </div>
                             </div>
                             <div class="reviews-rating">
@@ -422,107 +381,15 @@
                                     <span>5.0</span>
                                     <span class="fa fa-star"></span>
                                     <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
                                 </div>
-                            </div><!-- reviews rating -->
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-12">
-                        <div class="testimonial-single-box">
-                            <div class="testi-intro">
-                                <div class="testi-thumb">
-                                    <img src="assets/images/resource/testi2.png" alt="">
-                                </div>
-                                <div class="testi-title">
-                                    <h2> Dr. john Martin<span>Specialist</span></h2>
-                                </div>
-                            </div>
-                            <div class="testi-content">
-                                <div class="testi-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                                    tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim veniam, quis nostrud
-                                    exercitation
-                                    ullamco laboris nisi ut dolor commodo consequat.
-                                </div>
-                            </div>
-                            <div class="reviews-rating">
-                                <div class="testi-star">
-                                    <span>4.5</span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star-half"></span>
-                                </div>
-                            </div><!-- reviews rating -->
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="testimonial-single-box">
-                            <div class="testi-intro">
-                                <div class="testi-thumb">
-                                    <img src="assets/images/resource/testi1.png" alt="">
-                                </div>
-                                <div class="testi-title">
-                                    <h2> Dr. Linda Davis<span>Health Director</span></h2>
-                                </div>
-                            </div>
-                            <div class="testi-content">
-                                <div class="testi-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                                    tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim veniam, quis nostrud
-                                    exercitation
-                                    ullamco laboris nisi ut dolor commodo consequat.
-                                </div>
-                            </div>
-                            <div class="reviews-rating">
-                                <div class="testi-star">
-                                    <span>5.0</span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                </div>
-                            </div><!-- reviews rating -->
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="testimonial-single-box">
-                            <div class="testi-intro">
-                                <div class="testi-thumb">
-                                    <img src="assets/images/resource/testi2.png" alt="">
-                                </div>
-                                <div class="testi-title">
-                                    <h2> Dr. john Martin<span>Specialist</span></h2>
-                                </div>
-                            </div>
-                            <div class="testi-content">
-                                <div class="testi-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                                    tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim veniam, quis nostrud
-                                    exercitation
-                                    ullamco laboris nisi ut dolor commodo consequat.
-                                </div>
-                            </div>
-                            <div class="reviews-rating">
-                                <div class="testi-star">
-                                    <span>4.5</span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star-half"></span>
-                                </div>
-                            </div><!-- reviews rating -->
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="subscribe-section">
         <div class="container">
@@ -547,7 +414,72 @@
 @endsection
 
 @push('styles')
+    <style>
+        .three_line_title a {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 18px;
+            text-align: justify;
+            height: 54px;
+            color: rgb(3, 80, 111);
+            border-bottom: 1px solid #1d0a30;
+            margin: 8px 0;
+
+            margin: 8px 0;
+        }
+
+        .three_line_title a:hover {
+            color: maroon;
+        }
+
+        .four_line_short_description {
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-align: justify;
+            color: #222;
+        }
+
+        .four_line_short_description:hover {
+            color: #111;
+        }
+
+        .msg-button {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
 @endpush
 
 @push('scripts')
+    <script type="text/javascript">
+        $('document').ready(function() {
+            $('#message-form').on('submit', function(event) {
+                event.preventDefault();
+                var form = $(this);
+                var url = form.attr('action');
+                var data = form.serialize();
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: data,
+                    success: function(response) {
+                        $('#message-response').text(response.message);
+                        $('#message-form').trigger('reset');
+                    },
+                    error: function(error) {
+                        $('#message-response').text(error.responseJSON.message);
+                    }
+                });
+            });
+        });
+    </script>
 @endpush

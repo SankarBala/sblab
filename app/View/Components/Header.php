@@ -15,7 +15,7 @@ class Header extends Component
      */
     public function __construct()
     {
-        view()->share('options', Option::pluck('value', 'key'));
+       //
     }
 
     /**

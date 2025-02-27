@@ -4,15 +4,14 @@
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="widget widgets-company-info">
                     <div class="dreamhub-logo">
-                        <a class="logo_thumb" href="{{route('home')}}" title="dreamhub">
-                            <img src="{{asset('assets/images/sbl/footer_logo.png')}}" alt="">
+                        <a class="logo_thumb" href="{{ route('home') }}" title="dreamhub">
+                            <img src="{{ asset('assets/images/sbl/footer_logo.png') }}" alt="">
                         </a>
                     </div>
                     <div class="follow-company-icon mt-4 text-center">
-                        <a href="home.html"> <i class="fab fa-facebook-f"></i> </a>
-                        <a href="home.html"> <i class="fab fa-pinterest"></i> </a>
-                        <a href="home.html"> <i class="fab fa-instagram"> </i> </a>
-                        <a href="home.html"> <i class="fab fa-google"></i> </a>
+                        <a href="{{ $options->get('facebook') }}"> <i class="fab fa-facebook-f"></i></a>
+                        <a href="{{ $options->get('twitter') }}"> <i class="fab fa-twitter"></i></a>
+                        <a href="{{ $options->get('youtube') }}"> <i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
             </div>
@@ -21,9 +20,9 @@
                     <h4 class="widget-title">Quick Link</h4>
                     <div class="menu-quick-link-content">
                         <ul class="footer-menu">
-                            <li><a href="{{route('about')}}"> About Us </a></li>
-                            <li><a href="{{route('contact')}}"> Contact Us </a></li>
-                            <li><a href="{{route('profiles')}}"> Products </a></li>
+                            <li><a href="{{ route('about') }}"> About Us </a></li>
+                            <li><a href="{{ route('contact') }}"> Contact Us </a></li>
+                            <li><a href="{{ route('profiles') }}"> Products </a></li>
                         </ul>
                     </div>
                 </div>
@@ -35,7 +34,8 @@
                         <div class="single-widget-item">
                             <div class="recent-post-item">
                                 <div class="recent-post-image">
-                                    <a href="{{route('articles')}}"><img src="assets/images/resource/recent1.png" alt=""></a>
+                                    <a href="{{ route('articles') }}"><img src="assets/images/resource/recent1.png"
+                                            alt=""></a>
                                 </div>
                                 <div class="recent-post-text">
                                     <h4><a href="home.html">Get The Exercise Limited Mobility</a></h4>
@@ -44,7 +44,8 @@
                             </div>
                             <div class="recent-post-item">
                                 <div class="recent-post-image">
-                                    <a href="home.html"><img src="assets/images/resource/recent2.png" alt=""></a>
+                                    <a href="home.html"><img src="assets/images/resource/recent2.png"
+                                            alt=""></a>
                                 </div>
                                 <div class="recent-post-text">
                                     <h4><a href="home.html"> How Long Does It Take To Whiten </a></h4>
@@ -62,15 +63,15 @@
                         <ul class="footer-info">
                             <li>
                                 <span><i class="fas fa-phone-alt"></i>Phone Number</span><br>
-                                <a href="home.html">{{$options->get('phone')}}</a>
+                                <a href="home.html">{{ $options->get('phone') }}</a>
                             </li>
                             <li>
                                 <span><i class="far fa-envelope"></i>Locations</span><br>
-                                <a href="home.html">{{$options->get('address')}}</a>
+                                <a href="home.html">{{ $options->get('address') }}</a>
                             </li>
                             <li>
                                 <span><i class="fas fa-map-marker-alt"></i>Email Address</span><br>
-                                <a href="home.html">{{$options->get('email')}}</a>
+                                <a href="home.html">{{ $options->get('email') }}</a>
                             </li>
                         </ul>
                     </div>
@@ -81,14 +82,14 @@
             <div class="col-lg-12 col-md-12">
                 <div class="footer-bottom-content d-flex justify-content-between">
                     <div class="">
-                        <p>&copy; {{date('Y')}} All Rights Reserved By |
-                            <a class="text-info" href="{{route('home')}}">
+                        <p>&copy; {{ date('Y') }} All Rights Reserved By |
+                            <a class="text-info" href="{{ route('home') }}">
                                 S.B.&nbsp;Laboratories Ltd.
                             </a>
                         </p>
                     </div>
                     <div class="">
-                        <p>Developed By <a class="text-warning" href="{{route('home')}}">Sankar Bala</a></p>
+                        <p>Developed By <a class="text-warning" href="{{ route('home') }}">Sankar Bala</a></p>
                     </div>
                 </div>
             </div>
