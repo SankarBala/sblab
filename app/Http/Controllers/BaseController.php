@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MessageRequest;
+use App\Models\Article;
 use App\Models\Division;
 use App\Models\Faq;
 use App\Models\Message;
@@ -20,7 +21,10 @@ class BaseController extends Controller
 
     public function home(): View
     {
-        return view('home');
+        $articles = Article::where('published', 1)->take(2)->get();
+
+        dd('', $articles);
+        return view('home', compact('articles'));
     }
 
     public function about(): View

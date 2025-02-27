@@ -314,77 +314,37 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="dentist-section-title">
-                        <h5>Latest Blog</h5>
+                        <h5>&nbsp;</h5>
                         <h1>Checkout Recent News & Blog</h1>
                         <p>Our office combines breakthrough technology with traditional dentistry so that we can improve
                             patient smiles with and non-invasive procedures</p>
                     </div>
                 </div>
                 <div class="blog_list owl-carousel">
-                    <div class="col-lg-12">
-                        <div class="blog-single-box">
-                            <div class="blog-thumb">
-                                <a href="blog-list.html"><img src="assets/images/resource/blog1.png" alt=""></a>
-                                <div class="post-categories"><a href="home.html">health</a></div>
-                            </div>
-                            <div class="dentist-blog-meta-left">
-                                <span><i aria-hidden="true" class="far fa-calendar-alt"></i>February 26, 2023</span>
-                                <div class="blog-content">
-                                    <div class="blog-title">
-                                        <h2><a href="blog-list.html">Facts About Dental ImplantRecovery Process</a></h2>
-                                    </div>
-                                    <div class="blog-text">
-                                        <p>Curabitur sagittis libero tincidunt tem finibus. Mauris at dignissim
-                                            ligula, </p>
+                    @foreach ($articles as $article)
+                        <div class="col-lg-12">
+                            <div class="blog-single-box">
+                                <div class="blog-thumb">
+                                    <a href="blog-list.html"><img src="assets/images/resource/blog1.png"
+                                            alt=""></a>
+                                    <div class="post-categories"><a href="home.html">health</a></div>
+                                </div>
+                                <div class="dentist-blog-meta-left">
+                                    <span><i aria-hidden="true" class="far fa-calendar-alt"></i>February 26, 2023</span>
+                                    <div class="blog-content">
+                                        <div class="blog-title">
+                                            <h2><a href="blog-list.html">Facts About Dental ImplantRecovery Process</a>
+                                            </h2>
+                                        </div>
+                                        <div class="blog-text">
+                                            <p>Curabitur sagittis libero tincidunt tem finibus. Mauris at dignissim
+                                                ligula, </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="blog-single-box">
-                            <div class="blog-thumb">
-                                <a href="blog-list.html"><img src="assets/images/resource/blog2.png" alt=""></a>
-                                <ul class="post-categories">
-                                    <li><a href="home.html" rel="category tag">health</a></li>
-                                </ul>
-                            </div>
-                            <div class="dentist-blog-meta-left">
-                                <span><i aria-hidden="true" class="far fa-calendar-alt"></i>February 26, 2023</span>
-                                <div class="blog-content">
-                                    <div class="blog-title">
-                                        <h2><a href="blog-list.html">How Long Does It Take To Whiten Teeth</a></h2>
-                                    </div>
-                                    <div class="blog-text">
-                                        <p>Curabitur sagittis libero tincidunt tem finibus. Mauris at dignissim
-                                            ligula, </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="blog-single-box">
-                            <div class="blog-thumb">
-                                <a href="blog-list.html"><img src="assets/images/resource/blog3.png" alt=""></a>
-                                <ul class="post-categories">
-                                    <li><a href="home.html" rel="category tag">health</a></li>
-                                </ul>
-                            </div>
-                            <div class="dentist-blog-meta-left">
-                                <span><i aria-hidden="true" class="far fa-calendar-alt"></i>February 26, 2023</span>
-                                <div class="blog-content">
-                                    <div class="blog-title">
-                                        <h2><a href="blog-list.html">Taking Care of Your Teeth Home with Candid</a></h2>
-                                    </div>
-                                    <div class="blog-text">
-                                        <p>Curabitur sagittis libero tincidunt tem finibus. Mauris at dignissim
-                                            ligula, </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>

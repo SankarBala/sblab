@@ -28,12 +28,15 @@ class AdminController extends Controller
             'phone' => 'required|string',
             'email' => 'required|email|string',
             'address' => 'required|string',
+            'facebook' => 'nullable|string|url',
+            'twitter' => 'nullable|string|url',
+            'youtube' => 'nullable|string|url',
         ]);
 
         foreach ($request->except('_token') as $name => $value) {
             Option::updateOrCreate(['key' => $name], ['value' => $value]);
         }
-        
+
         return back()->with('success', 'Settings updated successfully.');
     }
 }

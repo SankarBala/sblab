@@ -61,6 +61,42 @@
                                                 @enderror
                                             </div>
                                         </div>
+
+                                        {{-- Social Links --}}
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="parent_category">Facebook</label>
+                                                <input type="text" name="facebook" class="form-control" id="facebook"
+                                                    placeholder="Enter facebook link here"
+                                                    value="{{ old('facebook', $settings->get('facebook')) }}" />
+                                                @error('facebook')
+                                                    <span class="text-danger"> {{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="parent_category">Youtube</label>
+                                                <input type="text" name="youtube" class="form-control" id="youtube"
+                                                    placeholder="Enter youtube link here"
+                                                    value="{{ old('youtube', $settings->get('youtube')) }}" />
+                                                @error('youtube')
+                                                    <span class="text-danger"> {{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="parent_category">Twitter</label>
+                                                <input type="text" name="twitter" class="form-control" id="twitter"
+                                                    placeholder="Enter twitter link here"
+                                                    value="{{ old('twitter', $settings->get('twitter')) }}" />
+                                                @error('twitter')
+                                                    <span class="text-danger"> {{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        {{-- End Social Links --}}
                                     </div>
                                     <div class="d-flex justify-content-end mt-2">
                                         <button type="submit" class="btn btn-success">Update
