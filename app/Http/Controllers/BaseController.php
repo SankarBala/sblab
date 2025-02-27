@@ -6,6 +6,7 @@ use App\Http\Requests\MessageRequest;
 use App\Models\Division;
 use App\Models\Faq;
 use App\Models\Message;
+use App\Models\Option;
 use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
 
@@ -13,6 +14,7 @@ class BaseController extends Controller
 {
     public function __construct()
     {
+        view()->share('options', Option::pluck('value', 'key'));
         view()->share('divisions', Division::where('active', 1)->get());
     }
 

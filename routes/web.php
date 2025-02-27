@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DivisionController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\BaseController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,14 +25,17 @@ Route::get('/faq', [BaseController::class, 'faq'])->name('faq');
 Route::post('/message', [BaseController::class, 'store_message'])->name('store_message');
 
 // Admin routes.
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin', 'verified']], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']], function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/settings', [AdminController::class, 'settings'])->name('settings');
+    Route::post('/settings', [AdminController::class, 'settings_update'])->name('settings.update');
     Route::resource('message', MessageController::class)->names('message');
     Route::resource('division', DivisionController::class)->names('division');
     Route::resource('category', CategoryController::class)->names('category');
     Route::resource('faq', FaqController::class)->names('faq');
     Route::resource('product', ProductController::class)->names('product');
     Route::resource('article', ArticleController::class)->names('article');
+    Route::resource('staff', StaffController::class)->names('staff');
 });
 
 // Auth routes.
@@ -46,12 +50,18 @@ Route::group(['middleware' => ['guest']], function () {
     Route::post('/reset-password/{token}', [AuthController::class, 'update_password'])->name('update_password');
 });
 
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+Route::post('/logout', [AuthController::class, 'logout'])
+    ->name('logout')
+    ->middleware('auth');
+
 Route::get('/email/verify', [AuthController::class, 'verification_notice'])
     ->name('verification.notice')
     ->middleware('auth', 'throttle:6,1');
+
 Route::post('/email/resend', [AuthController::class, 'resend_verification_email'])
     ->name('verification.resend')
     ->middleware(['auth', 'throttle:6,1']);
 
-Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verify_email'])->name('verification.verify')->middleware(['signed', 'throttle:6,1']);
+Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verify_email'])
+    ->name('verification.verify')
+    ->middleware(['signed', 'throttle:6,1']);

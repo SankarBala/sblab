@@ -22,7 +22,8 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="hero-thumb">
-                        <img class="img-thumbnail" src="assets/images/sbl/herbal.png" alt="" />
+                        {{-- <img class="" src="assets/images/sbl/herbal.png" alt=""
+                            style="width: 300px; margin-top: 20px;" /> --}}
                         {{-- <div class="slider-shape">
                             <div class="shape1"><img src="assets/images/slider/slider-shape1.png" alt=""></div>
                             <div class="shape2"><img src="assets/images/slider/slider-shape2.png" alt=""></div>
@@ -39,7 +40,7 @@
             <div class="row about-bg">
                 <div class="col-lg-6">
                     <div class="about-thumb">
-                        <img src="{{ asset('assets/images/sbl/right-logo-t.png') }}" alt="">
+                        <img src="{{ asset('assets/images/sbl/right-logo-t.png') }}" alt="" style="width: 450px;">
                         {{-- <div class="about-shape">
                             <div class="ab-shape1"><img src="assets/images/resource/about-shape1.png" alt=""></div>
                             <div class="ab-shape2"><img src="assets/images/resource/about-shape2.png" alt=""></div>
@@ -56,20 +57,18 @@
                         </div>
                         <div class="single-about-right">
 
-
                             @foreach ($divisions as $division)
                                 <div class="single_about_right_inner">
                                     <div class="about-icon">
                                         <img class="img-fluid rounded" style="width: 80px;"
                                             src="{{ asset($division->image) }}" alt="" />
                                     </div>
-                                    <div class="single-about-content">
-                                        <h5>{{ $division->title }}</h5>
-                                        <p>We bring the right people together to challenge established thinking.</p>
+                                    <div class="single-about-contents">
+                                        <h5>{{ $division->name }}</h5>
+                                        <p class="text-justify">{!! $division->description ?? '&nbsp;' !!}</p>
                                     </div>
                                 </div>
                             @endforeach
-
 
                             <div class="btn btn-lg btn-info px-3 py-2 my-4"><a href="about.blade.php">See all products</a>
                             </div>
@@ -93,40 +92,42 @@
 
 
 
-
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-products-box">
-                        <!-- products thumb -->
-                        <div class="products-thumbs">
-                            <img class="img-thumbnail rounded"
-                                src="{{ asset('assets/images/sbl/divisions/pharmaceuticals.jpg') }}" alt="" />
-                            <!-- product thumb -->
-                            <div class="product-thumb-icon">
-                                <a href="cart.html"> <i class="bi bi-cart3"></i> </a>
-                                <a href="shop-details.html"> <i class="bi bi-suit-heart"></i> </a>
+                @foreach ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] as $product)
+                    <div class="col-lg-3 col-md-6">
+                        <div class="single-products-box">
+                            <!-- products thumb -->
+                            <div class="products-thumbs">
+                                <img class="img-thumbnail rounded"
+                                    src="{{ asset('assets/images/sbl/divisions/pharmaceuticals.jpg') }}" alt="" />
+                                <!-- product thumb -->
+                                <div class="product-thumb-icon">
+                                    <a href="cart.html"> <i class="bi bi-cart3"></i> </a>
+                                    <a href="shop-details.html"> <i class="bi bi-suit-heart"></i> </a>
+                                </div>
                             </div>
-                        </div>
-                        <!-- products content -->
-                        <div class="product-content">
-                            <!-- product list -->
-                            <ul class="product-rating">
-                                <li><i class="bi bi-star-fill"></i></li>
-                                <li><i class="bi bi-star-fill"></i></li>
-                                <li><i class="bi bi-star-fill"></i></li>
-                                <li><i class="bi bi-star-fill"></i></li>
-                                <li><i class="bi bi-star-half"></i></li>
-                            </ul>
-                            <div class="product-title">
-                                <h2> Dental Shower </h2>
-                            </div>
-                            <!-- product text -->
-                            <div class="product-price">
-                                <p> £30.00 <span>£30.00</span> </p>
+                            <!-- products content -->
+                            <div class="product-content">
+                                <!-- product list -->
+                                <ul class="product-rating">
+                                    <li><i class="bi bi-star-fill"></i></li>
+                                    <li><i class="bi bi-star-fill"></i></li>
+                                    <li><i class="bi bi-star-fill"></i></li>
+                                    <li><i class="bi bi-star-fill"></i></li>
+                                    <li><i class="bi bi-star-half"></i></li>
+                                </ul>
+                                <div class="product-title">
+                                    <h2> Dental Shower </h2>
+                                </div>
+                                <!-- product text -->
+                                <div class="product-price">
+                                    <p> £30.00 <span>£30.00</span> </p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
+
+
 
 
 

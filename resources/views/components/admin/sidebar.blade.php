@@ -34,22 +34,26 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
                 <li class="nav-item">
-                    <a href="#" class="nav-link active">
-                        <i class="nav-icon fas fa-th"></i> Dashboard
+                    <a href="{{ route('admin.dashboard') }}"
+                        class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i> Dashboard
                     </a>
                 </li>
+
                 <li class="nav-item">
-                    <a href="{{ route('admin.division.index') }}" class="nav-link">
+                    <a href="{{ route('admin.division.index') }}"
+                        class="nav-link {{ request()->routeIs('admin.division.index') ? 'active' : '' }}">
                         <i class="nav-icon fa fa-th-large"></i> Divisions
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.category.index') }}" class="nav-link">
-                        <i class="nav-icon fa fa-th-large"></i> Categories
+                    <a href="{{ route('admin.category.index') }}"
+                        class="nav-link {{ request()->routeIs('admin.category.index') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-th"></i> </i> Categories
                     </a>
                 </li>
                 <li class="nav-item menu-open-n">
-                    <a href="#" class="nav-link">
+                    <a href="#" class="nav-link {{ request()->routeIs('admin.product.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-box"></i>
                         <p>
                             Products
@@ -71,7 +75,7 @@
                 </li>
 
                 <li class="nav-item menu-open-n">
-                    <a href="#" class="nav-link">
+                    <a href="#" class="nav-link {{ request()->routeIs('admin.article.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-list"></i>
                         <p>
                             Articles
@@ -80,7 +84,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('admin.article.create') }}" class="nav-link pl-5">
+                            <a href="{{ route('admin.article.create') }}" class="nav-link pl-5 ">
                                 <p>Post New</p>
                             </a>
                         </li>
@@ -94,18 +98,27 @@
 
 
                 <li class="nav-item">
-                    <a href="{{ route('admin.message.index') }}" class="nav-link">
+                    <a href="{{ route('admin.staff.index') }}"
+                        class="nav-link {{ request()->routeIs('admin.staff.*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-users"></i> Staff
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.message.index') }}"
+                        class="nav-link {{ request()->routeIs('admin.message.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-envelope"></i> Messages
                     </a>
                 </li>
-                {{-- <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-cog"></i> Settings
-                    </a>
-                </li> --}}
+
                 <li class="nav-item">
-                    <a href="{{ route('admin.faq.index') }}" class="nav-link">
+                    <a href="{{ route('admin.faq.index') }}"
+                        class="nav-link {{ request()->routeIs('admin.faq.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-question-circle"></i> FAQ
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.settings') }}" class="nav-link">
+                        <i class="nav-icon fas fa-cog"></i> Settings
                     </a>
                 </li>
             </ul>
