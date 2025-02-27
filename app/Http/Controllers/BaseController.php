@@ -21,9 +21,8 @@ class BaseController extends Controller
 
     public function home(): View
     {
-        $articles = Article::where('published', 1)->take(2)->get();
+        $articles = Article::where('published', 1)->take(10)->get();
 
-        dd('', $articles);
         return view('home', compact('articles'));
     }
 

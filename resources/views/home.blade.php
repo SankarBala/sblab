@@ -273,11 +273,11 @@
                         </div>
                         <div class="form-area contact-form">
                             <div class="form-inner">
-                                <form action="" method="POST" class="form-controls row">
+                                <form id="message-form" class="form-controls rows" action="{{ route('store_message') }}">
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <input class="form-control" size="40" placeholder="Name" type="text"
-                                                name="sub" required>
+                                                name="name" required>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -288,17 +288,18 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input class="form-control" size="40" value="" type="text"
-                                                name="email" placeholder="Email Address" />
+                                            <input class="form-control" size="40" value="" type="email"
+                                                name="email" placeholder="Email Address" required />
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea class="form-control" cols="20" rows="7" placeholder="Write Message" name="textarea-234"></textarea>
+                                            <textarea class="form-control" cols="20" rows="7" placeholder="Write Message" name="message" required></textarea>
                                         </div>
+                                        <span id="message-response" class="text-dark"></span>
                                     </div>
                                     <div class="col-md-12 text-right">
-                                        <button class="btn btn-primary form-group" type="submit">Send Message</button>
+                                        <button class="msg-button" type="submit">Send Message</button>
                                     </div>
                                 </form>
                             </div>
@@ -315,9 +316,9 @@
                 <div class="col-lg-12">
                     <div class="dentist-section-title">
                         <h5>&nbsp;</h5>
-                        <h1>Checkout Recent News & Blog</h1>
-                        <p>Our office combines breakthrough technology with traditional dentistry so that we can improve
-                            patient smiles with and non-invasive procedures</p>
+                        <h1>Read our recent Blogs</h1>
+                        <p>Stay updated with the latest insights, tips, and trends in our recent blogs. Explore expert
+                            opinions, helpful guides, and inspiring stories curated just for you! </p>
                     </div>
                 </div>
                 <div class="blog_list owl-carousel">
@@ -327,18 +328,19 @@
                                 <div class="blog-thumb">
                                     <a href="blog-list.html"><img src="assets/images/resource/blog1.png"
                                             alt=""></a>
-                                    <div class="post-categories"><a href="home.html">health</a></div>
+                                    {{-- <div class="post-categories"><a href="home.html">health</a></div> --}}
                                 </div>
                                 <div class="dentist-blog-meta-left">
-                                    <span><i aria-hidden="true" class="far fa-calendar-alt"></i>February 26, 2023</span>
+                                    <span class="text-dark">
+                                        <i aria-hidden="true" class="far fa-calendar-alt"></i>
+                                        {{ $article->created_at->format('d M Y h:m A') }}
+                                    </span>
                                     <div class="blog-content">
-                                        <div class="blog-title">
-                                            <h2><a href="blog-list.html">Facts About Dental ImplantRecovery Process</a>
-                                            </h2>
+                                        <div class="blog-title three_line_title">
+                                            <a href="{{ route('article', $article) }}">{{ $article->name }}</a>
                                         </div>
-                                        <div class="blog-text">
-                                            <p>Curabitur sagittis libero tincidunt tem finibus. Mauris at dignissim
-                                                ligula, </p>
+                                        <div class="blog-text four_line_short_description">
+                                            <p>{{ $article->short_description }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -350,7 +352,7 @@
         </div>
     </div>
 
-    <div class="testimonial-section">
+    {{-- <div class="testimonial-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -364,18 +366,14 @@
                         <div class="testimonial-single-box">
                             <div class="testi-intro">
                                 <div class="testi-thumb">
-                                    <img src="assets/images/resource/testi1.png" alt="">
+                                    <img src="" alt="/">
                                 </div>
                                 <div class="testi-title">
                                     <h2> Dr. Linda Davis<span>Health Director</span></h2>
                                 </div>
                             </div>
                             <div class="testi-content">
-                                <div class="testi-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                                    tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim veniam, quis nostrud
-                                    exercitation
-                                    ullamco laboris nisi ut dolor commodo consequat.
+                                <div class="testi-text">Lorem ipsum dolor
                                 </div>
                             </div>
                             <div class="reviews-rating">
@@ -383,107 +381,15 @@
                                     <span>5.0</span>
                                     <span class="fa fa-star"></span>
                                     <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
                                 </div>
-                            </div><!-- reviews rating -->
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-12">
-                        <div class="testimonial-single-box">
-                            <div class="testi-intro">
-                                <div class="testi-thumb">
-                                    <img src="assets/images/resource/testi2.png" alt="">
-                                </div>
-                                <div class="testi-title">
-                                    <h2> Dr. john Martin<span>Specialist</span></h2>
-                                </div>
-                            </div>
-                            <div class="testi-content">
-                                <div class="testi-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                                    tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim veniam, quis nostrud
-                                    exercitation
-                                    ullamco laboris nisi ut dolor commodo consequat.
-                                </div>
-                            </div>
-                            <div class="reviews-rating">
-                                <div class="testi-star">
-                                    <span>4.5</span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star-half"></span>
-                                </div>
-                            </div><!-- reviews rating -->
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="testimonial-single-box">
-                            <div class="testi-intro">
-                                <div class="testi-thumb">
-                                    <img src="assets/images/resource/testi1.png" alt="">
-                                </div>
-                                <div class="testi-title">
-                                    <h2> Dr. Linda Davis<span>Health Director</span></h2>
-                                </div>
-                            </div>
-                            <div class="testi-content">
-                                <div class="testi-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                                    tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim veniam, quis nostrud
-                                    exercitation
-                                    ullamco laboris nisi ut dolor commodo consequat.
-                                </div>
-                            </div>
-                            <div class="reviews-rating">
-                                <div class="testi-star">
-                                    <span>5.0</span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                </div>
-                            </div><!-- reviews rating -->
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="testimonial-single-box">
-                            <div class="testi-intro">
-                                <div class="testi-thumb">
-                                    <img src="assets/images/resource/testi2.png" alt="">
-                                </div>
-                                <div class="testi-title">
-                                    <h2> Dr. john Martin<span>Specialist</span></h2>
-                                </div>
-                            </div>
-                            <div class="testi-content">
-                                <div class="testi-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                                    tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim veniam, quis nostrud
-                                    exercitation
-                                    ullamco laboris nisi ut dolor commodo consequat.
-                                </div>
-                            </div>
-                            <div class="reviews-rating">
-                                <div class="testi-star">
-                                    <span>4.5</span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star-half"></span>
-                                </div>
-                            </div><!-- reviews rating -->
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="subscribe-section">
         <div class="container">
@@ -508,7 +414,72 @@
 @endsection
 
 @push('styles')
+    <style>
+        .three_line_title a {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 18px;
+            text-align: justify;
+            height: 54px;
+            color: rgb(3, 80, 111);
+            border-bottom: 1px solid #1d0a30;
+            margin: 8px 0;
+
+            margin: 8px 0;
+        }
+
+        .three_line_title a:hover {
+            color: maroon;
+        }
+
+        .four_line_short_description {
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-align: justify;
+            color: #222;
+        }
+
+        .four_line_short_description:hover {
+            color: #111;
+        }
+
+        .msg-button {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
 @endpush
 
 @push('scripts')
+    <script type="text/javascript">
+        $('document').ready(function() {
+            $('#message-form').on('submit', function(event) {
+                event.preventDefault();
+                var form = $(this);
+                var url = form.attr('action');
+                var data = form.serialize();
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: data,
+                    success: function(response) {
+                        $('#message-response').text(response.message);
+                        $('#message-form').trigger('reset');
+                    },
+                    error: function(error) {
+                        $('#message-response').text(error.responseJSON.message);
+                    }
+                });
+            });
+        });
+    </script>
 @endpush

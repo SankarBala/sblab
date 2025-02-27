@@ -18,7 +18,7 @@ Route::get('/contact-us', [BaseController::class, 'contact'])->name('contact');
 Route::get('/profiles', [BaseController::class, 'profiles'])->name('profiles');
 Route::get('/profile/{slug}', [BaseController::class, 'profile'])->name('profile');
 Route::get('/articles', [BaseController::class, 'articles'])->name('articles');
-Route::get('/article', [BaseController::class, 'article'])->name('article');
+Route::get('/article/{article:slug}', [BaseController::class, 'article'])->name('article');
 Route::get('/faq', [BaseController::class, 'faq'])->name('faq');
 
 // General post routes.
