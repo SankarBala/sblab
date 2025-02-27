@@ -412,13 +412,13 @@ ul.sub-menu li:hover a span {
 <!-- =================================================== -->*/
 
 .hero-section {
-    /* background: url(../images/slider/hero-bg.jpg); */
     background: url(../images/sbl/hero.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     height: 780px;
 }
+
 
 .text-justify {
     text-align: justify;
@@ -647,7 +647,6 @@ ul.sub-menu li:hover a span {
 
 .dentist-section-title p {
     padding: 20px 0 18px;
-    width: 90%;
     margin: auto;
 }
 
