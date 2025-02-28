@@ -35,7 +35,7 @@
                         @foreach ($divisions as $division)
                             <tr data-widget="expandable-table" aria-expanded="false">
                                 <td>{{ $division->id }}</td>
-                                <td>{{ $division->title }}</td>
+                                <td>{{ $division->name }}</td>
                                 <td>
                                     @if($division->image)
                                     <img src="{{ asset('storage/' . $division->image) }}" alt="{{ $division->title }}" class="img-thumbnail" style="width: 80px" />

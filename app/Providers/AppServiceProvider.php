@@ -23,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
     {
         if ($request->is('admin/*')) {
             Paginator::useBootstrapFive();
+        } else {
+            Paginator::useBootstrap();
         }
     }
 }

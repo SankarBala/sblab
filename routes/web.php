@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\BaseController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [BaseController::class, 'home'])->name('home');
@@ -17,8 +18,11 @@ Route::get('/about-us', [BaseController::class, 'about'])->name('about');
 Route::get('/contact-us', [BaseController::class, 'contact'])->name('contact');
 Route::get('/profiles', [BaseController::class, 'profiles'])->name('profiles');
 Route::get('/profile/{slug}', [BaseController::class, 'profile'])->name('profile');
+Route::get('/products', [BaseController::class, 'products'])->name('products');
+Route::get('/product/{product:slug}', [BaseController::class, 'product'])->name('product');
 Route::get('/articles', [BaseController::class, 'articles'])->name('articles');
 Route::get('/article/{article:slug}', [BaseController::class, 'article'])->name('article');
+Route::get('/division/{division:slug}', [BaseController::class, 'division'])->name('division');
 Route::get('/faq', [BaseController::class, 'faq'])->name('faq');
 
 // General post routes.
@@ -65,3 +69,8 @@ Route::post('/email/resend', [AuthController::class, 'resend_verification_email'
 Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verify_email'])
     ->name('verification.verify')
     ->middleware(['signed', 'throttle:6,1']);
+
+
+Route::get('test', function () {
+   dd(Product::find(1)->with('division')->get());
+});

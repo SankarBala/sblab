@@ -16,7 +16,7 @@
                             well-being, our herbal and nutraceutical products are crafted to enhance your life. Experience
                             the power of nature for a healthier tomorrow.</p>
                         <div class="slider-button">
-                            <a class="btn btn-info btn-lg px-5" href="">Products</a>
+                            <a class="btn btn-info btn-lg px-5" href="{{route('products')}}">Products</a>
                         </div>
                     </div>
                 </div>
@@ -94,7 +94,7 @@
 
 
                 @foreach ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] as $product)
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-4 col-md-6">
                         <div class="single-products-box">
                             <!-- products thumb -->
                             <div class="products-thumbs">
@@ -245,9 +245,8 @@
         </div>
     </div>
 
-    <div class="choose-us-sectionl">
+    <div class="choose-us-sectionl mb-5">
         <div class="container">
-
             <div class="row">
                 <div class="col-lg-12">
                     <div class="dentist-section-title">
@@ -258,13 +257,13 @@
                 <div class="col-lg-7">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d4343.456803074698!2d90.41233592574451!3d23.7332092526258!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1740685907697!5m2!1sen!2sbd"
-                        width="100%" height="500px" allowfullscreen="" loading="lazy"
+                        width="100%" height="540px" allowfullscreen="" loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade"></iframe>
 
                 </div>
                 <div class="col-lg-5">
                     <div class="contact-form-wrapper">
-                        <div class="form-area contact-form">
+                        <div class="form-area home-contact-form">
                             <div class="form-inner">
                                 <form id="message-form" class="form-controls rows"
                                     action="{{ route('store_message') }}">
@@ -286,10 +285,10 @@
                                                 name="email" placeholder="Email Address" required />
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 mb-3">
                                         <div class="form-group">
-                                            <textarea class="form-control" cols="20" rows="7" placeholder="Write Message" name="message" required></textarea>
-                                            <span id="message-response" class="text-dark"></span>
+                                            <textarea class="form-control mb-2" cols="20" rows="5" placeholder="Write Message" name="message" required></textarea>
+                                            <span id="message-response" class="text-info">&nbsp;</span>
                                         </div>
                                     </div>
                                     <div class="col-md-12 text-right">
@@ -343,7 +342,7 @@
         </div>
     </div> --}}
 
-    <div class="subscribe-section">
+    {{-- <div class="subscribe-section">
         <div class="container">
             <div class="row subscribe-bg">
                 <div class="col-lg-6">
@@ -362,7 +361,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
 
 @push('styles')
@@ -437,10 +436,29 @@
             color: #111;
         }
 
-        .contact-form input {
-            border: #000000;
-            border-radius: 5px;
-            color: #000000;
+     .contact-form-wrapper {
+            padding: 20px;
+            background: #0E264F;
+            border-radius: 8px;
+            height: 540px;
+        }
+
+        .contact-form-wrapper textarea { 
+            height: 160px;
+            resize: none;
+        }
+
+
+        .home-contact-form input.form-control,
+        .home-contact-form textarea.form-control {
+            /* width: 100%;
+            padding: 10px;
+            margin: 5px 0 10px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            background: green; */
         }
 
         .msg-button {

@@ -9,9 +9,9 @@
                         </a>
                     </div>
                     <div class="follow-company-icon mt-4 text-center">
-                        <a href="{{ $options->get('facebook') }}"> <i class="fab fa-facebook-f"></i></a>
-                        <a href="{{ $options->get('twitter') }}"> <i class="fab fa-twitter"></i></a>
-                        <a href="{{ $options->get('youtube') }}"> <i class="fab fa-youtube"></i></a>
+                        <a href="{{ $options->get('facebook') }}" target="_blank"> <i class="fab fa-facebook-f"></i></a>
+                        <a href="{{ $options->get('twitter') }}" target="_blank"> <i class="fab fa-twitter"></i></a>
+                        <a href="{{ $options->get('youtube') }}" target="_blank"> <i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
             </div>

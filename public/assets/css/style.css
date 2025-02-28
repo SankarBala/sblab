@@ -1303,7 +1303,7 @@ h3.team-name {
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(70, 181, 215, .6);
 }
 
-.subscribe-form button {
+/* .subscribe-form button {
     position: absolute;
     display: inline-block;
     color: #fff;
@@ -1314,11 +1314,11 @@ h3.team-name {
     top: 4px;
     margin: auto;
     height: 87%;
-    right: 106px;
+    right: 154px;
     border-radius: 6px;
     border: medium none;
     transition: all 0.4s ease 0s;
-}
+} */
 
 /*
 <!-- ============================================== -->
@@ -3105,7 +3105,7 @@ span#slider-range-value2 {
 }
 
 .single-products-box {
-    text-align: center;
+    /* text-align: center; */
     margin-bottom: 30px;
 }
 
@@ -3192,7 +3192,7 @@ span#slider-range-value2 {
 }
 
 .product-content {
-    padding: 23px 0 6px;
+    padding: 8px;
     border: 1px solid rgba(6, 36, 98, 0.1);
     border-top: 0;
     border-radius: 0 0 4px 4px;
@@ -3206,17 +3206,22 @@ ul.product-rating li {
     font-size: 14px;
 }
 
-.product-title h2 {
-    font-size: 18px;
-    font-weight: 600;
-    color: #062462;
-    line-height: 17px;
+.product-title h6 { 
+    height: 66px;
+    color: #761cca; 
+    overflow: hidden;
+}
+.product-title h6:hover {  
+    color: #b324c1; 
 }
 
 .product-price p {
     font-size: 15px;
     padding: 14px 0 0px;
     color: #3BB3D8;
+    height: 40px;
+    overflow: hidden;
+    line-height: 20px;
 }
 
 .product-price p span {
@@ -3234,10 +3239,7 @@ ul.product-rating li {
     width: 100%;
 }
 
-.single-products-box:hover .products-thumb:before {
-    height: 100%;
-    top: 0;
-}
+ 
 
 .single-products-box:hover .product-thumb-icon a:nth-child(1) {
     opacity: 1;

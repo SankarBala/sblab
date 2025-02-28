@@ -20,6 +20,7 @@ class ProductFactory extends Factory
         $tags = Tag::all()->pluck('id')->toArray();  // Retrieve all tag IDs
 
         return [
+            'division_id' => $this->faker->numberBetween(1, 4),
             'name' => $this->faker->sentence(),
             'slug' => $this->faker->slug,
             'short_description' => $this->faker->paragraph(5),

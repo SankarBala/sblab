@@ -8,7 +8,10 @@ use App\Models\Division;
 use App\Models\Faq;
 use App\Models\Message;
 use App\Models\Option;
+use App\Models\Product;
+use App\Models\Staff;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class BaseController extends Controller
@@ -22,6 +25,8 @@ class BaseController extends Controller
     public function home(): View
     {
         $articles = Article::where('published', 1)->take(10)->get();
+        $products = Product::where('published', 1)->take(10)->get();
+        $staffs = Staff::all();
 
         return view('home', compact('articles'));
     }
@@ -35,6 +40,64 @@ class BaseController extends Controller
     {
         return view('contact');
     }
+
+    public function division(Request $request, Division $division): View
+    {
+
+        $productsQuery = $division->products()->where('published', 1);
+
+        // Search functionality
+        if ($request->has('search') && $request->search !== '') {
+            $productsQuery->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        // Sorting functionality
+        if ($request->has('sort')) {
+            $sortParams = explode('~', $request->sort);
+            if (count($sortParams) == 2) {
+                $productsQuery->orderBy($sortParams[0], $sortParams[1]);
+            }
+        } else {
+            // Default sorting (optional)
+            $productsQuery->orderBy('name', 'asc'); // or any default order
+        }
+
+        // Pagination and appending query params
+        $products = $productsQuery->paginate(12)->appends(request()->query());
+
+        return view('divisional-products', compact(['division', 'products']));
+    }
+
+
+    public function products(Request $request): View
+    {
+        $productsQuery = Product::where('published', 1);
+        if ($request->has('search') && $request->search !== '') {
+            $productsQuery->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        if ($request->has('sort')) {
+            $sortParams = explode('~', $request->sort);
+            if (count($sortParams) == 2) {
+                $productsQuery->orderBy($sortParams[0], $sortParams[1]);
+            }
+        } else {
+            $productsQuery->orderBy('name', 'asc');
+        }
+        $products = $productsQuery->paginate(12)->appends(request()->query());
+        return view('products', compact('products'));
+    }
+
+    public function product(Product $product): View
+    {
+        $categories = $product->categories;
+        $tags = $product->tags;
+        $related = $product->related();
+
+        return view('product', compact(['product', 'categories', 'tags', 'related']));
+    }
+
+
 
     public function articles(): View
     {

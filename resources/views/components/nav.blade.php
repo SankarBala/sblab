@@ -4,8 +4,9 @@
     <li><a href="#">Products <span><i class="fas fa-chevron-down"></i></span></a>
         @if (count($divisions) > 0)
             <ul class="sub-menu">
+                <li><a href="{{ route('products') }}">Products <br /> All Division</a></li>
                 @foreach ($divisions as $division)
-                    <li><a href="#">{{$division->name}}</a></li>
+                    <li><a href="{{ route('division', $division) }}">{{ $division->name }}</a></li>
                 @endforeach
             </ul>
         @endif
