@@ -11,7 +11,7 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="shop-dtls-info">
                         <!-- category title -->
-                        <div class="category-titles mt-0 mb-3 text-justify">
+                        <div class="category-titles mt-0 mb-3">
                             <h3>{{ $product->name }}</h3>
                         </div>
                         <!-- category icon -->
@@ -83,7 +83,7 @@
                     <div class="appoinment-tab">
                         <!-- / tab -->
                         <div class="tab">
-                            <h1 class="border-bottom pb-2">Product Description</h1 class="border-bottom pb-2">
+                            <h2 class="border-bottom pb-2">Product Description</h2>
                             <!-- / tabs -->
                             {{-- <ul class="tabs">
                                 <li><a href="shop-details.html#">Description</a></li>

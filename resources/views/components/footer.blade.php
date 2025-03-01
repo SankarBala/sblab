@@ -32,26 +32,22 @@
                     <h4 class="widget-title">Recent Posts</h4>
                     <div class="menu-quick-link-content">
                         <div class="single-widget-item">
-                            <div class="recent-post-item">
-                                <div class="recent-post-image">
-                                    <a href="{{ route('articles') }}"><img src="assets/images/resource/recent1.png"
-                                            alt=""></a>
+
+                            @foreach ($articles as $article)
+                                <div class="recent-post-item">
+                                    <div class="recent-post-image">
+                                        <a href="{{ route('article', $article) }}">
+                                            <img src="assets/images/resource/recent1.png" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="recent-post-text">
+                                        <h4><a href="{{ route('article', $article) }}">{{ $article->name }}</a></h4>
+                                        <span class="rcomment"><i class="far fa-calendar-alt"></i>
+                                            {{ $article->created_at->format('d M Y') }}</span>
+                                    </div>
                                 </div>
-                                <div class="recent-post-text">
-                                    <h4><a href="home.html">Get The Exercise Limited Mobility</a></h4>
-                                    <span class="rcomment"><i class="far fa-calendar-alt"></i> Sep 03, 2023</span>
-                                </div>
-                            </div>
-                            <div class="recent-post-item">
-                                <div class="recent-post-image">
-                                    <a href="home.html"><img src="assets/images/resource/recent2.png"
-                                            alt=""></a>
-                                </div>
-                                <div class="recent-post-text">
-                                    <h4><a href="home.html"> How Long Does It Take To Whiten </a></h4>
-                                    <span class="rcomment"><i class="far fa-calendar-alt"></i> Sep 03, 2023</span>
-                                </div>
-                            </div>
+                            @endforeach
+
                         </div>
                     </div>
                 </div>
