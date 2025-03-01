@@ -103,7 +103,7 @@ class BaseController extends Controller
     public function articles(Request $request): View
     {
         $articlesQuery = Article::where('published', 1)->orderBy('created_at', 'desc');
-        
+
         if ($request->filled('search')) {
             $articlesQuery->where('name', 'like', "%{$request->search}%");
         }
@@ -114,10 +114,10 @@ class BaseController extends Controller
         return view('articles', compact(['articles', 'categories']));
     }
 
-    public function article(): View
+    public function article(Article $article): View
     {
-        // view()->share('article', $article);
-        return view('article');
+        $article->increment('read');
+        return view('article', compact('article'));
     }
 
     public function faq(): View

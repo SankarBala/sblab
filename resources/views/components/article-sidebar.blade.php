@@ -1,64 +1,48 @@
 <div>
     <!-- widget search -->
     <div class="widget_search upper2">
-        <form action="blog-details.html#" id="dreamit-form">
-            <input type="text" name="s" value="" placeholder="Search Here" title="Search for:" required>
+        <form action="{{ route('articles') }}" id="dreamit-form" method="get">
+            <input type="search" name="s" value="" placeholder="Search Here" title="Search for:" required>
             <button type="submit" class="icons"><i class="fa fa-search"></i></button>
         </form>
     </div>
     <div class="widget-categories-box">
         <!-- categories title -->
         <div class="categories-title">
-            <h4> Category </h4>
+            <h4> Post Categories </h4>
         </div>
         <!-- widget categories menu -->
         <div class="widget-categories-menu">
             <ul>
-                <li><a href="articles.blade.php"> Orthopedic Care<span><i class="fas fa-arrow-right"></i></span></a>
-                </li>
-                <li><a href="articles.blade.php"> Gynecology Care<span><i class="fas fa-arrow-right"></i></span></a>
-                </li>
-                <li><a href="articles.blade.php"> Primary Care<span><i class="fas fa-arrow-right"></i></span></a></li>
-                <li><a href="articles.blade.php"> Cancer Care <span><i class="fas fa-arrow-right"></i></span></a></li>
-                <li><a href="articles.blade.php"> Dentistry Care<span><i class="fas fa-arrow-right"></i></span></a>
-                </li>
+                @foreach ($article->categories as $category)
+                    <li>
+                        <a href="articles.blade.php"> {{ $category->name }} <span><i
+                                    class="fas fa-arrow-right"></i></span></a>
+                    </li>
+                @endforeach
             </ul>
         </div>
     </div>
-    <div class="widget-categories-box">
+    <div class="widget-categories-box py-1">
         <!-- categories title -->
         <div class="categories-title">
-            <h4> Recent Post </h4>
+            <h4> Recent Articles </h4>
         </div>
-        <div class="sidber-widget-recent-post">
-            <div class="recent-widget-thumb">
-                <img src="assets/images/resource/recend1.jpg" alt="">
+        @foreach ($recent_articles as $r_article)
+            <div class="sidber-widget-recent-post">
+                <div class="recent-widget-thumb">
+                    <img src="assets/images/resource/recend1.jpg" alt="" />
+                </div>
+                <div class="recent-widget-content">
+                    <a href="blog-details.html#">{{ $r_article->name }}</a>
+                    <span><i class="flaticon-calendar"></i> {{ $r_article->created_at->format('M d, Y') }} </span>
+                </div>
             </div>
-            <div class="recent-widget-content">
-                <a href="blog-details.html#">Feel the real experience</a>
-                <span><i class="flaticon-calendar"></i> Jan, 26 2023</span>
-            </div>
-        </div>
-        <div class="sidber-widget-recent-post">
-            <div class="recent-widget-thumb">
-                <img src="assets/images/resource/recend2.jpg" alt="">
-            </div>
-            <div class="recent-widget-content">
-                <a href="blog-details.html#">Feel the real experience</a>
-                <span><i class="flaticon-calendar"></i> Jan, 18 2023</span>
-            </div>
-        </div>
-        <div class="sidber-widget-recent-post">
-            <div class="recent-widget-thumb">
-                <img src="assets/images/resource/recend3.jpg" alt="">
-            </div>
-            <div class="recent-widget-content">
-                <a href="blog-details.html#">Feel the real experience</a>
-                <span><i class="flaticon-calendar"></i> Jan, 15 2023</span>
-            </div>
-        </div>
+        @endforeach
+
+
     </div>
-    <div class="widget-categories-box">
+    {{-- <div class="widget-categories-box">
         <!-- categories title -->
         <div class="categories-title">
             <h4> Achievement </h4>
@@ -67,15 +51,10 @@
             <ul>
                 <li><a href="blog-details.html#"><i class="fas fa-angle-right"></i> 01 February 2015
                         <span>(14)</span></a></li>
-                <li><a href="blog-details.html#"><i class="fas fa-angle-right"></i> 01 March 2006 <span>(10)</span></a>
-                </li>
-                <li><a href="blog-details.html#"><i class="fas fa-angle-right"></i> 01 August 2001
-                        <span>(03)</span></a></li>
             </ul>
         </div>
-    </div>
-    <div class="widget-categories-box">
-        <!-- categories title -->
+    </div> --}}
+    {{-- <div class="widget-categories-box">
         <div class="categories-title">
             <h4> Gallery </h4>
         </div>
@@ -83,36 +62,19 @@
             <div class="widget-gallery-thumb">
                 <a href="blog-details.html#"><img src="assets/images/resource/gallery1.jpg" alt=""></a>
             </div>
-            <div class="widget-gallery-thumb">
-                <a href="blog-details.html#"><img src="assets/images/resource/gallery2.jpg" alt=""></a>
-            </div>
-            <div class="widget-gallery-thumb">
-                <a href="blog-details.html#"><img src="assets/images/resource/gallery3.jpg" alt=""></a>
-            </div>
-            <div class="widget-gallery-thumb">
-                <a href="blog-details.html#"><img src="assets/images/resource/gallery4.jpg" alt=""></a>
-            </div>
-            <div class="widget-gallery-thumb">
-                <a href="blog-details.html#"><img src="assets/images/resource/gallery5.jpg" alt=""></a>
-            </div>
-            <div class="widget-gallery-thumb">
-                <a href="blog-details.html#"><img src="assets/images/resource/gallery6.jpg" alt=""></a>
-            </div>
+          
         </div>
-    </div>
-    <div class="widget-categories-box">
+    </div> --}}
+    <div class="widget-categories-box py-1">
         <!-- categories title -->
         <div class="categories-title">
             <h4> Tags </h4>
         </div>
         <div class="sidebar-tag-item style-two">
             <ul>
-                <li><a href="blog-details.html#">Medical</a></li>
-                <li><a href="blog-details.html#">Dector</a></li>
-                <li><a href="blog-details.html#">Business</a></li>
-                <li><a href="blog-details.html#">Farms</a></li>
-                <li><a href="blog-details.html#">Support</a></li>
-                <li><a class="item1" href="blog-details.html#">Management</a></li>
+                @foreach ($article->tags as $tag)
+                    <li><a href="blog-details.html#">{{ $tag->name }}</a></li>
+                @endforeach
             </ul>
         </div>
     </div>
