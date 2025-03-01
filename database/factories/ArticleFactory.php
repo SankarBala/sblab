@@ -23,6 +23,7 @@ class ArticleFactory extends Factory
             'description' => $this->faker->text(3000),
             'image' => $this->faker->imageUrl,
             'published' => $this->faker->numberBetween(0, 1),
+            'read' => $this->faker->numberBetween(0, 100),
         ];
     }
 }

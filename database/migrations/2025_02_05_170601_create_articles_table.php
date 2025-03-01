@@ -19,6 +19,7 @@ return new class extends Migration
             $table->mediumText('description')->nullable();
             $table->string('image')->nullable();
             $table->integer('published')->nullable();
+            $table->tinyInteger('read')->default(0);
             $table->timestamps();
         });
     }

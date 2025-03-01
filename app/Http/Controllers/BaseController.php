@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MessageRequest;
 use App\Models\Article;
+use App\Models\Category;
 use App\Models\Division;
 use App\Models\Faq;
 use App\Models\Message;
@@ -99,9 +100,18 @@ class BaseController extends Controller
 
 
 
-    public function articles(): View
+    public function articles(Request $request): View
     {
-        return view('articles');
+        $articlesQuery = Article::where('published', 1)->orderBy('created_at', 'desc');
+        
+        if ($request->filled('search')) {
+            $articlesQuery->where('name', 'like', "%{$request->search}%");
+        }
+
+        $articles = $articlesQuery->paginate(6)->appends(['search' => $request->search]);
+        $categories = Category::where('published', 1)->get();
+
+        return view('articles', compact(['articles', 'categories']));
     }
 
     public function article(): View
