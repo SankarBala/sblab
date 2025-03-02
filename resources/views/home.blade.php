@@ -16,7 +16,7 @@
                             well-being, our herbal and nutraceutical products are crafted to enhance your life. Experience
                             the power of nature for a healthier tomorrow.</p>
                         <div class="slider-button">
-                            <a class="btn btn-info btn-lg px-5" href="{{route('products')}}">Products</a>
+                            <a class="btn btn-info btn-lg px-5" href="{{ route('products') }}">Products</a>
                         </div>
                     </div>
                 </div>
@@ -90,50 +90,9 @@
                         <p class="lead">Some popular products we already have introduced.</p>
                     </div>
                 </div>
-
-
-
-                @foreach ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] as $product)
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-products-box">
-                            <!-- products thumb -->
-                            <div class="products-thumbs">
-                                <img class="img-thumbnail rounded"
-                                    src="{{ asset('assets/images/sbl/divisions/pharmaceuticals.jpg') }}" alt="" />
-                                <!-- product thumb -->
-                                <div class="product-thumb-icon">
-                                    <a href="cart.html"> <i class="bi bi-cart3"></i> </a>
-                                    <a href="shop-details.html"> <i class="bi bi-suit-heart"></i> </a>
-                                </div>
-                            </div>
-                            <!-- products content -->
-                            <div class="product-content">
-                                <!-- product list -->
-                                <ul class="product-rating">
-                                    <li><i class="bi bi-star-fill"></i></li>
-                                    <li><i class="bi bi-star-fill"></i></li>
-                                    <li><i class="bi bi-star-fill"></i></li>
-                                    <li><i class="bi bi-star-fill"></i></li>
-                                    <li><i class="bi bi-star-half"></i></li>
-                                </ul>
-                                <div class="product-title">
-                                    <h2> Dental Shower </h2>
-                                </div>
-                                <!-- product text -->
-                                <div class="product-price">
-                                    <p> £30.00 <span>£30.00</span> </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                @foreach ($products as $product)
+                    @include('components.product', ['product' => $product])
                 @endforeach
-
-
-
-
-
-
-
             </div>
         </div>
     </div>
@@ -149,54 +108,9 @@
                             et dolore magna aliqua.</p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="team-single-box">
-                        <div class="team-thumb">
-                            <img src="assets/images/resource/team1.png" alt="">
-                            <ul class="team-share">
-                                <li><a href="home.html"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="home.html"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="home.html"><i class="fab fa-pinterest"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="team-content">
-                            <h3 class="team-name"><a href="team.html">Stella Smith</a></h3>
-                            <div class="team-title"><span>Dental Assistant</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="team-single-box">
-                        <div class="team-thumb">
-                            <img src="assets/images/resource/team2.png" alt="">
-                            <ul class="team-share">
-                                <li><a href="home.html"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="home.html"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="home.html"><i class="fab fa-pinterest"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="team-content">
-                            <h3 class="team-name"><a href="team.html">Luke Jacobs</a></h3>
-                            <div class="team-title"><span>Doctor</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="team-single-box">
-                        <div class="team-thumb">
-                            <img src="assets/images/resource/team3.png" alt="">
-                            <ul class="team-share">
-                                <li><a href="home.html"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="home.html"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="home.html"><i class="fab fa-pinterest"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="team-content">
-                            <h3 class="team-name"><a href="team.html">Camille Walters</a></h3>
-                            <div class="team-title"><span>Dental Assistant</span></div>
-                        </div>
-                    </div>
-                </div>
+                @foreach ($staffs as $staff)
+                    @include('components.staff', ['staff' => $staff])
+                @endforeach
             </div>
         </div>
     </div>
@@ -217,27 +131,7 @@
                 <div class="blog_list owl-carousel">
                     @foreach ($articles as $article)
                         <div class="col-lg-12">
-                            <div class="blog-single-box">
-                                <div class="blog-thumb">
-                                    <a href="blog-list.html"><img src="assets/images/resource/blog1.png"
-                                            alt=""></a>
-                                    {{-- <div class="post-categories"><a href="home.html">health</a></div> --}}
-                                </div>
-                                <div class="dentist-blog-meta-left">
-                                    <span class="text-dark">
-                                        <i aria-hidden="true" class="far fa-calendar-alt"></i>
-                                        {{ $article->created_at->format('d M Y h:m A') }}
-                                    </span>
-                                    <div class="blog-content">
-                                        <div class="blog-title three_line_title">
-                                            <a href="{{ route('article', $article) }}">{{ $article->name }}</a>
-                                        </div>
-                                        <div class="blog-text four_line_short_description">
-                                            <p>{{ $article->short_description }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @include('components.article', ['article' => $article])
                         </div>
                     @endforeach
                 </div>
@@ -265,8 +159,7 @@
                     <div class="contact-form-wrapper">
                         <div class="form-area home-contact-form">
                             <div class="form-inner">
-                                <form id="message-form" class="form-controls rows"
-                                    action="{{ route('store_message') }}">
+                                <form id="message-form" class="form-controls rows" action="{{ route('store_message') }}">
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <input class="form-control" size="40" placeholder="Name" type="text"
@@ -403,7 +296,7 @@
             padding-right: 20px;
         }
 
-        .three_line_title a {
+        /* .three_line_title a {
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -434,31 +327,30 @@
 
         .four_line_short_description:hover {
             color: #111;
-        }
+        } */
 
-     .contact-form-wrapper {
+        .contact-form-wrapper {
             padding: 20px;
             background: #0E264F;
             border-radius: 8px;
             height: 540px;
         }
 
-        .contact-form-wrapper textarea { 
+        .contact-form-wrapper textarea {
             height: 160px;
             resize: none;
         }
 
-
         .home-contact-form input.form-control,
         .home-contact-form textarea.form-control {
             /* width: 100%;
-            padding: 10px;
-            margin: 5px 0 10px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            background: green; */
+                                            padding: 10px;
+                                            margin: 5px 0 10px 0;
+                                            display: inline-block;
+                                            border: 1px solid #ccc;
+                                            border-radius: 4px;
+                                            box-sizing: border-box;
+                                            background: green; */
         }
 
         .msg-button {

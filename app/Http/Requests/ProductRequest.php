@@ -66,6 +66,7 @@ class ProductRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
+            'division' => 'required|integer|exists:divisions,id',
             'short_description' => 'nullable|string|max:1000',
             'description' => 'nullable|string',
             'price' => 'nullable|numeric',

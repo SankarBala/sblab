@@ -23,6 +23,8 @@ Route::get('/product/{product:slug}', [BaseController::class, 'product'])->name(
 Route::get('/articles', [BaseController::class, 'articles'])->name('articles');
 Route::get('/article/{article:slug}', [BaseController::class, 'article'])->name('article');
 Route::get('/division/{division:slug}', [BaseController::class, 'division'])->name('division');
+Route::get('/category/{category:slug}', [BaseController::class, 'category'])->name('category');
+Route::get('/tag/{tag:slug}', [BaseController::class, 'tag'])->name('tag');
 Route::get('/faq', [BaseController::class, 'faq'])->name('faq');
 
 // General post routes.

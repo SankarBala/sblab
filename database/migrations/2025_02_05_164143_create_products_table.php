@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('division_id')->nullable()->default(0);
+            $table->bigInteger('division_id')->nullable();
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('short_description')->nullable();

@@ -26,10 +26,10 @@ class BaseController extends Controller
     public function home(): View
     {
         $articles = Article::where('published', 1)->take(10)->get();
-        $products = Product::where('published', 1)->take(10)->get();
+        $products = Product::where('published', 1)->take(8)->get();
         $staffs = Staff::all();
 
-        return view('home', compact('articles'));
+        return view('home', compact(['products', 'articles', 'staffs']));
     }
 
     public function about(): View
