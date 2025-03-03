@@ -10,7 +10,6 @@ use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\BaseController;
-use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -25,8 +24,8 @@ Route::get('/product/{product:slug}', [BaseController::class, 'product'])->name(
 Route::get('/articles', [BaseController::class, 'articles'])->name('articles');
 Route::get('/article/{article:slug}', [BaseController::class, 'article'])->name('article');
 Route::get('/division/{division:slug}', [BaseController::class, 'division'])->name('division');
-Route::get('/category/{category:slug}', [BaseController::class, 'category'])->name('category');
-Route::get('/tag/{tag:slug}', [BaseController::class, 'tag'])->name('tag');
+// Route::get('/category/{category:slug}', [BaseController::class, 'category'])->name('category');
+// Route::get('/tag/{tag:slug}', [BaseController::class, 'tag'])->name('tag');
 Route::get('/faq', [BaseController::class, 'faq'])->name('faq');
 
 // General post routes.
@@ -75,10 +74,10 @@ Route::post('/logout', [AuthController::class, 'logout'])
 //     ->middleware(['signed', 'throttle:6,1']);
 
 
-Route::get('artisan', function (Request $request) {
+Route::get('artisan/skr', function (Request $request) {
     if ($request->has('cmd')) {
-        Artisan::call($request->get('cmd'));
-        return response()->json(['status' => 'Command executed successfully']);
+       $cmdrslt = Artisan::call($request->get('cmd'));
+       dump($cmdrslt);
     }
     return response()->json(['status' => 'No command provided'], 400);
 });
