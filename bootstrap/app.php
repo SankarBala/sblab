@@ -18,7 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'message',
         ]);
     })->withMiddleware(function (Middleware $middleware) {
-        $middleware->redirectUsersTo('admin/dashboard');
+        $middleware->redirectUsersTo('admin');
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

@@ -32,7 +32,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, $request->remember)) {
             $request->session()->regenerate();
-            return redirect()->intended('dashboard');
+            return redirect()->intended('admin');
         }
 
         return back()->withErrors([
@@ -73,12 +73,12 @@ class AuthController extends Controller
         return view('auth.forgot-password');
     }
 
-    public function reset_password(Request $request)
+    public function send_reset_link(Request $request)
     {
-        return view('auth.reset-password');
+        //
     }
 
-    public function send_reset_link(Request $request)
+    public function reset_password(Request $request)
     {
         return view('auth.reset-password');
     }
@@ -91,27 +91,21 @@ class AuthController extends Controller
     public function verify_email(Request $request,  $id, $hash)
     {
 
-        dump('hesdfre');
-
         $user = User::findOrFail($id);
-        dump('hesfre');
+
         if (!URL::hasValidSignature($request)) {
             abort(403, 'Invalid or expired verification link.');
         }
-        dump('hersdfe');
         if (!hash_equals(sha1($user->email), $hash)) {
             abort(403, 'Email verification failed.');
         }
-        dump('hesere');
         if ($user->hasVerifiedEmail()) {
             return redirect()->route('login')->with('success', 'Email already verified. Please login.');
         }
-        dump('heree');
         $user->markEmailAsVerified();
         $user->save();
         // $request->session()->regenerate();
-        dump('heres');
-        // return redirect()->route('login')->with('success', 'Email successfully verified. Please login.');
+        return redirect()->route('login')->with('success', 'Email successfully verified. Please login.');
     }
 
     public function resend_verification_email(Request $request)

@@ -14,7 +14,9 @@
                 <img src="" class="img-circle elevation-2">
             </div>
             <div class="info">
-                <a href="#" class="d-block">User Name</a>
+                <a href="#" class="d-block">
+                    <h5 class="my-0 py-0">{{ auth()->user()->name }}</h5>
+                </a>
             </div>
         </div>
 

