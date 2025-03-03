@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\Category;
+use App\Models\Division;
 use App\Models\Product;
 use App\Models\Tag;
 use Illuminate\Http\RedirectResponse;
@@ -28,8 +29,9 @@ class ProductController extends Controller
     public function create(): View
     {
         $categories = Category::with('children')->where('parent_id', 0)->get();
+        $divisions = Division::where('active', 1)->get();
 
-        return view('admin.products.create', compact('categories'));
+        return view('admin.products.create', compact('categories', 'divisions'));
     }
 
     /**
@@ -52,6 +54,7 @@ class ProductController extends Controller
         // Store the product
         $product = new Product();
         $product->name = $request->name;
+        $product->division_id = $request->division;
         $product->slug = $slug;
         $product->short_description = $request->short_description;
         $product->description = $request->description;
@@ -106,8 +109,9 @@ class ProductController extends Controller
     public function edit(Product $product): View
     {
         $categories = Category::with('children')->where('parent_id', 0)->get();
+        $divisions = Division::where('active', 1)->get();
 
-        return view('admin.products.edit', compact('product', 'categories'));
+        return view('admin.products.edit', compact('product', 'categories', 'divisions'));
     }
 
     /**
@@ -117,6 +121,7 @@ class ProductController extends Controller
     {
 
         $product->name = $request->name;
+        $product->division_id = $request->division;
         $product->short_description = $request->short_description;
         $product->description = $request->description;
         $product->price = $request->price;

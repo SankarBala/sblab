@@ -82,6 +82,21 @@
                                         </div>
                                         <div class="col-md-4 col-lg-3">
                                             <div class="form-group">
+                                                <label for="division">Division</label>
+                                                <div class="">
+                                                    <select class="form-control" name="division">
+                                                        @foreach ($divisions as $division)
+                                                            <option value="{{ $division->id }}">{{ $division->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                @error('division')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group">
                                                 <label for="answer">Categories</label>
                                                 <div class="category_input_wrapper">
                                                     @include('admin.partials.category-select', [

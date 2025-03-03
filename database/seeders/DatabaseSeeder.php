@@ -16,20 +16,29 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        // User::factory()->create([
-        //   'name' => 'Test User',
-        //   'email' => 'test@example.com',
-        // ]);
+        User::create([
+            'name' => 'Administrator',
+            'email' => 'admin@sblabbd.com',
+            'password' => bcrypt('sblab@bd'),
+            'email_verified_at' => now(),
+        ]);
+
+        User::create([
+            'name' => 'Sankar Bala',
+            'email' => 'sankarbala232@gmail.com',
+            'password' => bcrypt('sblab@bd'),
+            'email_verified_at' => now(),
+        ]);
 
         $this->call([
-            CategorySeeder::class,
-            TagSeeder::class,
-            OptionSeeder::class,
-            FaqSeeder::class,
-            MessageSeeder::class,
-            DivisionSeeder::class,
-            ProductSeeder::class,
-            ArticleSeeder::class,
+            // CategorySeeder::class,
+            // TagSeeder::class,
+            // OptionSeeder::class,
+            // FaqSeeder::class,
+            // MessageSeeder::class,
+            // DivisionSeeder::class,
+            // ProductSeeder::class,
+            // ArticleSeeder::class,
         ]);
     }
 }

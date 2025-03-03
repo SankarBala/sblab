@@ -40,8 +40,8 @@
                 </form>
 
                 <p class="mt-3 mb-1 d-flex justify-content-between">
-                    <a class="btn btn-primary btn-sm flex-fill mr-1" href="{{ route('forgot_password') }}">Forgot
-                        Password</a>
+                    {{-- <a class="btn btn-primary btn-sm flex-fill mr-1" href="{{ route('forgot_password') }}">Forgot
+                        Password</a> --}}
                     <a class="btn btn-info btn-sm flex-fill ml-1" href="{{ route('home') }}">Homepage</a>
                 </p>
             </div>

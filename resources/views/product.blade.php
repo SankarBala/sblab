@@ -5,8 +5,9 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6">
-					<img class="img-fluid" src="https://image01-in.oneplus.net/media/202406/19/ec64eb41a8e787a798be1b71c13a51bb.png?x-amz-process=image/format,webp/quality,Q_80"
-					alt="">
+                    <img class="img-fluid"
+                        src="https://image01-in.oneplus.net/media/202406/19/ec64eb41a8e787a798be1b71c13a51bb.png?x-amz-process=image/format,webp/quality,Q_80"
+                        alt="">
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="shop-dtls-info">
@@ -27,7 +28,7 @@
                         </div> --}}
                         <!-- category price -->
                         <div class="category-price">
-                            <h1>BDT {{ number_format($product->price, 2) }} Tk.</h1>
+                            <h1 class="text-primary">BDT {{ number_format($product->price, 2) }} Tk.</h1>
                         </div>
                         <!-- description -->
                         <div class="category-description text-justify">
@@ -56,24 +57,25 @@
                         <table class="category-table">
                             <tr>
                                 <!-- table data -->
-                                <td class="table-title"> Categories </td>
+                                <td class="table-title align-top">Categories</td>
                                 <td class="table-text">
                                     @foreach ($categories as $category)
-                                        <a class="btn btn-sm btn-primary px-2 rounded" href=""> {{ $category->name }}
+                                        <a class="btn btn-sm btn-primary px-2 rounded my-1" href="">
+                                            {{ $category->name }}
                                         </a>
                                     @endforeach
                                 </td>
                             </tr>
                             <tr>
-                                <!-- table data -->
-                                <td class="table-title"> Tags </td>
+                                <td class="table-title align-top">Tags</td>
                                 <td class="table-text">
                                     @foreach ($tags as $tag)
-                                        <a class="btn btn-sm btn-info px-2 rounded" href=""> {{ $tag->name }} </a>
+                                        <a class="btn btn-sm btn-info px-2 rounded my-1" href=""> {{ $tag->name }}
+                                        </a>
                                     @endforeach
                                 </td>
                             </tr>
-                        </table> <!-- category table End -->
+                        </table>
                     </div>
                 </div>
             </div>
@@ -175,15 +177,14 @@
                                                             <h6 class="form-title"> Your E-Mail*</h6>
                                                             <div class="form-box">
                                                                 <input id="email2" name="email" type="text"
-                                                                    placeholder="Enter E-Mail" autocomplete="off"
-                                                                    required>
+                                                                    placeholder="Enter E-Mail" autocomplete="off" required>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-12">
                                                             <div class="form-box">
                                                                 <h6 class="form-title"> Comment*</h6>
-                                                                <textarea name="massage" id="massage" cols="30" rows="10" placeholder="Write Comment"
-                                                                    autocomplete="off" required></textarea>
+                                                                <textarea name="massage" id="massage" cols="30" rows="10" placeholder="Write Comment" autocomplete="off"
+                                                                    required></textarea>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-12">
@@ -198,7 +199,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div> <!-- / tab_content -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -209,48 +210,7 @@
                 </div>
 
                 @foreach ($related as $rp)
-				<div class="col-lg-3 col-md-6">
-					<div class="single-products-box">
-						<!-- products thumb -->
-						<div class="products-thumb">
-							<a href="{{ route('product', $rp) }}">
-								<img src="https://image01-in.oneplus.net/media/202406/19/ec64eb41a8e787a798be1b71c13a51bb.png?x-amz-process=image/format,webp/quality,Q_80"
-									alt="">
-							</a>
-							<!-- product sale -->
-							<div class="product-sale">
-								<span> BDT {{ number_format($rp->price, 2) }} Tk. </span>
-							</div>
-							<!-- product thumb -->
-							{{-- <div class="product-thumb-icon">
-								<a href="cart.html"> <i class="bi bi-cart3"></i> </a>
-								<a href="shop-details.html"> <i class="bi bi-suit-heart"></i> </a>
-							</div> --}}
-						</div>
-						<!-- products content -->
-						<div class="product-content text-start">
-							<!-- product list -->
-							{{-- <ul class="product-rating">
-								<li><i class="bi bi-star-fill"></i></li>
-								<li><i class="bi bi-star-fill"></i></li>
-								<li><i class="bi bi-star-fill"></i></li>
-								<li><i class="bi bi-star-fill"></i></li>
-								<li><i class="bi bi-star-half"></i></li>
-							</ul> --}}
-							<div class="product-title">
-								<a href="{{ route('product', $rp) }}">
-									<h6 class=""> {{ $rp->name }} </h6>
-								</a>
-							</div>
-							<!-- product text -->
-							<div class="product-price">
-								<a href="{{ route('division', $rp->division) }}">
-									<p class="fw-bold">{{ $rp->division->name }}</p>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
+                    @include('components.product', ['product' => $rp])
                 @endforeach
             </div>
         </div>
