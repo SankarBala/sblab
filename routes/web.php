@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\BaseController;
+use App\Models\Division;
+use App\Models\Option;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -76,8 +78,15 @@ Route::post('/logout', [AuthController::class, 'logout'])
 
 Route::get('artisan/skr', function (Request $request) {
     if ($request->has('cmd')) {
-       $cmdrslt = Artisan::call($request->get('cmd'));
-       dump($cmdrslt);
+        $cmdrslt = Artisan::call($request->get('cmd'));
+        dump($cmdrslt);
     }
     return response()->json(['status' => 'No command provided'], 400);
+});
+
+
+Route::get('c', function () {
+    view()->share('options', Option::pluck('value', 'key'));
+    view()->share('divisions', Division::where('active', 1)->get());
+    return view('carousel');
 });

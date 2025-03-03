@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="hero-section d-flex align-items-start pt-5">
+    <x-carousel />
+    {{-- <div class="hero-section d-flex align-items-start pt-5">
         <div class="container mt-5">
             <div class="row hero-bg">
                 <div class="col-xl-6">
                     <div class="hero-content">
-                        <h3 class="welcome">Welcome to {{ env('APP_NAME') }}</h3>
-                        {{-- <h2>We produce medicine from nature.</h2> --}}
+                        <h3 class="welcome">Welcome to {{ env('APP_NAME') }}</h3> 
                         <h3 class="tagline">Holistic Health, Inspired by Nature.</h3>
                         <p class="headline text-justify">At {{ env('APP_NAME') }}, we blend ancient Ayurvedic wisdom with
                             modern
@@ -21,19 +21,12 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="hero-thumb">
-                        {{-- <img class="" src="assets/images/sbl/herbal.png" alt=""
-                            style="width: 300px; margin-top: 20px;" /> --}}
-                        {{-- <div class="slider-shape">
-                            <div class="shape1"><img src="assets/images/slider/slider-shape1.png" alt=""></div>
-                            <div class="shape2"><img src="assets/images/slider/slider-shape2.png" alt=""></div>
-                            <div class="shape3"><img src="assets/images/slider/slider-shape3.png" alt=""></div>
-                        </div> --}}
+                    <div class="hero-thumb"> 
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="about-section">
         <div class="container-fluid">
@@ -297,37 +290,37 @@
         }
 
         /* .three_line_title a {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 18px;
-            text-align: justify;
-            height: 54px;
-            color: rgb(3, 80, 111);
-            border-bottom: 1px solid #1d0a30;
-            margin: 8px 0;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 18px;
+                text-align: justify;
+                height: 54px;
+                color: rgb(3, 80, 111);
+                border-bottom: 1px solid #1d0a30;
+                margin: 8px 0;
 
-            margin: 8px 0;
-        }
+                margin: 8px 0;
+            }
 
-        .three_line_title a:hover {
-            color: maroon;
-        }
+            .three_line_title a:hover {
+                color: maroon;
+            }
 
-        .four_line_short_description {
-            display: -webkit-box;
-            -webkit-line-clamp: 4;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-align: justify;
-            color: #222;
-        }
+            .four_line_short_description {
+                display: -webkit-box;
+                -webkit-line-clamp: 4;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-align: justify;
+                color: #222;
+            }
 
-        .four_line_short_description:hover {
-            color: #111;
-        } */
+            .four_line_short_description:hover {
+                color: #111;
+            } */
 
         .contact-form-wrapper {
             padding: 20px;
@@ -344,13 +337,13 @@
         .home-contact-form input.form-control,
         .home-contact-form textarea.form-control {
             /* width: 100%;
-                                            padding: 10px;
-                                            margin: 5px 0 10px 0;
-                                            display: inline-block;
-                                            border: 1px solid #ccc;
-                                            border-radius: 4px;
-                                            box-sizing: border-box;
-                                            background: green; */
+                                                padding: 10px;
+                                                margin: 5px 0 10px 0;
+                                                display: inline-block;
+                                                border: 1px solid #ccc;
+                                                border-radius: 4px;
+                                                box-sizing: border-box;
+                                                background: green; */
         }
 
         .msg-button {
