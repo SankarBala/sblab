@@ -40,10 +40,8 @@ class ProductController extends Controller
     public function store(ProductRequest $request): RedirectResponse
     {
 
-        // $slug = Str::slug($request->name);
-
         $words = explode(' ', $request->name);
-        $limitedWords = array_slice($words, 0, 10); // Keep only the first 8 words
+        $limitedWords = array_slice($words, 0, 10);
         $slug = Str::slug(implode(' ', $limitedWords));
 
         $count = Product::where('slug', $slug)->count();

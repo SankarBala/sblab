@@ -59,7 +59,7 @@
                                         <div class="col-md-8 col-lg-9">
                                             <div class="form-group">
                                                 <label for="description">Product Description</label>
-                                                <textarea id="summernote" name="description" placeholder="Write description here.">{{ old('description', $product->description) }}</textarea>
+                                                <textarea id="summernote" name="description" placeholder="Write description here.">{{ $product->description }}</textarea>
                                                 @error('description')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror

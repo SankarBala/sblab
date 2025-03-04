@@ -16,12 +16,12 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::create([
-            'name' => 'Administrator',
-            'email' => 'admin@sblabbd.com',
-            'password' => bcrypt('sblab@bd'),
-            'email_verified_at' => now(),
-        ]);
+        // User::create([
+        //     'name' => 'Administrator',
+        //     'email' => 'admin@sblabbd.com',
+        //     'password' => bcrypt('sblab@bd'),
+        //     'email_verified_at' => now(),
+        // ]);
 
         User::create([
             'name' => 'Sankar Bala',
@@ -31,14 +31,14 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
-            CategorySeeder::class,
-            TagSeeder::class,
-            OptionSeeder::class,
-            FaqSeeder::class,
-            MessageSeeder::class,
+            // CategorySeeder::class,
+            // TagSeeder::class,
+            // OptionSeeder::class,
+            // FaqSeeder::class,
+            // MessageSeeder::class,
             DivisionSeeder::class,
             ProductSeeder::class,
-            ArticleSeeder::class,
+            // ArticleSeeder::class,
         ]);
     }
 }
