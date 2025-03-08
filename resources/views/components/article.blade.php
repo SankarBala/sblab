@@ -1,6 +1,8 @@
 <div class="blog-single-box">
     <div class="blog-thumb">
-        <a href="blog-list.html"><img src="assets/images/resource/blog1.png" alt=""></a>
+        <a href="{{ route('article', $article) }}">
+            <img class="img-square" src="{{ asset("storage/{$article->image}") }}" alt="Article Image" />
+        </a>
         {{-- <div class="post-categories"><a href="home.html">health</a></div> --}}
     </div>
     <div class="dentist-blog-meta-left">
@@ -52,6 +54,12 @@
 
         .four_line_short_description:hover {
             color: #111;
+        }
+
+        .img-square {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
         }
     </style>
 @endpush

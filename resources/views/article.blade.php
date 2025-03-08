@@ -9,18 +9,17 @@
                     <div class="blog-details-main">
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="blog-details-meta text-dark p-0">
+                                <div class="blog-details-content py-0 my-0">
+                                    <h2 class="mb-3">{{ $article->name }}</h2>
+                                </div>
+                                <div class="blog-details-meta text-dark p-0 m-0">
                                     <span class=""><i class="far fa-calendar-alt"></i>
                                         {{ $article->created_at->format('M d, Y') }}</span>
-                                    {{-- <span><i class="far fa-comments"></i> 3 Comments</span> --}}
-                                </div>
-                                <div class="blog-details-content">
-                                    <h2>{{ $article->name }}</h2>
-                                </div>
-                                <div class="blog-details-thumb">
-                                    <img src="assets/images/resource/blog-details1.jpg" alt="">
+                                    <span><i class="far fa-comments"></i> 3 Comments</span>
                                 </div>
                                 <div class="blog-details-des">
+                                    <img class="img-thumbnail" src="{{ asset("storage/{$article->image}") }}"
+                                        alt="">
                                     {!! $article->description !!}
                                 </div>
                             </div>
@@ -29,10 +28,21 @@
                                 <button class="btn btn-sm btn-info rounded">Read More</button>
                             </div> --}}
                             <div class="col-12 mt-4">
-                                <div class="blog-details-social">
-                                    <a href="blog-details.html#"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="blog-details.html#"><i class="fab fa-twitter"></i></a>
-                                    <a href="blog-details.html#"><i class="fab fa-linkedin-in"></i></a>
+                              
+                                <div class="blog-details-socials float-end">
+                                    <h5 class="d-inline-block  mx-5">Share on Social Media</h5>
+                                    <a class="btn btn-primary text-light px-5" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('article', $article)) }}"
+                                        target="_blank">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                    <a class="btn btn-primary text-light px-5 mx-1" href="https://twitter.com/intent/tweet?url={{ urlencode(route('article', $article)) }}"
+                                        target="_blank">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                    <a class="btn btn-primary text-light px-5" href="https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode(route('article', $article)) }}"
+                                        target="_blank">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a>
                                 </div>
                             </div>
 
@@ -104,9 +114,32 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-12">
-                    <x-article-sidebar :article="$article"/>
+                    <x-article-sidebar :article="$article" />
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
+
+@push('styles')
+    <style>
+        .blog-details-des {
+            text-align: justify;
+        }
+
+        .blog-details-des img {
+            float: left;
+            max-width: 320px;
+            height: auto;
+        }
+
+        @media (max-width: 992px) {
+            .blog-details-des img {
+                float: none;
+                display: block;
+                margin: 0 auto;
+            }
+        }
+    </style>
+@endpush

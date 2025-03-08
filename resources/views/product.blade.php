@@ -203,6 +203,9 @@
                         </div>
                     </div>
                 </div>
+
+            </div>
+            <div class="row">
                 <div class="col-lg-12">
                     <div class="product-item-title">
                         <h2>Related Products</h2>

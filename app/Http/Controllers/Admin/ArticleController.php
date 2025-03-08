@@ -113,6 +113,8 @@ class ArticleController extends Controller
     public function update(ProductRequest $request, Article $article): RedirectResponse
     {
 
+        // dd($request->all());
+
         $article->name = $request->name;
         $article->short_description = $request->short_description;
         $article->description = $request->description;

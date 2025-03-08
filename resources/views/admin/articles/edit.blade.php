@@ -23,6 +23,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
+                        {{$errors}}
                         <div class="card card-primary">
                             <form id="quickForms" action="{{ route('admin.article.update', $article) }}" method="POST"
                                 enctype="multipart/form-data">
