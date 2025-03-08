@@ -31,7 +31,11 @@
                      </div>
                  </div>
              </div>
-
+             @if (count($products) == 0)
+                 <div class="col-12">
+                     <div class="alert alert-danger">No products found</div>
+                 </div>
+             @endif
 
              <div class="row">
                  @foreach ($products as $product)

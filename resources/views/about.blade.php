@@ -8,7 +8,7 @@
                 <div class="col-lg-6">
                     <div class="about-thumbs">
                         <img class="img-fluid" src="{{ asset('assets/images/sbl/slogo.jpeg') }}" alt=""
-                            style="width: 100%" />
+                            style="width: 60%" />
                     </div>
                 </div>
                 <div class="col-lg-6">

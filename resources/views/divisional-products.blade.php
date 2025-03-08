@@ -34,6 +34,11 @@
 
 
              <div class="row">
+                 @if (count($products) == 0)
+                     <div class="col-12">
+                         <div class="alert alert-danger">No product found</div>
+                     </div>
+                 @endif
                  @foreach ($products as $product)
                      @include('components.product', ['product' => $product])
                  @endforeach

@@ -35,7 +35,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
-                    <img src="{{ asset('assets/images/sbl/right-logo-t.png') }}" alt="contact us" />
+                    <img src="{{ asset('assets/images/sbl/footer_logo.png') }}" alt="contact us" style="width:80%"/>
                 </div>
                 <div class="col-lg-6">
                     <div class="choose_us_right">
