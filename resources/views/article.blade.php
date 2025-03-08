@@ -28,25 +28,41 @@
                                 <button class="btn btn-sm btn-info rounded">Read More</button>
                             </div> --}}
                             <div class="col-12 mt-4">
-                              
+
                                 <div class="blog-details-socials float-end">
                                     <h5 class="d-inline-block  mx-5">Share on Social Media</h5>
-                                    <a class="btn btn-primary text-light px-5" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('article', $article)) }}"
+                                    <a class="btn btn-primary text-light px-5"
+                                        href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('article', $article)) }}"
                                         target="_blank">
                                         <i class="fab fa-facebook-f"></i>
                                     </a>
-                                    <a class="btn btn-primary text-light px-5 mx-1" href="https://twitter.com/intent/tweet?url={{ urlencode(route('article', $article)) }}"
+                                    <a class="btn btn-primary text-light px-5 mx-1"
+                                        href="https://twitter.com/intent/tweet?url={{ urlencode(route('article', $article)) }}"
                                         target="_blank">
                                         <i class="fab fa-twitter"></i>
                                     </a>
-                                    <a class="btn btn-primary text-light px-5" href="https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode(route('article', $article)) }}"
+                                    <a class="btn btn-primary text-light px-5"
+                                        href="https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode(route('article', $article)) }}"
                                         target="_blank">
                                         <i class="fab fa-linkedin-in"></i>
                                     </a>
                                 </div>
                             </div>
 
-                            {{-- <div class="col-lg-12">
+                            {{-- <div class="col-12">
+                                <h2>Comment Section</h2>
+                                <button onclick="googleLogin()">Login with Google</button>
+                                <p id="user-info"></p>
+
+                                <textarea id="comment-input" placeholder="Write a comment..."></textarea>
+                                <button onclick="postComment()">Post Comment</button>
+
+                                <h3>Comments:</h3>
+                                <div id="comments"></div>
+                            </div> --}}
+
+
+                            <div class="col-lg-12">
                                 <div class="blog-details-content">
                                     <h3>2 Comments</h3>
                                 </div>
@@ -108,7 +124,7 @@
                                     </div>
                                 </form>
                                 <div id="status"></div>
-                            </div> --}}
+                            </div>
 
                         </div>
                     </div>
@@ -142,4 +158,78 @@
             }
         }
     </style>
+@endpush
+
+
+@push('scripts')
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Your Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAIx0D1BFoUD3CSYieapKhtNKy7S_E8YGo",
+            authDomain: "sb-lab-bangladesh.firebaseapp.com",
+            projectId: "sb-lab-bangladesh",
+            storageBucket: "sb-lab-bangladesh.firebasestorage.app",
+            messagingSenderId: "791173001264",
+            appId: "1:791173001264:web:e408b8ecbf067817e2fdf5"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Google Login
+        function googleLogin() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider).then((result) => {
+                const user = result.user;
+                document.getElementById("user-info").innerText = `Logged in as: ${user.displayName}`;
+            }).catch(error => console.error(error));
+        }
+
+        // Post Comment
+        function postComment() {
+            const user = auth.currentUser;
+            if (!user) {
+                alert("Please log in to comment.");
+                return;
+            }
+
+            const commentText = document.getElementById("comment-input").value;
+            if (commentText.trim() === "") {
+                alert("Comment cannot be empty!");
+                return;
+            }
+
+            db.collection("comments").add({
+                user: user.displayName,
+                text: commentText,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            }).then(() => {
+                document.getElementById("comment-input").value = "";
+                loadComments();
+            });
+        }
+
+        // Load Comments
+        function loadComments() {
+            const commentsDiv = document.getElementById("comments");
+            commentsDiv.innerHTML = "";
+
+            db.collection("comments").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
+                commentsDiv.innerHTML = "";
+                snapshot.forEach((doc) => {
+                    const data = doc.data();
+                    commentsDiv.innerHTML += `<p><strong>${data.user}:</strong> ${data.text}</p>`;
+                });
+            });
+        }
+
+        // Auto-load comments
+        loadComments();
+    </script>
 @endpush
