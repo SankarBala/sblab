@@ -4490,9 +4490,9 @@ p.description {
 }
 
 .blog-details-comment.reply {
-    margin-left: 70px;
+    margin-left: 50px;
     padding-top: 35px;
-    border-top: 2px solid #3BB3D8;
+    border-top: 1px solid #2c18ab;
 }
 
 /* Blog Details Contact */
