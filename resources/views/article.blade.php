@@ -67,36 +67,7 @@
                                 <div class="blog-details-content">
                                     <h3>2 Comments</h3>
                                 </div>
-                                <div class="blog-details-comment">
-                                    <div class="blog-details-comment-reply">
-                                        <button class="btn btn-sm btn-primary">Reply</button>
-                                    </div>
-                                    <div class="blog-details-comment-thumb">
-                                        <img src="{{ asset('assets/images/resource/comment1.png') }}" alt="">
-                                    </div>
-                                    <div class="blog-details-comment-content">
-                                        <h2>Michael jordan</h2>
-                                        <span>11 September, 2023</span>
-                                        <p>Nulla vitae orci luctus risus tristique sollicitudin sed at quam. Nulla sem
-                                            dui, faucibus sit amet justo sed, laoreet ornare leo. </p>
-                                    </div>
-
-                                    <div class="blog-details-comment reply">
-                                        <div class="blog-details-comment-reply">
-                                            <button class="btn btn-sm btn-primary">Reply</button>
-                                        </div>
-                                        <div class="blog-details-comment-thumb">
-                                            <img src="{{ asset('assets/images/resource/comment2.png') }}" alt="">
-                                        </div>
-                                        <div class="blog-details-comment-content">
-                                            <h2>Angel Jara</h2>
-                                            <span>15 September, 2023</span>
-                                            <p>Hello vitae orci luctus risus tristique sollicitudin sed at quam. Karet sem
-                                                dui, faucibus sit amet justo sed, ornare deo </p>
-                                        </div>
-                                        @stack('reply')
-                                    </div>
-                                </div>
+                                <div id="commentary-box"></div>
                             </div>
                             <div class="col-12">
                                 <div class="blog-details-content">
@@ -104,12 +75,14 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
-                                        <div class="user">User Name</div>
+
                                         <div class="">
-                                            <textarea class="form-control" name="message" id="answer" rows="6" placeholder="Write here..."></textarea>
+                                            <textarea class="form-control" name="comment" id="new_comment" rows="6" placeholder="Write here..."></textarea>
                                         </div>
-                                        <div class="float-end mt-3">
-                                            <button type="submit" class="btn btn-primary">Comment</button>
+                                        <div class="float-end my-3">
+                                            <div class="d-inline mx-2 user">User Name</div>
+                                            <button type="submit" class="btn btn-primary"
+                                                onclick="postComment()">Comment</button>
                                         </div>
                                     </div>
                                 </div>
@@ -170,35 +143,53 @@
     <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore-compat.js"></script>
 
     <script>
-        // Comment box
-        const commentBox = `<div class="row">
-                                <div class="col-12">
-                                    <div class="user">User Name</div>
-                                    <div class="">
-                                        <textarea class="form-control" name="message" id="answer" rows="6" placeholder="Write here..."></textarea>
-                                    </div>
-                                    <div class="float-end mt-3">
-                                        <button type="submit" class="btn btn-primary">Comment</button>
-                                    </div>
-                                </div>
-                            </div>`;
-
-
-        function getCommentBox(username, ) {
-            return `
-        <div class="row">
-            <div class="col-12">
-                <div class="user">${username}</div>
-                <div class="">
-                    <textarea class="form-control" name="message" rows="6" placeholder="Write here..."></textarea>
-                </div>
-                <div class="float-end mt-3">
-                    <button type="submit" class="btn btn-primary">Comment</button>
-                </div>
-            </div>
-        </div>
-    `;
+        // Comment box template
+        function getCommentBox(username) {
+            return `<div class="row">
+                    <div class="col-12">
+                        <div class="user">${username}</div>
+                        <div class="">
+                            <textarea class="form-control" name="message" rows="6" placeholder="Write here..."></textarea>
+                        </div>
+                        <div class="float-end mt-3">
+                            <button type="submit" class="btn btn-primary">Comment</button>
+                        </div>
+                    </div>
+                </div>`;
         }
+
+
+        function getComment(comment, reply = "") {
+            console.log(comment);
+            // Create the base HTML for the comment
+            let commentHTML = `
+                        <div class="blog-details-comment ${reply}">
+                            <div class="blog-details-comment-reply">
+                                <button class="btn btn-sm btn-primary">Reply</button>
+                            </div>
+                            <div class="blog-details-comment-thumb">
+                                <img class="rounded" src="${comment.userPhoto}" alt="" />
+                            </div>
+                            <div class="blog-details-comment-content">
+                                <h2>${comment.user}</h2>
+                                <span>${new Date(comment.timestamp?.toDate()).toLocaleString()}</span>
+                                <p>${comment.text}</p>
+                            </div>
+                    `;
+
+            // Check if there are replies, and loop through them if they exist
+            if (comment.replies && comment.replies.length > 0) {
+                comment.replies.forEach(reply => {
+                    commentHTML += getComment(reply, "reply"); // Recursively call for each reply
+                });
+            }
+
+            // Close the main comment div
+            commentHTML += `</div>`;
+
+            return commentHTML;
+        }
+
 
 
 
@@ -222,48 +213,73 @@
         function googleLogin() {
             const provider = new firebase.auth.GoogleAuthProvider();
             auth.signInWithPopup(provider).then((result) => {
-                const user = result.user;
-                document.getElementById("user-info").innerText = `Logged in as: ${user.displayName}`;
+                return;
             }).catch(error => console.error(error));
         }
 
         // Post Comment
         function postComment() {
             const user = auth.currentUser;
+
             if (!user) {
-                alert("Please log in to comment.");
-                return;
+                googleLogin();
             }
 
-            const commentText = document.getElementById("comment-input").value;
+            const commentText = document.getElementById("new_comment").value;
+
             if (commentText.trim() === "") {
                 alert("Comment cannot be empty!");
                 return;
             }
 
             db.collection("comments").add({
+                article_id: {{ $article->id }},
                 user: user.displayName,
+                userPhoto: user.photoURL,
                 text: commentText,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                reply: null
             }).then(() => {
-                document.getElementById("comment-input").value = "";
+                document.getElementById("new_comment").value = "";
                 loadComments();
             });
+
         }
 
         // Load Comments
-        function loadComments() {
-            const commentsDiv = document.getElementById("comments");
-            commentsDiv.innerHTML = "";
+        // function loadComments() {
+        //     const commentsDiv = document.getElementsByClassName("blog-details-comment")[0];
+        //     commentsDiv.innerHTML = "";
 
-            db.collection("comments").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
-                commentsDiv.innerHTML = "";
-                snapshot.forEach((doc) => {
-                    const data = doc.data();
-                    commentsDiv.innerHTML += `<p><strong>${data.user}:</strong> ${data.text}</p>`;
+        //     db.collection("comments").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
+        //         commentsDiv.innerHTML = "";
+        //         snapshot.forEach((doc) => {
+        //             const data = doc.data();
+        //             commentsDiv.innerHTML += `<p><strong>${data.user}:</strong> ${data.text}</p>`;
+        //         });
+        //     });
+        // }
+
+        function loadComments() {
+            db.collection("comments")
+                // .where("article_id", "==", 1)
+                .orderBy("timestamp", "desc")
+                .get()
+                .then((querySnapshot) => {
+                    let commentsHTML = "";
+                    querySnapshot.forEach((doc) => {
+                        let comment = doc.data();
+                        let commentId = doc.id;
+                        commentsHTML += getComment(comment);
+                    });
+                    document.getElementById("commentary-box").innerHTML = commentsHTML;
                 });
-            });
         }
+
+
+
+
+
 
         // Auto-load comments
         loadComments();

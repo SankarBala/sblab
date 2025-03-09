@@ -31,7 +31,6 @@
         @foreach ($recent_articles as $r_article)
             <div class="sidber-widget-recent-post">
                 <div class="recent-widget-thumb">
-                    {{-- <img src="assets/images/resource/recend1.jpg" alt="" /> --}}
                 </div>
                 <div class="recent-widget-content">
                     <a href="blog-details.html#">{{ $r_article->name }}</a>
