@@ -34,6 +34,7 @@ Route::get('/division/{division:slug}', [BaseController::class, 'division'])->na
 Route::get('/faq', [BaseController::class, 'faq'])->name('faq');
 Route::resource('comment', CommentController::class)->except(['create', 'edit']);
 
+
 // General post routes.
 Route::post('/message', [BaseController::class, 'store_message'])->name('store_message');
 
