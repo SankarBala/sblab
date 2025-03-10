@@ -159,13 +159,20 @@
         }
 
 
-        function getComment(comment, reply = "") {
+        function getComment(comment, commentId, reply = "") {
             console.log(comment);
+            const currentUserId = firebase.auth().currentUser?.uid;
+            const isCommentOwner = comment.uid === currentUserId;
+
             // Create the base HTML for the comment
             let commentHTML = `
                         <div class="blog-details-comment ${reply}">
                             <div class="blog-details-comment-reply">
-                                <button class="btn btn-sm btn-primary">Reply</button>
+                                ${isCommentOwner ? `
+                                                    <button class="btn btn-sm btn-warning" onclick="editComment('${comment.id}', '${comment.text}')">Edit</button>
+                                                    <button class="btn btn-sm btn-danger" onclick="deleteComment('${commentId}')">Delete</button>` : ''}
+                                <button class="btn btn-sm btn-primary" onclick="makeReply(${commentId})">Reply</button>
+                                <button class="btn btn-sm btn-danger" onclick="deleteComment('${commentId}')">Delete</button>
                             </div>
                             <div class="blog-details-comment-thumb">
                                 <img class="rounded" src="${comment.userPhoto}" alt="" />
@@ -174,13 +181,14 @@
                                 <h2>${comment.user}</h2>
                                 <span>${new Date(comment.timestamp?.toDate()).toLocaleString()}</span>
                                 <p>${comment.text}</p>
+                                <div id="reply_${commentId}" class="replyhere"></div>
                             </div>
                     `;
 
             // Check if there are replies, and loop through them if they exist
             if (comment.replies && comment.replies.length > 0) {
                 comment.replies.forEach(reply => {
-                    commentHTML += getComment(reply, "reply"); // Recursively call for each reply
+                    commentHTML += getComment(reply, "sjaidfiasidf", "reply"); // Recursively call for each reply
                 });
             }
 
@@ -234,17 +242,35 @@
 
             db.collection("comments").add({
                 article_id: {{ $article->id }},
+                uid: user.uid,
                 user: user.displayName,
                 userPhoto: user.photoURL,
                 text: commentText,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                reply: null
+                reply: []
             }).then(() => {
                 document.getElementById("new_comment").value = "";
                 loadComments();
             });
 
         }
+
+
+        function deleteComment(commentId) {
+            console.log(commentId);
+            if (confirm("Are you sure you want to delete this comment?")) {
+                db.collection("comments").doc(commentId).delete()
+                    .then((res) => {
+                        console.log(res);
+                        alert("Comment deleted successfully!");
+                        loadComments(); // Reload comments to reflect changes
+                    })
+                    .catch(error => {
+                        console.error("Error deleting comment: ", error);
+                    });
+            }
+        }
+
 
         // Load Comments
         // function loadComments() {
@@ -270,7 +296,7 @@
                     querySnapshot.forEach((doc) => {
                         let comment = doc.data();
                         let commentId = doc.id;
-                        commentsHTML += getComment(comment);
+                        commentsHTML += getComment(comment, commentId);
                     });
                     document.getElementById("commentary-box").innerHTML = commentsHTML;
                 });

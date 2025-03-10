@@ -42,7 +42,7 @@
 <script src='{{asset("venobox/venobox.min.js")}}'></script>
 <script src='{{asset("assets/js/isotope.pkgd.min.js")}}'></script>
 <script src='{{asset("assets/js/jquery.meanmenu.js")}}'></script>
-<script src='{{asset("assets/js/jquery.scrollUp.js")}}'></script>
+{{-- <script src='{{asset("assets/js/jquery.scrollUp.js")}}'></script> --}}
 <script src='{{asset("assets/js/custom.js")}}'></script>
 @stack('scripts')
 
