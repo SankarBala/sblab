@@ -151,7 +151,7 @@
                         </div>
                         <div class="float-end mt-1">
                             <button type="submit" class="btn btn-danger" onclick="closeAllReplies()">Close</button>
-                            <button type="submit" class="btn btn-primary">Reply</button>
+                            <button type="submit" class="btn btn-primary" onclick="postReply('${commentId}')">Reply</button>
                         </div>
                 </div>`;
         }
@@ -185,10 +185,9 @@
                         <div class="blog-details-comment ${reply}">
                             <div class="blog-details-comment-reply">
                                 ${isCommentOwner ? `
-                                                                    <button class="btn btn-sm btn-warning" onclick="editComment('${comment.id}', '${comment.text}')">Edit</button>
-                                                                    <button class="btn btn-sm btn-danger" onclick="deleteComment('${commentId}')">Delete</button>` : ''}
+                                <button class="btn btn-sm btn-warning" onclick="editComment('${comment.id}', '${comment.text}')">Edit</button>
+                                <button class="btn btn-sm btn-danger" onclick="deleteComment('${commentId}')">Delete</button>` : ''}
                                 <button class="btn btn-sm btn-primary" onclick="makeReply('${commentId}')">Reply</button>
-                                <button class="btn btn-sm btn-danger" onclick="deleteComment('${commentId}')">Delete</button>
                             </div>
                             <div class="blog-details-comment-thumb">
                                 <img class="rounded" src="${comment.userPhoto}" alt="" />
@@ -269,6 +268,35 @@
                 loadComments();
             });
 
+        }
+
+
+        // Post Reply
+        function postReply(commentId) {
+            const user = auth.currentUser;
+
+            if (!user) {
+                googleLogin();
+            }
+
+            const replyText = document.getElementById(`reply_to_${commentId}`).querySelector("textarea").value;
+
+            if (replyText.trim() === "") {
+                alert("Reply cannot be empty!");
+                return;
+            }
+
+            db.collection("comments").doc(commentId).update({
+                replies: firebase.firestore.FieldValue.arrayUnion({
+                    uid: user.uid,
+                    user: user.displayName,
+                    userPhoto: user.photoURL,
+                    text: replyText,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                })
+            }).then(() => {
+                loadComments();
+            });
         }
 
 
