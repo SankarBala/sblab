@@ -144,20 +144,36 @@
 
     <script>
         // Comment box template
-        function getCommentBox(username) {
-            return `<div class="row">
-                    <div class="col-12">
-                        <div class="user">${username}</div>
+        function getCommentBox(commentId) {
+            return `<div class="mt-2 mb-5 pb-5">
                         <div class="">
-                            <textarea class="form-control" name="message" rows="6" placeholder="Write here..."></textarea>
+                            <textarea class="form-control" name="message" rows="4" placeholder="Reply here..."></textarea>
                         </div>
-                        <div class="float-end mt-3">
-                            <button type="submit" class="btn btn-primary">Comment</button>
+                        <div class="float-end mt-1">
+                            <button type="submit" class="btn btn-danger" onclick="closeAllReplies()">Close</button>
+                            <button type="submit" class="btn btn-primary">Reply</button>
                         </div>
-                    </div>
                 </div>`;
         }
 
+        function makeReply(commentId) {
+            const user = auth.currentUser;
+
+            if (!user) {
+                googleLogin();
+            }
+
+            closeAllReplies();
+            const replyBox = document.getElementById(`reply_to_${commentId}`);
+            replyBox.innerHTML = getCommentBox(commentId);
+        }
+
+        function closeAllReplies() {
+            const replyBoxes = document.getElementsByClassName("replyhere");
+            for (let i = 0; i < replyBoxes.length; i++) {
+                replyBoxes[i].innerHTML = "";
+            }
+        }
 
         function getComment(comment, commentId, reply = "") {
             console.log(comment);
@@ -169,9 +185,9 @@
                         <div class="blog-details-comment ${reply}">
                             <div class="blog-details-comment-reply">
                                 ${isCommentOwner ? `
-                                                    <button class="btn btn-sm btn-warning" onclick="editComment('${comment.id}', '${comment.text}')">Edit</button>
-                                                    <button class="btn btn-sm btn-danger" onclick="deleteComment('${commentId}')">Delete</button>` : ''}
-                                <button class="btn btn-sm btn-primary" onclick="makeReply(${commentId})">Reply</button>
+                                                                    <button class="btn btn-sm btn-warning" onclick="editComment('${comment.id}', '${comment.text}')">Edit</button>
+                                                                    <button class="btn btn-sm btn-danger" onclick="deleteComment('${commentId}')">Delete</button>` : ''}
+                                <button class="btn btn-sm btn-primary" onclick="makeReply('${commentId}')">Reply</button>
                                 <button class="btn btn-sm btn-danger" onclick="deleteComment('${commentId}')">Delete</button>
                             </div>
                             <div class="blog-details-comment-thumb">
@@ -181,14 +197,14 @@
                                 <h2>${comment.user}</h2>
                                 <span>${new Date(comment.timestamp?.toDate()).toLocaleString()}</span>
                                 <p>${comment.text}</p>
-                                <div id="reply_${commentId}" class="replyhere"></div>
                             </div>
+                            <div id="reply_to_${commentId}" class="replyhere"></div>
                     `;
 
             // Check if there are replies, and loop through them if they exist
             if (comment.replies && comment.replies.length > 0) {
                 comment.replies.forEach(reply => {
-                    commentHTML += getComment(reply, "sjaidfiasidf", "reply"); // Recursively call for each reply
+                    commentHTML += getComment(reply, "fakeid", "reply"); // Recursively call for each reply
                 });
             }
 
