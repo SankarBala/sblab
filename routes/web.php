@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\BaseController;
+use App\Http\Controllers\CommentController;
 use App\Models\Division;
 use App\Models\Option;
 use App\Models\Product;
@@ -31,6 +32,7 @@ Route::get('/division/{division:slug}', [BaseController::class, 'division'])->na
 // Route::get('/category/{category:slug}', [BaseController::class, 'category'])->name('category');
 // Route::get('/tag/{tag:slug}', [BaseController::class, 'tag'])->name('tag');
 Route::get('/faq', [BaseController::class, 'faq'])->name('faq');
+Route::resource('comment', CommentController::class)->except(['create', 'edit']);
 
 // General post routes.
 Route::post('/message', [BaseController::class, 'store_message'])->name('store_message');
