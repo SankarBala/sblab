@@ -314,7 +314,7 @@
                 url: '{{ route('comment.store') }}',
                 type: 'POST',
                 data: {
-                    commentable_type: commentable_type,
+                    commentable_type: "App\Model\Article",
                     commentable_id: commentable_id,
                     guid: user.uid,
                     user_name: user.displayName,
