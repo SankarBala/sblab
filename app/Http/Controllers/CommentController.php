@@ -3,16 +3,34 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request): JsonResponse
     {
-        //
+
+        $request->validate([
+            "commentable_type" => ["required", Rule::in(['App\\Models\\Article', 'App\\Models\\Product', 'App\\Models\\Comment'])],
+            "commentable_id" => "required|exists:$request->commentable_type,id",
+        ]);
+
+        $comments = Comment::where('commentable_type', $request->commentable_type)
+            ->where('commentable_id', $request->commentable_id)
+            ->get();
+
+        // $comments->load('loadReplies');
+
+        $comments = $comments->map(function ($comment) {
+            return $comment->loadReplies();
+        });
+
+        return response()->json(['comments' => $comments], 200);
     }
 
     /**
@@ -28,7 +46,32 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'commentable_type' => [
+                'required',
+                'string',
+                Rule::in(['App\\Models\\Article', 'App\\Models\\Product', 'App\\Models\\Comment']),
+            ],
+            'commentable_id' => "required|exists:$request->commentable_type,id",
+            'guid' => 'required|string',
+            'user_name' => 'required|string|max:255',
+            'user_email' => 'required|email|max:255',
+            'image_url' => 'nullable|url',
+            'text' => 'required|string|max:1000',
+        ]);
+
+        $comment = new Comment();
+        $comment->commentable_type = $request->commentable_type;
+        $comment->commentable_id = $request->commentable_id;
+        $comment->guid = $request->guid;
+        $comment->user_name = $request->user_name;
+        $comment->user_email = $request->user_email;
+        $comment->image_url = $request->image_url;
+        $comment->text = $request->text;
+        $comment->save();
+
+        return response()->json(['message' => 'Comment created successfully'], 201);
     }
 
     /**

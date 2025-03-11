@@ -175,37 +175,41 @@
             }
         }
 
-        function getComment(comment, commentId, reply = "") {
+        function getComment(comment, reply = "") {
             console.log(comment);
+            console.log(commentId);
             const currentUserId = firebase.auth().currentUser?.uid;
-            const isCommentOwner = comment.uid === currentUserId;
+            const isCommentOwner = comment.guid === currentUserId;
+            // console.log(currentUserId);
+            console.log(isCommentOwner);
 
+         
             // Create the base HTML for the comment
             let commentHTML = `
                         <div class="blog-details-comment ${reply}">
                             <div class="blog-details-comment-reply">
                                 ${isCommentOwner ? `
-                                <button class="btn btn-sm btn-warning" onclick="editComment('${comment.id}', '${comment.text}')">Edit</button>
-                                <button class="btn btn-sm btn-danger" onclick="deleteComment('${commentId}')">Delete</button>` : ''}
+                                                                            <button class="btn btn-sm btn-warning" onclick="editComment('${comment.id}', '${comment.text}')">Edit</button>
+                                                                            <button class="btn btn-sm btn-danger" onclick="deleteComment('${commentId}')">Delete</button>` : ''}
                                 <button class="btn btn-sm btn-primary" onclick="makeReply('${commentId}')">Reply</button>
                             </div>
                             <div class="blog-details-comment-thumb">
-                                <img class="rounded" src="${comment.userPhoto}" alt="" />
+                                <img class="rounded" src="${comment.image_url}" alt="" />
                             </div>
                             <div class="blog-details-comment-content">
-                                <h2>${comment.user}</h2>
-                                <span>${new Date(comment.timestamp?.toDate()).toLocaleString()}</span>
+                                <h2>${comment.user_name}</h2>
+                                <span>${new Date(comment.created_at).toLocaleString()}</span>
                                 <p>${comment.text}</p>
                             </div>
                             <div id="reply_to_${commentId}" class="replyhere"></div>
                     `;
 
             // Check if there are replies, and loop through them if they exist
-            if (comment.replies && comment.replies.length > 0) {
-                comment.replies.forEach(reply => {
-                    commentHTML += getComment(reply, "fakeid", "reply"); // Recursively call for each reply
-                });
-            }
+            // if (comment.replies && comment.replies.length > 0) {
+            //     comment.replies.forEach(reply => {
+            //         commentHTML += getComment(reply, "fakeid", "reply"); // Recursively call for each reply
+            //     });
+            // }
 
             // Close the main comment div
             commentHTML += `</div>`;
@@ -248,25 +252,47 @@
                 googleLogin();
             }
 
-            const commentText = document.getElementById("new_comment").value;
+            const commentText = $("#new_comment").val();
 
             if (commentText.trim() === "") {
                 alert("Comment cannot be empty!");
                 return;
             }
 
-            db.collection("comments").add({
-                article_id: {{ $article->id }},
-                uid: user.uid,
-                user: user.displayName,
-                userPhoto: user.photoURL,
-                text: commentText,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                reply: []
-            }).then(() => {
-                document.getElementById("new_comment").value = "";
-                loadComments();
+            $.ajax({
+                url: '{{ route('comment.store') }}',
+                type: 'POST',
+                data: {
+                    commentable_type: 'App\\Models\\Article',
+                    commentable_id: {{ $article->id }},
+                    guid: user.uid,
+                    user_name: user.displayName,
+                    user_email: user.email,
+                    image_url: user.photoURL,
+                    text: commentText,
+                },
+                success: function(response) {
+                    $('#status').html('Comment posted successfully!');
+                    $('#new_comment').val('');
+                    loadComments();
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
             });
+
+            // db.collection("comments").add({
+            //     article_id: {{ $article->id }},
+            //     uid: user.uid,
+            //     user: user.displayName,
+            //     userPhoto: user.photoURL,
+            //     text: commentText,
+            //     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            //     reply: []
+            // }).then(() => {
+            //     document.getElementById("new_comment").value = "";
+            //     loadComments();
+            // });
 
         }
 
@@ -331,19 +357,50 @@
         // }
 
         function loadComments() {
-            db.collection("comments")
-                // .where("article_id", "==", 1)
-                .orderBy("timestamp", "desc")
-                .get()
-                .then((querySnapshot) => {
+
+            $.ajax({
+                url: '{{ route('comment.index') }}',
+                type: 'GET',
+                data: {
+                    commentable_type: 'App\\Models\\Article',
+                    commentable_id: {{ $article->id }},
+                },
+                dataType: 'json',
+                success: function(res) {
                     let commentsHTML = "";
-                    querySnapshot.forEach((doc) => {
-                        let comment = doc.data();
-                        let commentId = doc.id;
-                        commentsHTML += getComment(comment, commentId);
+                    res.comments.forEach((comment) => {
+                        // let comment = comment.data();
+                        // let commentId = comment.id;
+                        commentsHTML += getComment(comment);
                     });
-                    document.getElementById("commentary-box").innerHTML = commentsHTML;
-                });
+                    $("#commentary-box").html(commentsHTML);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+
+
+
+
+
+
+
+
+            // db.collection("comments")
+            //     // .where("article_id", "==", 1)
+            //     .orderBy("timestamp", "desc")
+            //     .get()
+            //     .then((querySnapshot) => {
+            //         let commentsHTML = "";
+            //         querySnapshot.forEach((doc) => {
+            //             let comment = doc.data();
+            //             let commentId = doc.id;
+            //             commentsHTML += getComment(comment, commentId);
+            //         });
+            //         $("#commentary-box").html(commentsHTML);
+            //     });
+
         }
 
 

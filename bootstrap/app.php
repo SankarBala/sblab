@@ -16,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => AdminMiddleware::class
         ])->validateCsrfTokens(except: [
             'message',
+            'comment',
         ]);
     })->withMiddleware(function (Middleware $middleware) {
         $middleware->redirectUsersTo('admin');

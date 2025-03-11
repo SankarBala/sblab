@@ -1,5 +1,5 @@
 ### GET request to example server
-POST {{host}}/message
+POST https://sblab.dev/message
 Accept: application/json
 Content-Type: application/json
 
