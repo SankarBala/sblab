@@ -162,45 +162,7 @@
                 replyBoxes[i].innerHTML = "";
             }
         }
-
-        // function getComment(comment, reply = "") {
-
-        //     const isCommentOwner = comment.guid === firebase.auth().currentUser?.uid;
-
-        //     // Create the base HTML for the comment
-        //     let commentHTML = `
-    //                 <div class="blog-details-comment ${reply}">
-    //                     <div class="blog-details-comment-reply">
-    //                         ${isCommentOwner ? `
-        //                             <button class="btn btn-sm btn-warning" onclick="editComment('${comment.id}', '${comment.text}')">Edit</button>
-        //                             <button class="btn btn-sm btn-danger" onclick="deleteComment('${comment.id}')">Delete</button>` : ''}
-    //                             <button class="btn btn-sm btn-primary" onclick="makeReply('${comment.id}')">Reply</button>
-    //                     </div>
-    //                     <div class="blog-details-comment-thumb">
-    //                         <img class="rounded" src="${comment.image_url}" alt="" />
-    //                     </div>
-    //                     <div class="blog-details-comment-content">
-    //                         <h2>${comment.user_name}</h2>
-    //                         <span>${new Date(comment.created_at).toLocaleString()}</span>
-    //                         <p>${comment.text}</p>
-    //                     </div>
-    //                     <div id="reply_to_${comment.id}" class="replyhere"></div>
-    //             `;
-
-        //     // Check if there are replies, and loop through them if they exist
-        //     if (comment.replies && comment.replies.length > 0) {
-        //         comment.replies.forEach(comment => {
-        //             commentHTML += getComment(comment, "reply"); 
-        //         });
-        //     }
-
-        //     // Close the main comment div
-        //     commentHTML += `</div>`;
-
-        //     return commentHTML;
-        // }
-
-
+ 
 
         function escapeHTML(text) {
             const div = document.createElement('div');
@@ -223,8 +185,8 @@
                         <div class="blog-details-comment ${replyClass}">
                             <div class="blog-details-comment-reply">
                                 ${isCommentOwner ? `
-                                                                                        <button class="btn btn-sm btn-warning" onclick="editComment('${comment.id}', '${userText}')">Edit</button>
-                                                                                        <button class="btn btn-sm btn-danger" onclick="deleteComment('${comment.id}')">Delete</button>` : ''}
+                                <button class="btn btn-sm btn-warning" onclick="editComment('${comment.id}', '${userText}')">Edit</button>
+                                <button class="btn btn-sm btn-danger" onclick="deleteComment('${comment.id}')">Delete</button>` : ''}
                                 <button class="btn btn-sm btn-primary" onclick="makeReply('${comment.id}')">Reply</button>
                             </div>
                             <div class="blog-details-comment-thumb">
@@ -296,15 +258,14 @@
 
             // Determine the commentable type and ID
             if (!commentable_id) {
-                commentable_type = "App\\Model\\Article";
+                commentable_type = "App\\Models\\Article";
                 commentable_id = {{ $article->id }};
                 commentText = $('#new_comment').val();
             } else {
-                commentable_type = "App\\Model\\Comment";
+                commentable_type = "App\\Models\\Comment";
                 commentText = $(`#reply_to_${commentable_id}`).find('textarea').val();
             }
-
-
+ 
             if (commentText.trim() === "") {
                 alert("Comment cannot be empty!");
                 return;
@@ -314,7 +275,7 @@
                 url: '{{ route('comment.store') }}',
                 type: 'POST',
                 data: {
-                    commentable_type: "App\Model\Article",
+                    commentable_type: commentable_type,
                     commentable_id: commentable_id,
                     guid: user.uid,
                     user_name: user.displayName,
@@ -324,7 +285,7 @@
                 },
                 success: function(response) {
                     $('#status').html('Comment posted successfully!');
-                    if (commentable_type === "App\\Model\\Comment") {
+                    if (commentable_type === "App\\Models\\Comment") {
                         $(`#reply_to_${commentable_id}`).find('textarea').val('');
                     } else {
                         $('#new_comment').val('');
@@ -332,7 +293,7 @@
                     loadComments();
                 },
                 error: function(xhr, status, error) {
-                    console.error('Error:', error);
+                    console.error('Error:', xhr, status, error);
                 }
             });
         }
@@ -360,6 +321,7 @@
         }
 
         function loadComments() {
+           
             $.ajax({
                 url: '{{ route('comment.index') }}',
                 type: 'GET',
@@ -374,9 +336,9 @@
                     //     commentsHTML += getComment(comment);
                     // });
                     // $("#commentary-box").html(commentsHTML);
-
+                  
                     Promise.all(res.comments.map(comment => getComment(comment)))
-                        .then(commentsHTML => {
+                        .then(commentsHTML => { 
                             $('#commentary-box').html(commentsHTML.join(''));
                         });
 

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 
 class CommentController extends Controller
@@ -18,14 +17,11 @@ class CommentController extends Controller
 
         $request->validate([
             "commentable_type" => ["required", Rule::in(['App\\Models\\Article', 'App\\Models\\Product', 'App\\Models\\Comment'])],
-            "commentable_id" => "required|exists:$request->commentable_type,id",
         ]);
 
         $comments = Comment::where('commentable_type', $request->commentable_type)
             ->where('commentable_id', $request->commentable_id)
             ->get();
-
-        // $comments->load('loadReplies');
 
         $comments = $comments->map(function ($comment) {
             return $comment->loadReplies();
@@ -54,7 +50,6 @@ class CommentController extends Controller
                 'string',
                 Rule::in(['App\\Models\\Article', 'App\\Models\\Product', 'App\\Models\\Comment']),
             ],
-            'commentable_id' => "required|exists:$request->commentable_type,id",
             'guid' => 'required|string',
             'user_name' => 'required|string|max:255',
             'user_email' => 'required|email|max:255',
@@ -96,7 +91,24 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
-        //
+
+        $validated = $request->validate([
+            'guid' => 'required|string',
+            'user_name' => 'required|string|max:255',
+            'user_email' => 'required|email|max:255',
+            'image_url' => 'nullable|url',
+            'text' => 'required|string|max:1000',
+        ]);
+
+        if ($request->user_email !== $comment->user_email || $request->guid !== $comment->guid) { 
+            abort(401, 'Unauthorized');
+        }
+ 
+        if ($comment->isDirty($validated)) {
+            $comment->update($validated); 
+        }
+
+        return response()->json(['message' => 'Comment updated successfully'], 200);
     }
 
     /**
