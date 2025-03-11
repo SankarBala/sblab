@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 
 class CommentController extends Controller
@@ -46,6 +47,8 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
+
+        Log::debug($request->all());
 
         $request->validate([
             'commentable_type' => [

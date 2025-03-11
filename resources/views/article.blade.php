@@ -63,7 +63,6 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
-
                                         <div class="">
                                             <textarea class="form-control" name="comment" id="new_comment" rows="6" placeholder="Write here..."></textarea>
                                         </div>
@@ -133,13 +132,14 @@
     <script>
         // Comment box template
         function getCommentBox(commentId) {
+            // console.log(commentId);
             return `<div class="mt-2 mb-5 pb-5">
                         <div class="">
                             <textarea class="form-control" name="message" rows="4" placeholder="Reply here..."></textarea>
                         </div>
                         <div class="float-end mt-1">
                             <button type="submit" class="btn btn-danger" onclick="closeAllReplies()">Close</button>
-                            <button type="submit" class="btn btn-primary" onclick="postReply('${commentId}')">Reply</button>
+                            <button type="submit" class="btn btn-primary" onclick="postComment('${commentId}')">Reply</button>
                         </div>
                 </div>`;
         }
@@ -153,7 +153,7 @@
 
             closeAllReplies();
             const replyBox = $(`#reply_to_${commentId}`);
-            replyBox.innerHTML = getCommentBox(commentId);
+            replyBox.html(getCommentBox(commentId));
         }
 
         function closeAllReplies() {
@@ -223,8 +223,8 @@
                         <div class="blog-details-comment ${replyClass}">
                             <div class="blog-details-comment-reply">
                                 ${isCommentOwner ? `
-                                            <button class="btn btn-sm btn-warning" onclick="editComment('${comment.id}', '${userText}')">Edit</button>
-                                            <button class="btn btn-sm btn-danger" onclick="deleteComment('${comment.id}')">Delete</button>` : ''}
+                                                                                        <button class="btn btn-sm btn-warning" onclick="editComment('${comment.id}', '${userText}')">Edit</button>
+                                                                                        <button class="btn btn-sm btn-danger" onclick="deleteComment('${comment.id}')">Delete</button>` : ''}
                                 <button class="btn btn-sm btn-primary" onclick="makeReply('${comment.id}')">Reply</button>
                             </div>
                             <div class="blog-details-comment-thumb">
@@ -255,9 +255,6 @@
         }
 
 
-
-
-
         // Your Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyAIx0D1BFoUD3CSYieapKhtNKy7S_E8YGo",
@@ -282,14 +279,31 @@
         }
 
         // Post Comment
-        function postComment(commentable_type = "App\\Model\\Article", commentable_id = null) {
-            const user = auth.currentUser;
+        async function postComment(commentable_id = null) {
+
+            let user = auth.currentUser;
 
             if (!user) {
-                googleLogin();
+                await googleLogin();
+                user = auth.currentUser;
+                if (!user) {
+                    alert('Login is required to post a comment.');
+                    return;
+                }
             }
 
-            const commentText = $("#new_comment").val();
+            let commentable_type, commentText;
+
+            // Determine the commentable type and ID
+            if (!commentable_id) {
+                commentable_type = "App\\Model\\Article";
+                commentable_id = {{ $article->id }};
+                commentText = $('#new_comment').val();
+            } else {
+                commentable_type = "App\\Model\\Comment";
+                commentText = $(`#reply_to_${commentable_id}`).find('textarea').val();
+            }
+
 
             if (commentText.trim() === "") {
                 alert("Comment cannot be empty!");
@@ -310,7 +324,11 @@
                 },
                 success: function(response) {
                     $('#status').html('Comment posted successfully!');
-                    $('#new_comment').val('');
+                    if (commentable_type === "App\\Model\\Comment") {
+                        $(`#reply_to_${commentable_id}`).find('textarea').val('');
+                    } else {
+                        $('#new_comment').val('');
+                    }
                     loadComments();
                 },
                 error: function(xhr, status, error) {
@@ -320,34 +338,6 @@
         }
 
 
-        // Post Reply
-        function postReply(commentId) {
-            const user = auth.currentUser;
-
-            if (!user) {
-                googleLogin();
-            }
-
-            // const replyText = document.getElementById(`reply_to_${commentId}`).querySelector("textarea").value;
-            const replyText = $(`#reply_to_${commentId} textarea`).val();
-
-            if (replyText.trim() === "") {
-                alert("Reply cannot be empty!");
-                return;
-            }
-
-            db.collection("comments").doc(commentId).update({
-                replies: firebase.firestore.FieldValue.arrayUnion({
-                    uid: user.uid,
-                    user: user.displayName,
-                    userPhoto: user.photoURL,
-                    text: replyText,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                })
-            }).then(() => {
-                loadComments();
-            });
-        }
 
 
         function deleteComment(commentId) {
