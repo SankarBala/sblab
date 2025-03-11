@@ -50,18 +50,6 @@
                                 </div>
                             </div>
 
-                            {{-- <div class="col-12">
-                                <h2>Comment Section</h2>
-                                <button onclick="googleLogin()">Login with Google</button>
-                                <p id="user-info"></p>
-
-                                <textarea id="comment-input" placeholder="Write a comment..."></textarea>
-                                <button onclick="postComment()">Post Comment</button>
-
-                                <h3>Comments:</h3>
-                                <div id="comments"></div>
-                            </div> --}}
-
 
                             <div class="col-12">
                                 <div class="blog-details-content">
@@ -164,57 +152,106 @@
             }
 
             closeAllReplies();
-            const replyBox = document.getElementById(`reply_to_${commentId}`);
+            const replyBox = $(`#reply_to_${commentId}`);
             replyBox.innerHTML = getCommentBox(commentId);
         }
 
         function closeAllReplies() {
-            const replyBoxes = document.getElementsByClassName("replyhere");
+            const replyBoxes = $(".replyhere");
             for (let i = 0; i < replyBoxes.length; i++) {
                 replyBoxes[i].innerHTML = "";
             }
         }
 
-        function getComment(comment, reply = "") {
-            console.log(comment);
-            console.log(commentId);
-            const currentUserId = firebase.auth().currentUser?.uid;
-            const isCommentOwner = comment.guid === currentUserId;
-            // console.log(currentUserId);
-            console.log(isCommentOwner);
+        // function getComment(comment, reply = "") {
 
-         
-            // Create the base HTML for the comment
-            let commentHTML = `
-                        <div class="blog-details-comment ${reply}">
+        //     const isCommentOwner = comment.guid === firebase.auth().currentUser?.uid;
+
+        //     // Create the base HTML for the comment
+        //     let commentHTML = `
+    //                 <div class="blog-details-comment ${reply}">
+    //                     <div class="blog-details-comment-reply">
+    //                         ${isCommentOwner ? `
+        //                             <button class="btn btn-sm btn-warning" onclick="editComment('${comment.id}', '${comment.text}')">Edit</button>
+        //                             <button class="btn btn-sm btn-danger" onclick="deleteComment('${comment.id}')">Delete</button>` : ''}
+    //                             <button class="btn btn-sm btn-primary" onclick="makeReply('${comment.id}')">Reply</button>
+    //                     </div>
+    //                     <div class="blog-details-comment-thumb">
+    //                         <img class="rounded" src="${comment.image_url}" alt="" />
+    //                     </div>
+    //                     <div class="blog-details-comment-content">
+    //                         <h2>${comment.user_name}</h2>
+    //                         <span>${new Date(comment.created_at).toLocaleString()}</span>
+    //                         <p>${comment.text}</p>
+    //                     </div>
+    //                     <div id="reply_to_${comment.id}" class="replyhere"></div>
+    //             `;
+
+        //     // Check if there are replies, and loop through them if they exist
+        //     if (comment.replies && comment.replies.length > 0) {
+        //         comment.replies.forEach(comment => {
+        //             commentHTML += getComment(comment, "reply"); 
+        //         });
+        //     }
+
+        //     // Close the main comment div
+        //     commentHTML += `</div>`;
+
+        //     return commentHTML;
+        // }
+
+
+
+        function escapeHTML(text) {
+            const div = document.createElement('div');
+            div.innerText = text;
+            return div.innerHTML;
+        }
+
+        function getComment(comment, replyClass = "") {
+            return new Promise((resolve) => {
+                // Wait for Firebase auth to be ready
+                firebase.auth().onAuthStateChanged((user) => {
+                    const isCommentOwner = user && comment.guid === user.uid;
+
+                    const userName = escapeHTML(comment.user_name || "Anonymous");
+                    const userText = escapeHTML(comment.text || "");
+                    const userImage = comment.image_url || 'default-avatar.png';
+                    const createdAt = new Date(comment.created_at).toLocaleString();
+
+                    let commentHTML = `
+                        <div class="blog-details-comment ${replyClass}">
                             <div class="blog-details-comment-reply">
                                 ${isCommentOwner ? `
-                                                                            <button class="btn btn-sm btn-warning" onclick="editComment('${comment.id}', '${comment.text}')">Edit</button>
-                                                                            <button class="btn btn-sm btn-danger" onclick="deleteComment('${commentId}')">Delete</button>` : ''}
-                                <button class="btn btn-sm btn-primary" onclick="makeReply('${commentId}')">Reply</button>
+                                            <button class="btn btn-sm btn-warning" onclick="editComment('${comment.id}', '${userText}')">Edit</button>
+                                            <button class="btn btn-sm btn-danger" onclick="deleteComment('${comment.id}')">Delete</button>` : ''}
+                                <button class="btn btn-sm btn-primary" onclick="makeReply('${comment.id}')">Reply</button>
                             </div>
                             <div class="blog-details-comment-thumb">
-                                <img class="rounded" src="${comment.image_url}" alt="" />
+                                <img class="rounded" src="${userImage}" alt="User Image" loading="lazy" />
                             </div>
                             <div class="blog-details-comment-content">
-                                <h2>${comment.user_name}</h2>
-                                <span>${new Date(comment.created_at).toLocaleString()}</span>
-                                <p>${comment.text}</p>
+                                <h2>${userName}</h2>
+                                <span>${createdAt}</span>
+                                <p>${userText}</p>
                             </div>
-                            <div id="reply_to_${commentId}" class="replyhere"></div>
+                            <div id="reply_to_${comment.id}" class="replyhere"></div>
                     `;
 
-            // Check if there are replies, and loop through them if they exist
-            // if (comment.replies && comment.replies.length > 0) {
-            //     comment.replies.forEach(reply => {
-            //         commentHTML += getComment(reply, "fakeid", "reply"); // Recursively call for each reply
-            //     });
-            // }
-
-            // Close the main comment div
-            commentHTML += `</div>`;
-
-            return commentHTML;
+                    // Process nested replies recursively
+                    if (comment.replies && comment.replies.length > 0) {
+                        Promise.all(comment.replies.map(reply => getComment(reply, "reply")))
+                            .then(repliesHTML => {
+                                commentHTML += repliesHTML.join('');
+                                commentHTML += `</div>`;
+                                resolve(commentHTML);
+                            });
+                    } else {
+                        commentHTML += `</div>`;
+                        resolve(commentHTML);
+                    }
+                });
+            });
         }
 
 
@@ -245,7 +282,7 @@
         }
 
         // Post Comment
-        function postComment() {
+        function postComment(commentable_type = "App\\Model\\Article", commentable_id = null) {
             const user = auth.currentUser;
 
             if (!user) {
@@ -263,8 +300,8 @@
                 url: '{{ route('comment.store') }}',
                 type: 'POST',
                 data: {
-                    commentable_type: 'App\\Models\\Article',
-                    commentable_id: {{ $article->id }},
+                    commentable_type: commentable_type,
+                    commentable_id: commentable_id,
                     guid: user.uid,
                     user_name: user.displayName,
                     user_email: user.email,
@@ -280,20 +317,6 @@
                     console.error('Error:', error);
                 }
             });
-
-            // db.collection("comments").add({
-            //     article_id: {{ $article->id }},
-            //     uid: user.uid,
-            //     user: user.displayName,
-            //     userPhoto: user.photoURL,
-            //     text: commentText,
-            //     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            //     reply: []
-            // }).then(() => {
-            //     document.getElementById("new_comment").value = "";
-            //     loadComments();
-            // });
-
         }
 
 
@@ -305,7 +328,8 @@
                 googleLogin();
             }
 
-            const replyText = document.getElementById(`reply_to_${commentId}`).querySelector("textarea").value;
+            // const replyText = document.getElementById(`reply_to_${commentId}`).querySelector("textarea").value;
+            const replyText = $(`#reply_to_${commentId} textarea`).val();
 
             if (replyText.trim() === "") {
                 alert("Reply cannot be empty!");
@@ -327,37 +351,25 @@
 
 
         function deleteComment(commentId) {
-            console.log(commentId);
-            if (confirm("Are you sure you want to delete this comment?")) {
-                db.collection("comments").doc(commentId).delete()
-                    .then((res) => {
-                        console.log(res);
-                        alert("Comment deleted successfully!");
-                        loadComments(); // Reload comments to reflect changes
-                    })
-                    .catch(error => {
-                        console.error("Error deleting comment: ", error);
-                    });
+            if (confirm("Are you sure?")) {
+                $.ajax({
+                    url: '{{ route('comment.destroy', ['comment' => 'COMMENT_ID']) }}'.replace('COMMENT_ID',
+                        commentId),
+                    type: 'DELETE',
+                    data: {
+                        comment_id: commentId,
+                    },
+                    success: function(response) {
+                        loadComments();
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
             }
         }
 
-
-        // Load Comments
-        // function loadComments() {
-        //     const commentsDiv = document.getElementsByClassName("blog-details-comment")[0];
-        //     commentsDiv.innerHTML = "";
-
-        //     db.collection("comments").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
-        //         commentsDiv.innerHTML = "";
-        //         snapshot.forEach((doc) => {
-        //             const data = doc.data();
-        //             commentsDiv.innerHTML += `<p><strong>${data.user}:</strong> ${data.text}</p>`;
-        //         });
-        //     });
-        // }
-
         function loadComments() {
-
             $.ajax({
                 url: '{{ route('comment.index') }}',
                 type: 'GET',
@@ -368,47 +380,26 @@
                 dataType: 'json',
                 success: function(res) {
                     let commentsHTML = "";
-                    res.comments.forEach((comment) => {
-                        // let comment = comment.data();
-                        // let commentId = comment.id;
-                        commentsHTML += getComment(comment);
-                    });
-                    $("#commentary-box").html(commentsHTML);
+                    // res.comments.forEach((comment) => {
+                    //     commentsHTML += getComment(comment);
+                    // });
+                    // $("#commentary-box").html(commentsHTML);
+
+                    Promise.all(res.comments.map(comment => getComment(comment)))
+                        .then(commentsHTML => {
+                            $('#commentary-box').html(commentsHTML.join(''));
+                        });
+
                 },
                 error: function(xhr, status, error) {
                     console.error('Error:', error);
                 }
             });
-
-
-
-
-
-
-
-
-            // db.collection("comments")
-            //     // .where("article_id", "==", 1)
-            //     .orderBy("timestamp", "desc")
-            //     .get()
-            //     .then((querySnapshot) => {
-            //         let commentsHTML = "";
-            //         querySnapshot.forEach((doc) => {
-            //             let comment = doc.data();
-            //             let commentId = doc.id;
-            //             commentsHTML += getComment(comment, commentId);
-            //         });
-            //         $("#commentary-box").html(commentsHTML);
-            //     });
-
         }
 
-
-
-
-
-
         // Auto-load comments
-        loadComments();
+        $(document).ready(function() {
+            loadComments();
+        });
     </script>
 @endpush
