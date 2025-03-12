@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Article;
 use App\Models\Tag;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -16,9 +17,15 @@ class ArticleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $articles = Article::paginate(10);
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $articles = Article::where('name', 'like', '%' . $search . '%')->paginate(10);
+        } else {
+            $articles = Article::paginate(10);
+        }
+
         return view('admin.articles.index', compact('articles'));
     }
 

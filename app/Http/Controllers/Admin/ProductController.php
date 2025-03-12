@@ -9,6 +9,7 @@ use App\Models\Division;
 use App\Models\Product;
 use App\Models\Tag;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -17,9 +18,14 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $products = Product::paginate(10);
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $products = Product::where('name', 'like', '%' . $search . '%')->paginate(10);
+        } else {
+            $products = Product::paginate(10);
+        } 
         return view('admin.products.index', compact('products'));
     }
 

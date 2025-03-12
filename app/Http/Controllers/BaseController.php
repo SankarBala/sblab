@@ -120,6 +120,11 @@ class BaseController extends Controller
         return view('article', compact('article'));
     }
 
+    public function staff(Staff $staff): View
+    {
+        return view('staff', compact('staff'));
+    }
+
     public function faq(): View
     {
         $faqs = Faq::where('active', 1)->get();

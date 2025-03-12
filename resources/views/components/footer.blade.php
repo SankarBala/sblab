@@ -60,15 +60,16 @@
                         <ul class="footer-info">
                             <li>
                                 <span><i class="fas fa-phone-alt"></i>Phone Number</span><br>
-                                <a href="home.html">{{ $options->get('phone') }}</a>
+                                <a href="tel:{{ $options->get('phone') }}">{{ $options->get('phone') }}</a>
                             </li>
                             <li>
                                 <span><i class="far fa-envelope"></i>Locations</span><br>
-                                <a href="home.html">{{ $options->get('address') }}</a>
+                                <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($options->get('address')) }}"
+                                    target="_blank">{{ $options->get('address') }}</a>
                             </li>
                             <li>
                                 <span><i class="fas fa-map-marker-alt"></i>Email Address</span><br>
-                                <a href="home.html">{{ $options->get('email') }}</a>
+                                <a href="mailto:{{ $options->get('email') }}">{{ $options->get('email') }}</a>
                             </li>
                         </ul>
                     </div>

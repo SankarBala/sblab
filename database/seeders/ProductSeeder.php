@@ -39,7 +39,7 @@ class ProductSeeder extends Seeder
             $product->slug = $this->generateSlug($data['name']);
             $product->short_description = $data['short_description'];
             $product->description = $faker->sentence(300);
-            $product->image = $data['images'];
+            $product->image = $data['images']; 
             $categories = explode(',', $data['categories']);
             $categoryIds = [];
             $product->save();

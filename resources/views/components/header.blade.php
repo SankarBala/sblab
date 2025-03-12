@@ -6,15 +6,18 @@
                     <div class="header_top_menu_address">
                         <div class="header_top_menu_address_inner">
                             <ul>
-                                <li><a href="{{ route('home') }}"><i
-                                            class="far fa-envelope"></i>{{ $options->get('email') }}</a>
+                                <li>
+                                    <a href="mailto:{{ $options->get('email') }}"><i class="far fa-envelope"></i>
+                                        {{ $options->get('email') }}</a>
                                 </li>
-                                <li><a href="{{ route('home') }}">
-                                        <i class="fas fa-map-marker-alt"></i>
+                                <li>
+                                    <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($options->get('address')) }}"
+                                        target="_blank"><i class="fas fa-map-marker-alt"></i>
                                         {{ $options->get('address') }}</a>
                                 </li>
-                                <li><a href="{{ route('home') }}"><i
-                                            class="fa fa-phone"></i>{{ $options->get('phone') }}</a>
+                                <li>
+                                    <a href="tel:{{ $options->get('phone') }}"><i class="fa fa-phone"></i>
+                                        {{ $options->get('phone') }}</a>
                                 </li>
                             </ul>
                         </div>
