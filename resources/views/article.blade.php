@@ -67,7 +67,7 @@
                                             <textarea class="form-control" name="comment" id="new_comment" rows="6" placeholder="Write here..."></textarea>
                                         </div>
                                         <div class="float-end my-3">
-                                            <div class="d-inline mx-2 user">User Name</div>
+                                            {{-- <div class="d-inline mx-2 user"></div> --}}
                                             <button type="submit" class="btn btn-primary"
                                                 onclick="postComment()">Comment</button>
                                         </div>

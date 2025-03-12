@@ -55,7 +55,7 @@
                                 <div class="single_about_right_inner">
                                     <div class="about-icon">
                                         <img class="img-fluid rounded" style="width: 80px;"
-                                            src="{{ asset($division->image) }}" alt="" />
+                                            src="{{ asset("storage/$division->image") }}" alt="" />
                                     </div>
                                     <div class="single-about-contents">
                                         <h5>{{ $division->name }}</h5>
@@ -96,9 +96,7 @@
                 <div class="col-lg-12">
                     <div class="dentist-section-title">
                         <h1>Our Team</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut
-                            labore
-                            et dolore magna aliqua.</p>
+                        <p></p>
                     </div>
                 </div>
                 @foreach ($staffs as $staff)

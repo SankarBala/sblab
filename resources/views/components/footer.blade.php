@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="widget widgets-company-info">
+                <div class="widget widgets-company-info d-flex-column justify-content-center ">
                     <div class="dreamhub-logo">
                         <a class="logo_thumb" href="{{ route('home') }}" title="dreamhub">
                             <img src="{{ asset('assets/images/sbl/footer_logo.png') }}" alt="">
@@ -15,7 +15,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2 col-md-6 col-sm-6 pl-40">
+            {{-- <div class="col-lg-2 col-md-6 col-sm-6 pl-40">
                 <div class="widget widget-nav-menu">
                     <h4 class="widget-title">Quick Link</h4>
                     <div class="menu-quick-link-content">
@@ -26,8 +26,8 @@
                         </ul>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 pl-40">
+            </div> --}}
+            <div class="col-lg-5 col-md-6 col-sm-6 pl-40">
                 <div class="widget widget-nav-menu">
                     <h4 class="widget-title">Recent Posts</h4>
                     <div class="menu-quick-link-content">
@@ -37,7 +37,8 @@
                                 <div class="recent-post-item">
                                     <div class="recent-post-image">
                                         <a href="{{ route('article', $article) }}">
-                                            <img src="assets/images/resource/recent1.png" alt="">
+                                            <img style="width: 100px; height: 100px;"
+                                                src="{{ asset("storage/{$article->image}") }}" alt="">
                                         </a>
                                     </div>
                                     <div class="recent-post-text">
@@ -85,7 +86,8 @@
                         </p>
                     </div>
                     <div class="">
-                        <p>Developed By <a class="text-warning" href="{{ route('home') }}">Sankar Bala</a></p>
+                        <p>Developed By <a class="text-warning" target="_blank"
+                                href="https://sankarbala.github.io">Sankar Bala</a></p>
                     </div>
                 </div>
             </div>

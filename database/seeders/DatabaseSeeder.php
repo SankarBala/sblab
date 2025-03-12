@@ -31,14 +31,14 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
-            CategorySeeder::class,
-            TagSeeder::class,
+            // CategorySeeder::class,
+            // TagSeeder::class,
             OptionSeeder::class,
-            FaqSeeder::class,
-            MessageSeeder::class,
+            // FaqSeeder::class,
+            // MessageSeeder::class,
             DivisionSeeder::class,
             ProductSeeder::class,
-            ArticleSeeder::class,
+            // ArticleSeeder::class,
         ]);
     }
 }

@@ -15,9 +15,9 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        Product::factory()->count(30)->create();
+        // Product::factory()->count(30)->create();
 
-        // $this->insertProducts();
+        $this->insertProducts();
     }
 
 
@@ -43,7 +43,7 @@ class ProductSeeder extends Seeder
             $categories = explode(',', $data['categories']);
             $categoryIds = [];
             $product->save();
-            
+
             foreach ($categories as $categoryName) {
                 $category = \App\Models\Category::firstOrCreate(['name' => trim($categoryName), 'slug' => $this->generateSlug($categoryName)]);
                 $categoryIds[] = $category->id;
