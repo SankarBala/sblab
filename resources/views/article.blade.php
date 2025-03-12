@@ -185,7 +185,6 @@
                         <div class="blog-details-comment ${replyClass}">
                             <div class="blog-details-comment-reply">
                                 ${isCommentOwner ? `
-                                <button class="btn btn-sm btn-warning" onclick="editComment('${comment.id}', '${userText}')">Edit</button>
                                 <button class="btn btn-sm btn-danger" onclick="deleteComment('${comment.id}')">Delete</button>` : ''}
                                 <button class="btn btn-sm btn-primary" onclick="makeReply('${comment.id}')">Reply</button>
                             </div>
@@ -195,7 +194,7 @@
                             <div class="blog-details-comment-content">
                                 <h2>${userName}</h2>
                                 <span>${createdAt}</span>
-                                <p>${userText}</p>
+                                 <p>${userText}</p>
                             </div>
                             <div id="reply_to_${comment.id}" class="replyhere"></div>
                     `;
@@ -298,9 +297,6 @@
             });
         }
 
-
-
-
         function deleteComment(commentId) {
             if (confirm("Are you sure?")) {
                 $.ajax({
@@ -332,11 +328,6 @@
                 dataType: 'json',
                 success: function(res) {
                     let commentsHTML = "";
-                    // res.comments.forEach((comment) => {
-                    //     commentsHTML += getComment(comment);
-                    // });
-                    // $("#commentary-box").html(commentsHTML);
-                  
                     Promise.all(res.comments.map(comment => getComment(comment)))
                         .then(commentsHTML => { 
                             $('#commentary-box').html(commentsHTML.join(''));
@@ -355,3 +346,8 @@
         });
     </script>
 @endpush
+
+
+
+
+{{-- <button class="btn btn-sm btn-warning" onclick="editComment('${comment.id}', '${userText}')">Edit</button> --}}
