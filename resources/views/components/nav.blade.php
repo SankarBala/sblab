@@ -14,5 +14,4 @@
     <li><a href="{{ route('articles') }}">Articles</a></li>
     <li><a href="{{ route('contact') }}">Contact US</a></li>
     <li><a href="{{ route('faq') }}">FAQ</a></li>
-    <li><a target="_blank" href="{{ route('admin.dashboard') }}">Admin</a></li>
 </ul>

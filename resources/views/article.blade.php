@@ -53,7 +53,7 @@
 
                             <div class="col-12">
                                 <div class="blog-details-content">
-                                    <h3>2 Comments</h3>
+                                    <h3>Comments</h3>
                                 </div>
                                 <div id="commentary-box"></div>
                             </div>
@@ -248,7 +248,6 @@
                 await googleLogin();
                 user = auth.currentUser;
                 if (!user) {
-                    alert('Login is required to post a comment.');
                     return;
                 }
             }

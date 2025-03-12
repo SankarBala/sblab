@@ -3,8 +3,7 @@
         <!-- products thumb -->
         <div class="products-thumb">
             <a href="{{ route('product', $product) }}">
-                <img src="https://image01-in.oneplus.net/media/202406/19/ec64eb41a8e787a798be1b71c13a51bb.png?x-amz-process=image/format,webp/quality,Q_80"
-                    alt="">
+                <img src="{{asset("storage/{$product->image}")}}" alt="">
             </a>
             <!-- product sale -->
             <div class="product-sale">
@@ -43,10 +42,10 @@
 
 @push('styles')
     <style>
-        . .img-square {
+        .img-square {
             width: 100%;
-            aspect-ratio: 1/1;
-            object-fit: cover;
+            /* aspect-ratio: 1/1;
+                object-fit: cover; */
         }
     </style>
 @endpush

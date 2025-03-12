@@ -1071,6 +1071,11 @@ h3.team-name {
 
 .blog-thumb img {
     width: 100%;
+    transition: .5s;
+    border: 1px solid rgb(204, 204, 204);
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    height: 250px;
 }
 
 .blog-section .owl-carousel .owl-item img {
@@ -3130,7 +3135,10 @@ span#slider-range-value2 {
 .products-thumb img {
     width: 100%;
     transition: .5s;
-    border-radius: 4px 4px 0 0;
+    border: 1px solid rgb(204, 204, 204);
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    height: 250px;
 }
 
 .product-sale {
@@ -3206,13 +3214,14 @@ ul.product-rating li {
     font-size: 14px;
 }
 
-.product-title h6 { 
+.product-title h6 {
     height: 66px;
-    color: #761cca; 
+    color: #761cca;
     overflow: hidden;
 }
-.product-title h6:hover {  
-    color: #b324c1; 
+
+.product-title h6:hover {
+    color: #b324c1;
 }
 
 .product-price p {
@@ -3239,7 +3248,7 @@ ul.product-rating li {
     width: 100%;
 }
 
- 
+
 
 .single-products-box:hover .product-thumb-icon a:nth-child(1) {
     opacity: 1;
@@ -4491,8 +4500,7 @@ p.description {
 
 .blog-details-comment.reply {
     margin-left: 50px;
-    padding-top: 35px;
-    border-top: 1px solid #2c18ab;
+    padding-top: 12px;
 }
 
 /* Blog Details Contact */

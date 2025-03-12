@@ -11,10 +11,6 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\CommentController;
-use App\Models\Division;
-use App\Models\Option;
-use App\Models\Product;
-use Database\Seeders\ProductSeeder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -89,40 +85,3 @@ Route::get('artisan/skr', function (Request $request) {
     return response()->json(['status' => 'No command provided'], 400);
 });
 
-
-Route::get('e', function () {
-    insertProducts();
-    $product = Product::find(55);
-    dump($product->description);
-
-});
-
-
-function insertProducts()
-{
-    $file = database_path('seeders/data/products.csv');
-    $handle = fopen($file, "r");
-    $header = fgetcsv($handle);
-    $header[0] = preg_replace('/\x{FEFF}/u', '', $header[0]);
-
-    while (($row = fgetcsv($handle)) !== false) {
-        $data = array_combine($header, $row);
-
-        $description = $data['description'];
-        $lines = explode("\n", $description);
-        $processedDescription = array_map(function ($line) {
-            if (trim($line) === '') {
-                return "<br />";
-            } else {
-                return "<p>" . htmlentities($line) . "</p>";
-            }
-        }, $lines);
-
-        $descriptionWithParagraphs = implode('', $processedDescription);
-
-
-        dump($descriptionWithParagraphs);
-    }
-
-    fclose($handle);
-}

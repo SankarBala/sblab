@@ -16,17 +16,17 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        // User::create([
-        //     'name' => 'Administrator',
-        //     'email' => 'admin@sblabbd.com',
-        //     'password' => bcrypt('sblab@bd'),
-        //     'email_verified_at' => now(),
-        // ]);
+        User::create([
+            'name' => 'Administrator',
+            'email' => 'admin@sblabbd.com',
+            'password' => bcrypt('sblab@bd1'),
+            'email_verified_at' => now(),
+        ]);
 
         User::create([
             'name' => 'Sankar Bala',
             'email' => 'sankarbala232@gmail.com',
-            'password' => bcrypt('sblab@bd'),
+            'password' => bcrypt('sblab@bd0'),
             'email_verified_at' => now(),
         ]);
 

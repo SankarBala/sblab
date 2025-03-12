@@ -56,10 +56,10 @@
             color: #111;
         }
 
-        .img-square {
+        /* .img-square {
             width: 100%;
             aspect-ratio: 1/1;
             object-fit: cover;
-        }
+        } */
     </style>
 @endpush

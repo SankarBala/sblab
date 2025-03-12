@@ -4,12 +4,12 @@
     <div class="shop-detials">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-6 col-md-6">
-                    <img class="img-fluid"
-                        src="https://image01-in.oneplus.net/media/202406/19/ec64eb41a8e787a798be1b71c13a51bb.png?x-amz-process=image/format,webp/quality,Q_80"
+                <div class="col-md-5">
+                    <img class="img-fluid" style="whith: 300px; height: 300px;"
+                        src="{{asset("storage/{$product->image}")}}"
                         alt="">
                 </div>
-                <div class="col-lg-6 col-md-6">
+                <div class="col-md-7">
                     <div class="shop-dtls-info">
                         <!-- category title -->
                         <div class="category-titles mt-0 mb-3">
