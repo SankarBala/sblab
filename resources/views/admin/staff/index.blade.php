@@ -60,11 +60,6 @@
                                     </form>
                                 </td>
                             </tr>
-                            <tr class="expandable-body">
-                                <td colspan="5">
-                                    <p class="text-break">{{ $staff->description }}</p>
-                                </td>
-                            </tr>
                         @endforeach
                     </tbody>
                 </table>
