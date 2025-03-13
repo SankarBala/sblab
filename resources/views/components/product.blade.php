@@ -3,7 +3,7 @@
         <!-- products thumb -->
         <div class="products-thumb">
             <a href="{{ route('product', $product) }}">
-                <img src="{{asset("storage/{$product->image}")}}" alt="">
+                <img src="{{ asset('storage/products/300x300/' . basename($product->image)) }}" alt="" />
             </a>
             <!-- product sale -->
             <div class="product-sale">
@@ -45,7 +45,7 @@
         .img-square {
             width: 100%;
             /* aspect-ratio: 1/1;
-                object-fit: cover; */
+                    object-fit: cover; */
         }
     </style>
 @endpush
