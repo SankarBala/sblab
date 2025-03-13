@@ -70,7 +70,7 @@ class ProductRequest extends FormRequest
             'short_description' => 'nullable|string|max:1000',
             'description' => 'nullable|string',
             'price' => 'nullable|numeric',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'categories' => ['nullable', 'array'],
             'categories.*' => ['integer', 'exists:categories,id'],
             'tags' => ['nullable', 'array'],

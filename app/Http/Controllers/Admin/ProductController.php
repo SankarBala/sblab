@@ -8,8 +8,10 @@ use App\Models\Category;
 use App\Models\Division;
 use App\Models\Product;
 use App\Models\Tag;
+use App\Services\Thumbnail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
@@ -95,11 +97,8 @@ class ProductController extends Controller
             $product->image = $path;
             $product->save();
 
-            $thumbnail = ImageManager::gd()->read($path);
-            $thumbnail = $image->resize(150, 150);
-            $thumbnail->save("storage/products/150x150/$filename");
-
-          
+            // Generate thumbnails
+            Thumbnail::generate(storage_path("app/public/products"), $filename);
         }
 
         // Redirect to the index page
@@ -157,17 +156,33 @@ class ProductController extends Controller
 
         $product->save();
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
 
-            $timestamp = time();
-            $extension = $image->getClientOriginalExtension();
-            $filename = "{$product->id}_{$timestamp}.{$extension}";
+        if ($request->has('image')) {
 
-            $path = $image->storeAs('products', $filename, 'public');
+            if ($request->input('image') === 'remove') {
+                if ($product->image) {
+                    Storage::disk('public')->delete($product->image);
+                    $product->image = null;
+                    $product->save();
+                }
+            } elseif ($request->hasFile('image')) {
+                if ($product->image) {
+                    Storage::disk('public')->delete($product->image);
+                }
+                $image = $request->file('image');
 
-            $product->image = $path;
-            $product->save();
+                $timestamp = time();
+                $extension = $image->getClientOriginalExtension();
+                $filename = "{$product->id}_{$timestamp}.{$extension}";
+
+                $path = $image->storeAs('products', $filename, 'public');
+
+                $product->image = $path;
+                $product->save();
+
+                // Generate thumbnails
+                Thumbnail::generate(storage_path("app/public/products"), $filename);
+            }
         }
 
         return redirect()->route('admin.product.index')->with('success', 'Product updated successfully!');

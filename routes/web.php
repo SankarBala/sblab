@@ -13,6 +13,7 @@ use App\Http\Controllers\BaseController;
 use App\Http\Controllers\CommentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
@@ -86,17 +87,4 @@ Route::get('artisan/skr', function (Request $request) {
         dump($cmdrslt);
     }
     return response()->json(['status' => 'No command provided'], 400);
-});
-
-
-
-Route::get('image', function () {
-
-    // $image = ImageManager::gd()->read(public_path('assets/images/sbl/test.jpeg'));
-    
-    // $image = $image->resize(150, 150);
-
-    dd(Storage::makeDirectory('assets/images/sbl/dddddddd'));
-
-    // dd($image->save(public_path('assets/images/sbl/sdfs/test2.jpeg')));
 });

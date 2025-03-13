@@ -7,8 +7,10 @@ use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Models\Article;
 use App\Models\Tag;
+use App\Services\Thumbnail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -90,6 +92,8 @@ class ArticleController extends Controller
 
             $article->image = $path;
             $article->save();
+
+            Thumbnail::generate(storage_path('app/public/articles'), $filename);
         }
 
         // Redirect to the index page
@@ -120,7 +124,6 @@ class ArticleController extends Controller
     public function update(ProductRequest $request, Article $article): RedirectResponse
     {
 
-        // dd($request->all());
 
         $article->name = $request->name;
         $article->short_description = $request->short_description;
@@ -145,17 +148,31 @@ class ArticleController extends Controller
 
         $article->save();
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
+        if ($request->has('image')) {
 
-            $timestamp = time();
-            $extension = $image->getClientOriginalExtension();
-            $filename = "{$article->id}_{$timestamp}.{$extension}";
+            if ($request->input('image') === 'remove') {
+                if ($article->image) {
+                    Storage::disk('public')->delete($article->image);
+                    $article->image = null;
+                    $article->save();
+                }
+            } elseif ($request->hasFile('image')) {
+                if ($article->image) {
+                    Storage::disk('public')->delete($article->image);
+                }
 
-            $path = $image->storeAs('articles', $filename, 'public');
+                $image = $request->file('image');
 
-            $article->image = $path;
-            $article->save();
+                $timestamp = time();
+                $extension = $image->getClientOriginalExtension();
+                $filename = "{$article->id}_{$timestamp}.{$extension}";
+
+                $path = $image->storeAs('articles', $filename, 'public');
+
+                $article->image = $path;
+                $article->save();
+                Thumbnail::generate(storage_path('app/public/articles'), $filename);
+            }
         }
 
         return redirect()->route('admin.article.index')->with('success', 'Article updated successfully!');
