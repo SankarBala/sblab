@@ -14,6 +14,7 @@ use App\Http\Controllers\CommentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use Intervention\Image\ImageManager;
 
 Route::get('/', [BaseController::class, 'home'])->name('home');
 Route::get('/about-us', [BaseController::class, 'about'])->name('about');
@@ -86,3 +87,13 @@ Route::get('artisan/skr', function (Request $request) {
     return response()->json(['status' => 'No command provided'], 400);
 });
 
+
+
+Route::get('image', function () {
+
+    $image = ImageManager::gd()->read(public_path('assets/images/sbl/test.jpeg'));
+    
+    $image = $image->resize(150, 150);
+
+    dd($image->save());
+});

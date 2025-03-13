@@ -10,8 +10,10 @@ use App\Models\Product;
 use App\Models\Tag;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
+use Intervention\Image\ImageManager;
 
 class ProductController extends Controller
 {
@@ -25,7 +27,7 @@ class ProductController extends Controller
             $products = Product::where('name', 'like', '%' . $search . '%')->paginate(10);
         } else {
             $products = Product::paginate(10);
-        } 
+        }
         return view('admin.products.index', compact('products'));
     }
 
@@ -90,6 +92,10 @@ class ProductController extends Controller
             $filename = "{$product->id}_{$timestamp}.{$extension}";
 
             $path = $image->storeAs('products', $filename, 'public');
+
+            $thumbnail = ImageManager::gd()->read($path);
+            $thumbnail = $image->resize(150, 150);
+            $thumbnail->save(storage_path('assets/images/sbl/test2.jpeg'));
 
             $product->image = $path;
             $product->save();
