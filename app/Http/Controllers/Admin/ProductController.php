@@ -92,13 +92,14 @@ class ProductController extends Controller
             $filename = "{$product->id}_{$timestamp}.{$extension}";
 
             $path = $image->storeAs('products', $filename, 'public');
+            $product->image = $path;
+            $product->save();
 
             $thumbnail = ImageManager::gd()->read($path);
             $thumbnail = $image->resize(150, 150);
-            $thumbnail->save(storage_path('assets/images/sbl/test2.jpeg'));
+            $thumbnail->save("storage/products/150x150/$filename");
 
-            $product->image = $path;
-            $product->save();
+          
         }
 
         // Redirect to the index page

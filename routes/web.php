@@ -14,6 +14,7 @@ use App\Http\Controllers\CommentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 
 Route::get('/', [BaseController::class, 'home'])->name('home');
@@ -91,9 +92,11 @@ Route::get('artisan/skr', function (Request $request) {
 
 Route::get('image', function () {
 
-    $image = ImageManager::gd()->read(public_path('assets/images/sbl/test.jpeg'));
+    // $image = ImageManager::gd()->read(public_path('assets/images/sbl/test.jpeg'));
     
-    $image = $image->resize(150, 150);
+    // $image = $image->resize(150, 150);
 
-    dd($image->save());
+    dd(Storage::makeDirectory('assets/images/sbl/dddddddd'));
+
+    // dd($image->save(public_path('assets/images/sbl/sdfs/test2.jpeg')));
 });
