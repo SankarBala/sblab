@@ -10,26 +10,23 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="blog-details-content py-0 my-0">
-                                    <h2 class="mb-3">{{ $article->name }}</h2>
+                                    <h2 class="mb-2">{{ $article->name }}</h2>
                                 </div>
-                                <div class="blog-details-meta text-dark p-0 m-0">
+                                <div class="blog-details-meta bg-transparent p-0 m-0 mb-3">
                                     <span class=""><i class="far fa-calendar-alt"></i>
                                         {{ $article->created_at->format('M d, Y') }}</span>
-                                    <span><i class="far fa-comments"></i> 3 Comments</span>
-                                </div>
-                                <div class="blog-details-des">
-                                    <img class="img-thumbnail" src="{{ asset("storage/{$article->image}") }}"
-                                        alt="">
+                                    <span><i class="far fa-eye"></i>{{ $article->read }}</span>
+                                </div> 
+                                <div class="text-justify">
+                                    <img class="img-thumbnail mb-4" style="margin-right: 16px; float:left; width: 400px;"
+                                        src="{{ asset("storage/{$article->image}") }}" alt="">
                                     {!! $article->description !!}
                                 </div>
                             </div>
 
-                            {{-- <div class="col-12">
-                                <button class="btn btn-sm btn-info rounded">Read More</button>
-                            </div> --}}
                             <div class="col-12 my-4">
                                 <div class="blog-details-socials d-flex justify-content-between">
-                                    <h5 class="d-inline-block">Share on Social Media</h5>
+                                    <h5 class="mt-1 d-none d-sm-inline">Share</h5>
                                     <div>
                                         <a class="btn btn-primary text-light px-5"
                                             href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('article', $article)) }}"
@@ -59,7 +56,7 @@
                             </div>
                             <div class="col-12">
                                 <div class="blog-details-content">
-                                    <h3>Post Comment</h3>
+                                    <h3>Post a new comment</h3>
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
@@ -67,7 +64,6 @@
                                             <textarea class="form-control" name="comment" id="new_comment" rows="6" placeholder="Write here..."></textarea>
                                         </div>
                                         <div class="float-end my-3">
-                                            {{-- <div class="d-inline mx-2 user"></div> --}}
                                             <button type="submit" class="btn btn-primary"
                                                 onclick="postComment()">Comment</button>
                                         </div>
@@ -132,7 +128,6 @@
     <script>
         // Comment box template
         function getCommentBox(commentId) {
-            // console.log(commentId);
             return `<div class="mt-2 mb-5 pb-5">
                         <div class="">
                             <textarea class="form-control" name="message" rows="4" placeholder="Reply here..."></textarea>
@@ -162,7 +157,7 @@
                 replyBoxes[i].innerHTML = "";
             }
         }
- 
+
 
         function escapeHTML(text) {
             const div = document.createElement('div');
@@ -185,7 +180,7 @@
                         <div class="blog-details-comment ${replyClass}">
                             <div class="blog-details-comment-reply">
                                 ${isCommentOwner ? `
-                                <button class="btn btn-sm btn-danger" onclick="deleteComment('${comment.id}')">Delete</button>` : ''}
+                                            <button class="btn btn-sm btn-danger" onclick="deleteComment('${comment.id}')">Delete</button>` : ''}
                                 <button class="btn btn-sm btn-primary" onclick="makeReply('${comment.id}')">Reply</button>
                             </div>
                             <div class="blog-details-comment-thumb">
@@ -263,7 +258,7 @@
                 commentable_type = "App\\Models\\Comment";
                 commentText = $(`#reply_to_${commentable_id}`).find('textarea').val();
             }
- 
+
             if (commentText.trim() === "") {
                 alert("Comment cannot be empty!");
                 return;
@@ -316,7 +311,7 @@
         }
 
         function loadComments() {
-           
+
             $.ajax({
                 url: '{{ route('comment.index') }}',
                 type: 'GET',
@@ -328,7 +323,7 @@
                 success: function(res) {
                     let commentsHTML = "";
                     Promise.all(res.comments.map(comment => getComment(comment)))
-                        .then(commentsHTML => { 
+                        .then(commentsHTML => {
                             $('#commentary-box').html(commentsHTML.join(''));
                         });
 
@@ -339,14 +334,8 @@
             });
         }
 
-        // Auto-load comments
         $(document).ready(function() {
             loadComments();
         });
     </script>
 @endpush
-
-
-
-
-{{-- <button class="btn btn-sm btn-warning" onclick="editComment('${comment.id}', '${userText}')">Edit</button> --}}

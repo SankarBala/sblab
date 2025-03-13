@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-5">
-                    <img class="img-fluid" style="whith: 100%;"
+                    <img class="img-thumbnail" style="whith: 100% !important;"
                         src="{{asset("storage/{$product->image}")}}"
                         alt="">
                 </div>
