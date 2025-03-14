@@ -50,7 +50,7 @@
                                 <td>{{ $product->name }}</td>
                                 <td>
                                     @if ($product->image)
-                                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->title }}"
+                                        <img src="{{ asset('storage/products/150x150/' . basename($product->image)) }}"
                                             class="img-thumbnail" style="width: 80px" />
                                     @endif
                                 </td>
@@ -71,11 +71,6 @@
                                             <span class="d-md-none d-flex"><i class="fa fa-trash"></i></span>
                                         </button>
                                     </form>
-                                </td>
-                            </tr>
-                            <tr class="expandable-body">
-                                <td colspan="5" class="">
-                                    <div class="row"></div>
                                 </td>
                             </tr>
                         @endforeach

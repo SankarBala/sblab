@@ -18,14 +18,10 @@
                                 {{-- <h2>We produce medicine from nature.</h2> --}}
                                 <h3 class="tagline">Holistic Health, Inspired by Nature.</h3>
                                 <p class="headline text-justify">At {{ env('APP_NAME') }}, we blend ancient Ayurvedic
-                                    wisdom with
-                                    modern
-                                    innovation to
-                                    create safe, effective, and natural healthcare solutions. With a commitment to
-                                    quality and
-                                    well-being, our herbal and nutraceutical products are crafted to enhance your life.
-                                    Experience
-                                    the power of nature for a healthier tomorrow.</p>
+                                    wisdom with modern innovation to create safe, effective, and natural healthcare
+                                    solutions. With a commitment to quality and well-being, our herbal and nutraceutical
+                                    products are crafted to enhance your life. Experience the power of nature for a
+                                    healthier tomorrow.</p>
                                 <div class="slider-button">
                                     <a class="btn btn-info btn-lg px-5" href="{{ route('products') }}">Products</a>
                                 </div>
@@ -48,14 +44,10 @@
                                 <h3 class="welcome">Welcome to {{ env('APP_NAME') }}</h3>
                                 <h3 class="tagline">Holistic Health, Inspired by Nature.</h3>
                                 <p class="headline text-justify">At {{ env('APP_NAME') }}, we blend ancient Ayurvedic
-                                    wisdom with
-                                    modern
-                                    innovation to
-                                    create safe, effective, and natural healthcare solutions. With a commitment to
-                                    quality and
-                                    well-being, our herbal and nutraceutical products are crafted to enhance your life.
-                                    Experience
-                                    the power of nature for a healthier tomorrow.</p>
+                                    wisdom with modern innovation to create safe, effective, and natural healthcare
+                                    solutions. With a commitment to quality and well-being, our herbal and nutraceutical
+                                    products are crafted to enhance your life. Experience the power of nature for a
+                                    healthier tomorrow.</p>
                                 <div class="slider-button">
                                     <a class="btn btn-info btn-lg px-5" href="{{ route('products') }}">Products</a>
                                 </div>
@@ -78,14 +70,10 @@
                                 <h3 class="welcome">Welcome to {{ env('APP_NAME') }}</h3>
                                 <h3 class="tagline">Holistic Health, Inspired by Nature.</h3>
                                 <p class="headline text-justify">At {{ env('APP_NAME') }}, we blend ancient Ayurvedic
-                                    wisdom with
-                                    modern
-                                    innovation to
-                                    create safe, effective, and natural healthcare solutions. With a commitment to
-                                    quality and
-                                    well-being, our herbal and nutraceutical products are crafted to enhance your life.
-                                    Experience
-                                    the power of nature for a healthier tomorrow.</p>
+                                    wisdom with modern innovation to create safe, effective, and natural healthcare
+                                    solutions. With a commitment to quality and well-being, our herbal and nutraceutical
+                                    products are crafted to enhance your life. Experience the power of nature for a
+                                    healthier tomorrow.</p>
                                 <div class="slider-button">
                                     <a class="btn btn-info btn-lg px-5" href="{{ route('products') }}">Products</a>
                                 </div>

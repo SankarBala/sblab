@@ -30,12 +30,15 @@
         @foreach ($recent_articles as $r_article)
             <div class="sidber-widget-recent-post">
                 <div class="recent-widget-thumb">
-                    <a href="{{ route('article', $r_article) }}"><img style="width: 80px;"
-                            src="{{ asset("storage/$r_article->image") }}" alt=""></a>
+                    <a href="{{ route('article', $r_article) }}">
+                        <img style="width: 80px;"
+                            src="{{ asset('storage/articles/150x150/' . basename($r_article->image)) }}"
+                            alt=""></a>
                 </div>
                 <div class="recent-widget-contents p-1">
-                    <a href="{{ route('article', $r_article) }}">{{ $r_article->name }}</a>
-                    {{-- <span><i class="flaticon-calendar"></i> {{ $r_article->created_at->format('M d, Y') }} </span> --}}
+                    <a class="d-block" href="{{ route('article', $r_article) }}">{{ $r_article->name }}</a>
+                    <span>{{ $r_article->created_at->format('d M Y') }} </span>
+                    <span>Read: {{ $r_article->read }} </span>
                 </div>
             </div>
         @endforeach

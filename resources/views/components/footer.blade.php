@@ -38,7 +38,8 @@
                                     <div class="recent-post-image">
                                         <a href="{{ route('article', $article) }}">
                                             <img style="width: 100px; height: 100px;"
-                                                src="{{ asset("storage/{$article->image}") }}" alt="">
+                                                src="{{ asset('storage/articles/150x150/' . basename($article->image)) }}"
+                                                alt="">
                                         </a>
                                     </div>
                                     <div class="recent-post-text">
