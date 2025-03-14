@@ -28,7 +28,7 @@
                 </div>
             </div> --}}
             <div class="col-lg-5 col-md-6 col-sm-6 pl-40">
-                <div class="widget widget-nav-menu">
+                <div class="widget-nav-menu">
                     <h4 class="widget-title">Recent Posts</h4>
                     <div class="menu-quick-link-content">
                         <div class="single-widget-item">
@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-6 pl-40 pr-0">
-                <div class="widget widget-nav-menu">
+                <div class="widget-nav-menu">
                     <h4 class="widget-title"> Contact Us </h4>
                     <div class="menu-quick-info-content">
                         <ul class="footer-info">
