@@ -77,13 +77,15 @@
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <div class="form-group">
-                                                <label for="answer">Description (Optional)</label>
-                                                <textarea name="description" class="form-control" id="description" placeholder="Write description here." rows="3">{{ old('description') }}</textarea>
+                                                <label for="description">Description</label>
+                                                <textarea id="summernote" name="description" placeholder="Write description here.">{{ old('description') }}</textarea>
                                                 @error('description')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
+
                                         </div>
                                         <div class="col-md-4 col-lg-3">
                                             <div class="form-group">
@@ -110,3 +112,23 @@
         </section>
     </div>
 @endsection
+
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
+
+    <style>
+        .note-editor.note-frame .note-editing-area .note-editable {
+            min-height: 300px;
+        }
+    </style>
+@endpush
+
+@push('scripts')
+    <script src="{{ asset('plugins/summernote/summernote-bs4.min.js') }}"></script>
+
+    <script>
+        $(function() {
+            $('#summernote').summernote()
+        })
+    </script>
+@endpush

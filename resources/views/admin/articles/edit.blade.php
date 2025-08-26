@@ -11,7 +11,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('admin.faq.index') }}">Article</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.article.index') }}">Article</a></li>
                             <li class="breadcrumb-item active">Edit</li>
                         </ol>
                     </div>
@@ -23,7 +23,6 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
-                        {{$errors}}
                         <div class="card card-primary">
                             <form id="quickForms" action="{{ route('admin.article.update', $article) }}" method="POST"
                                 enctype="multipart/form-data">

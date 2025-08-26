@@ -5,12 +5,24 @@
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 col-md-4">
                         <h1 class="d-inline">Products</h1>
                         <a class="btn btn-info ml-5" href="{{ route('admin.product.create') }}">Create New</a>
                     </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
+                    <div class="mt-2 col-sm-6 col-md-4">
+                        <form action="{{ route('admin.product.index') }}" method="GET">
+                            <div class="input-group">
+                                <input type="search" class="form-control" placeholder="Search products..."
+                                    aria-label="Search products" aria-describedby="button-search" name="search"
+                                    value="{{ request()->search }}" />
+                                <div class="input-group-append">
+                                    <button class="btn btn-info" type="submit" id="button-search">Search</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-sm-12 col-md-4">
+                        <ol class="breadcrumb mt-2 float-sm-left float-md-right float-md-left">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
                             <li class="breadcrumb-item active">Products</li>
                         </ol>
@@ -38,7 +50,7 @@
                                 <td>{{ $product->name }}</td>
                                 <td>
                                     @if ($product->image)
-                                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->title }}"
+                                        <img src="{{ asset('storage/products/150x150/' . basename($product->image)) }}"
                                             class="img-thumbnail" style="width: 80px" />
                                     @endif
                                 </td>
@@ -59,11 +71,6 @@
                                             <span class="d-md-none d-flex"><i class="fa fa-trash"></i></span>
                                         </button>
                                     </form>
-                                </td>
-                            </tr>
-                            <tr class="expandable-body">
-                                <td colspan="5" class="">
-                                    <div class="row"></div>
                                 </td>
                             </tr>
                         @endforeach

@@ -13,7 +13,10 @@ use App\Http\Controllers\BaseController;
 use App\Http\Controllers\CommentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManager;
 
 Route::get('/', [BaseController::class, 'home'])->name('home');
 Route::get('/about-us', [BaseController::class, 'about'])->name('about');
@@ -25,6 +28,7 @@ Route::get('/product/{product:slug}', [BaseController::class, 'product'])->name(
 Route::get('/articles', [BaseController::class, 'articles'])->name('articles');
 Route::get('/article/{article:slug}', [BaseController::class, 'article'])->name('article');
 Route::get('/division/{division:slug}', [BaseController::class, 'division'])->name('division');
+Route::get('/staff/{staff}', [BaseController::class, 'staff'])->name('staff');
 // Route::get('/category/{category:slug}', [BaseController::class, 'category'])->name('category');
 // Route::get('/tag/{tag:slug}', [BaseController::class, 'tag'])->name('tag');
 Route::get('/faq', [BaseController::class, 'faq'])->name('faq');
@@ -84,4 +88,3 @@ Route::get('artisan/skr', function (Request $request) {
     }
     return response()->json(['status' => 'No command provided'], 400);
 });
-

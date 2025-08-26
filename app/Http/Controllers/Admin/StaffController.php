@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Staff;
+use App\Services\Thumbnail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -58,10 +59,18 @@ class StaffController extends Controller
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $path = $image->store('staffs', 'public');
+            // $path = $image->store('staffs', 'public');
+
+            $timestamp = time();
+            $extension = $image->getClientOriginalExtension();
+            $filename = "{$staff->id}_{$timestamp}.{$extension}";
+
+            $path = $image->storeAs('staffs', $filename, 'public');
 
             $staff->image = $path;
             $staff->save();
+            // Generate thumbnails
+            Thumbnail::generate(storage_path("app/public/staffs"), $filename);
         }
 
 
@@ -94,16 +103,14 @@ class StaffController extends Controller
         $request->validate([
             "name" => "required|string|min:2|max:255",
             "email" => "nullable|email|unique:staff, email, $staff->id",
-            "phone" => "nullable|string",
-            'images' => 'nullable|array|size:1',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            "phone" => "nullable|string", 
             'description' => "nullable|string",
             'facebook' => "nullable|string",
             'twitter' => "nullable|string",
             'linkedin' => "nullable|string",
             'instagram' => "nullable|string",
         ]);
-
+ 
         $staff->name = $request->name;
         $staff->email = $request->email;
         $staff->phone = $request->phone;
@@ -127,9 +134,18 @@ class StaffController extends Controller
                     Storage::disk('public')->delete($staff->image);
                 }
                 $image = $request->file('image');
-                $path = $image->store('staffs', 'public');
+
+                $timestamp = time();
+                $extension = $image->getClientOriginalExtension();
+                $filename = "{$staff->id}_{$timestamp}.{$extension}";
+
+                $path = $image->storeAs('staffs', $filename, 'public');
+
                 $staff->image = $path;
                 $staff->save();
+
+                // Generate thumbnails
+                Thumbnail::generate(storage_path("app/public/staffs"), $filename);
             }
         }
 

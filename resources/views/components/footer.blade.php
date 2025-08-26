@@ -28,7 +28,7 @@
                 </div>
             </div> --}}
             <div class="col-lg-5 col-md-6 col-sm-6 pl-40">
-                <div class="widget widget-nav-menu">
+                <div class="widget-nav-menu">
                     <h4 class="widget-title">Recent Posts</h4>
                     <div class="menu-quick-link-content">
                         <div class="single-widget-item">
@@ -38,7 +38,8 @@
                                     <div class="recent-post-image">
                                         <a href="{{ route('article', $article) }}">
                                             <img style="width: 100px; height: 100px;"
-                                                src="{{ asset("storage/{$article->image}") }}" alt="">
+                                                src="{{ asset('storage/articles/150x150/' . basename($article->image)) }}"
+                                                alt="">
                                         </a>
                                     </div>
                                     <div class="recent-post-text">
@@ -54,21 +55,22 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-6 pl-40 pr-0">
-                <div class="widget widget-nav-menu">
+                <div class="widget-nav-menu">
                     <h4 class="widget-title"> Contact Us </h4>
                     <div class="menu-quick-info-content">
                         <ul class="footer-info">
                             <li>
                                 <span><i class="fas fa-phone-alt"></i>Phone Number</span><br>
-                                <a href="home.html">{{ $options->get('phone') }}</a>
+                                <a href="tel:{{ $options->get('phone') }}">{{ $options->get('phone') }}</a>
                             </li>
                             <li>
                                 <span><i class="far fa-envelope"></i>Locations</span><br>
-                                <a href="home.html">{{ $options->get('address') }}</a>
+                                <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($options->get('address')) }}"
+                                    target="_blank">{{ $options->get('address') }}</a>
                             </li>
                             <li>
                                 <span><i class="fas fa-map-marker-alt"></i>Email Address</span><br>
-                                <a href="home.html">{{ $options->get('email') }}</a>
+                                <a href="mailto:{{ $options->get('email') }}">{{ $options->get('email') }}</a>
                             </li>
                         </ul>
                     </div>

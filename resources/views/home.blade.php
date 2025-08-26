@@ -33,7 +33,7 @@
             <div class="row about-bgs">
                 <div class="col-lg-6">
                     <div class="about-thumbss">
-                        <img class="img-thumbnail" src="{{ asset('assets/images/sbl/factory.jpeg') }}" alt=""
+                        <img class="img-thumbnail" src="{{ asset('assets/images/sbl/factory_small.jpeg') }}" alt=""
                             style="width:100%;" />
                         {{-- <div class="about-shape">
                             <div class="ab-shape1"><img src="assets/images/resource/about-shape1.png" alt=""></div>

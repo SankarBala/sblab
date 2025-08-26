@@ -16,14 +16,13 @@
             <ul>
                 @foreach ($article->categories as $category)
                     <li>
-                        <a href="articles.blade.php"> {{ $category->name }} <span><i
-                                    class="fas fa-arrow-right"></i></span></a>
+                        <a href="#"> {{ $category->name }} <span><i class="fas fa-arrow-right"></i></span></a>
                     </li>
                 @endforeach
             </ul>
         </div>
     </div>
-    <div class="widget-categories-box py-1">
+    <div class="widget-categories-box">
         <!-- categories title -->
         <div class="categories-title">
             <h4> Recent Articles </h4>
@@ -31,10 +30,15 @@
         @foreach ($recent_articles as $r_article)
             <div class="sidber-widget-recent-post">
                 <div class="recent-widget-thumb">
+                    <a href="{{ route('article', $r_article) }}">
+                        <img style="width: 80px;"
+                            src="{{ asset('storage/articles/150x150/' . basename($r_article->image)) }}"
+                            alt=""></a>
                 </div>
-                <div class="recent-widget-content">
-                    <a href="blog-details.html#">{{ $r_article->name }}</a>
-                    <span><i class="flaticon-calendar"></i> {{ $r_article->created_at->format('M d, Y') }} </span>
+                <div class="recent-widget-contents p-1">
+                    <a class="d-block" href="{{ route('article', $r_article) }}">{{ $r_article->name }}</a>
+                    <span>{{ $r_article->created_at->format('d M Y') }} </span>
+                    <span>Read: {{ $r_article->read }} </span>
                 </div>
             </div>
         @endforeach
@@ -64,7 +68,7 @@
           
         </div>
     </div> --}}
-    <div class="widget-categories-box py-1">
+    <div class="widget-categories-box">
         <!-- categories title -->
         <div class="categories-title">
             <h4> Tags </h4>
@@ -72,7 +76,7 @@
         <div class="sidebar-tag-item style-two">
             <ul>
                 @foreach ($article->tags as $tag)
-                    <li><a href="blog-details.html#">{{ $tag->name }}</a></li>
+                    <li><a href="">{{ $tag->name }}</a></li>
                 @endforeach
             </ul>
         </div>

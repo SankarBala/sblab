@@ -1,7 +1,8 @@
 <div class="blog-single-box">
     <div class="blog-thumb">
         <a href="{{ route('article', $article) }}">
-            <img class="img-square" src="{{ asset("storage/{$article->image}") }}" alt="Article Image" />
+            <img class="img-square" src="{{ asset('storage/articles/300x300/' . basename($article->image)) }}"
+                alt="Article Image" />
         </a>
         {{-- <div class="post-categories"><a href="home.html">health</a></div> --}}
     </div>
@@ -57,9 +58,9 @@
         }
 
         /* .img-square {
-            width: 100%;
-            aspect-ratio: 1/1;
-            object-fit: cover;
-        } */
+                        width: 100%;
+                        aspect-ratio: 1/1;
+                        object-fit: cover;
+                    } */
     </style>
 @endpush

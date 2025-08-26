@@ -1,26 +1,26 @@
-@import url(owl.carousel.min.css);
+/*@import url(owl.carousel.min.css);*/
 /*carousel CSS*/
-@import url(bootstrap-icons.css);
+/*@import url(bootstrap-icons.css);*/
 /*bootstrap icons*/
-@import url(owl.transitions.css);
+/*@import url(owl.transitions.css);*/
 /*transitions CSS*/
-@import url(responsive.css);
+/*@import url(responsive.css);*/
 /*Responsive CSS*/
-@import url(custom-default.css);
+/*@import url(custom-default.css);*/
 /*Custom-default CSS*/
-@import url(loftloader.min.css);
+/*@import url(loftloader.min.css);*/
 /*Custom-default CSS*/
-@import url(animated-text.css);
+/*@import url(animated-text.css);*/
 /*animated-text CSS*/
-@import url(meanmenu.min.css);
+/*@import url(meanmenu.min.css);*/
 /*meanmenu CSS*/
-@import url(flaticon.css);
+/*@import url(flaticon.css);*/
 /*font-flaticon CSS*/
-@import url(animate.css);
+/*@import url(animate.css);*/
 /*animate CSS*/
-@import url(all.min.css);
+/*@import url(all.min.css);*/
 /*font-awesome CSS*/
-@import url(../../venobox/venobox.css);
+/*@import url(../../venobox/venobox.css);*/
 /*venobox CSS*/
 
 
@@ -4218,7 +4218,7 @@ p.description {
 
 .blog-details-main {
     background: #fff;
-    padding: 30px;
+    padding: 6px 20px 20px;
     box-shadow: 0px 0px 70px rgba(0, 0, 0, 0.05);
 }
 

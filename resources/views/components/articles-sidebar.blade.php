@@ -52,18 +52,21 @@
             <h4> Popular Articles </h4>
         </div>
         @foreach ($most_reads as $read)
-        <div class="single-widget-item">
-            <div class="recent-post-item style-two">
-                <div class="recent-post-image">
-                    <a href="blog-list.html#"><img src="" alt=""></a>
-                </div>
-                <div class="recent-post-text">
-                    <h4><a href="blog-list.html#">{{$read->name}}</a>
-                    </h4>
-                    <span class="rcomment">{{$read->created_at->format('M d, Y')}}</span>
+            <div class="single-widget-item">
+                <div class="recent-post-item style-two">
+                    <div class="recent-post-image">
+                        <a href="{{ route('article', $read) }}"><img width="80px"
+                                src="{{ asset('storage/articles/150x150/' . basename($read->image)) }}"
+                                alt=""></a>
+                    </div>
+                    <div class="recent-post-text">
+                        <h4><a href="{{ route('article', $read) }}">{{ $read->name }}</a>
+                        </h4>
+                        <span class="rcomment"> Published: {{ $read->created_at->format('M d, Y') }}</span>
+                        <span class="rcomment"> Read: {{ $read->read }}</span>
+                    </div>
                 </div>
             </div>
-        </div>
         @endforeach
     </div>
 </div>

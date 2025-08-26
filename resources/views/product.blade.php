@@ -3,14 +3,14 @@
     <x-breadcrumb title="Product" />
     <div class="shop-detials">
         <div class="container">
-            <div class="row align-items-center">
+            <div class="row">
                 <div class="col-md-5">
-                    <img class="img-fluid" style="whith: 300px; height: 300px;"
+                    <img class="img-thumbnail" style="whith: 100% !important;"
                         src="{{asset("storage/{$product->image}")}}"
                         alt="">
                 </div>
                 <div class="col-md-7">
-                    <div class="shop-dtls-info">
+                    <div class="">
                         <!-- category title -->
                         <div class="category-titles mt-0 mb-3">
                             <h3>{{ $product->name }}</h3>
@@ -80,11 +80,11 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row mt-5">
                 <div class="col-lg-12">
-                    <div class="appoinment-tab">
+                    <div class="appoinment-tabs">
                         <!-- / tab -->
-                        <div class="tab">
+                        <div class="tabs">
                             <h2 class="border-bottom pb-2">Product Description</h2>
                             <!-- / tabs -->
                             {{-- <ul class="tabs">

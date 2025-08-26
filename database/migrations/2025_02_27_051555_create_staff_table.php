@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('designation')->nullable();
             $table->string('phone')->nullable();
             $table->string('image')->nullable();
-            $table->text('description')->nullable();
+            $table->mediumText('description')->nullable();
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();
             $table->string('linkedin')->nullable();

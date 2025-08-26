@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Article;
 use App\Models\Option;
+use App\Models\Product;
+use App\Models\Staff;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -12,7 +15,12 @@ class AdminController extends Controller
 {
     public function dashboard(): View
     {
-        return view('admin.home');
+
+        $products = Product::all();
+        $articles = Article::all();
+        $staffs = Staff::all();
+
+        return view('admin.home', compact('products', 'articles', 'staffs'));
     }
 
     public function settings(): View

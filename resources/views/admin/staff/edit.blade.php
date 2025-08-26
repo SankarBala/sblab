@@ -55,15 +55,38 @@
                                                         @enderror
                                                     </div>
                                                 </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="parent_category">Email</label>
+                                                        <input type="text" name="email" class="form-control"
+                                                            id="email" placeholder="Write email here"
+                                                            value="{{ old('email', $staff->email) }}" />
+                                                        @error('email')
+                                                            <span class="text-danger"> {{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="parent_category">Phone</label>
+                                                        <input type="text" name="phone" class="form-control"
+                                                            id="phone" placeholder="Write phone here"
+                                                            value="{{ old('phone', $staff->phone) }}" />
+                                                        @error('phone')
+                                                            <span class="text-danger"> {{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
                                             </div>
+
                                             <div class="form-group">
-                                                <label for="answer">Description (Optional)</label>
-                                                <textarea name="description" class="form-control" placeholder="Write description here." rows="6">{{ old('description', $staff->description) }}</textarea>
+                                                <label for="description">Description</label>
+                                                <textarea id="summernote" name="description" placeholder="Write description here.">{{ old('description', $staff->description) }}</textarea>
                                                 @error('description')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
-                                           
+
                                         </div>
                                         <div class="col-md-4 col-lg-3">
                                             <div class="form-group">
@@ -90,3 +113,23 @@
         </section>
     </div>
 @endsection
+
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
+
+    <style>
+        .note-editor.note-frame .note-editing-area .note-editable {
+            min-height: 300px;
+        }
+    </style>
+@endpush
+
+@push('scripts')
+    <script src="{{ asset('plugins/summernote/summernote-bs4.min.js') }}"></script>
+
+    <script>
+        $(function() {
+            $('#summernote').summernote()
+        })
+    </script>
+@endpush
